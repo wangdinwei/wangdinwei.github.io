@@ -120,6 +120,45 @@
   .stat .n{font-size:26px;font-weight:800;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
   .stat .t{font-size:12.5px;color:var(--text-3);margin-top:2px}
 
+
+  /* product shots */
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .shot{
+    margin:0;background:var(--card);border:1px solid var(--line-soft);
+    border-radius:var(--radius);overflow:hidden;transition:.2s ease;
+  }
+  .shot:hover{border-color:#2a3a52;transform:translateY(-2px)}
+  .shot.wide{grid-column:1/-1}
+  .shot img{
+    display:block;width:100%;height:auto;object-fit:cover;object-position:top center;
+    aspect-ratio:16/9;background:#0a0e14;
+  }
+  .shot.wide img{aspect-ratio:21/9}
+  .shot figcaption{
+    padding:11px 15px;font-size:13px;color:var(--text-2);
+    border-top:1px solid var(--line-soft);
+  }
+  .shot figcaption b{color:#dbe4ef;font-weight:600}
+
+  /* notes */
+  .notes{display:grid;gap:12px}
+  .note-card{
+    background:var(--card);border:1px solid var(--line-soft);border-radius:var(--radius);
+    padding:20px 22px;position:relative;transition:.18s ease;
+  }
+  .note-card:hover{border-color:#26344a;background:#131822}
+  .note-card h3{font-size:16px;color:#fff;margin-bottom:8px;font-weight:700;letter-spacing:-.005em}
+  .note-card p{font-size:14px;color:var(--text-2);line-height:1.72}
+  .note-card .idx{
+    position:absolute;right:20px;top:18px;font-size:12px;color:#2c3a4f;font-weight:700;
+    font-variant-numeric:tabular-nums;
+  }
+
+  @media (max-width:640px){
+    .shots{grid-template-columns:1fr}
+    .shot.wide img{aspect-ratio:16/10}
+  }
+
   /* also */
   .also{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   .also-item{
@@ -248,6 +287,33 @@
   </div>
 </section>
 
+
+<section>
+  <div class="wrap">
+    <div class="label">Product</div>
+    <h2>我做的产品</h2>
+    <p class="sub">棱弧 AI 短剧工坊 —— 一句话或一段大纲，自动写剧本、配音、出画面，直接给成片。下面都是真实界面截图，不是设计稿。</p>
+    <div class="shots">
+      <figure class="shot wide">
+        <img src="assets/product-home.jpg" alt="AI 短剧工坊首页" loading="lazy">
+        <figcaption><b>首页</b> — 把一句话做成一部短剧。11 个生产步骤，全在浏览器里完成</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/product-sample.jpg" alt="从大纲到成片" loading="lazy">
+        <figcaption><b>从大纲到成片</b> — 单集 90 秒、1080×1920 竖屏、无人工剪辑介入</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/product-episodes.jpg" alt="连续集自动产出" loading="lazy">
+        <figcaption><b>连续集产出</b> — 一次跑多集，每集独立分镜、配音、字幕</figcaption>
+      </figure>
+      <figure class="shot wide">
+        <img src="assets/product-templates.jpg" alt="模板与题材" loading="lazy">
+        <figcaption><b>模板 / 题材库</b> — 预制种子，用户不用从零写提示词</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="label">Repositories</div>
@@ -274,6 +340,37 @@
         <div class="name">📄 chinese-doc-toolkit <em>→</em></div>
         <div class="desc">中文文档批量生产：合同、报价单、报表、扫描件重建</div>
       </a>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+    <div class="label">Notes</div>
+    <h2>几个我自己的判断</h2>
+    <p class="sub">都是从项目里摔出来的，不是从书上抄的。</p>
+    <div class="notes">
+      <div class="note-card"><span class="idx">01</span>
+        <h3>模型不是瓶颈，工程才是</h3>
+        <p>demo 到上线之间隔着二十来个工程问题：并发、计费、重试、状态、权限、时区、缓存、回滚。这些问题和 AI 一点关系都没有，但它们决定产品能不能活下来。我见过的 AI 项目，九成死在第二十个问题上，不是死在模型上。</p>
+      </div>
+      <div class="note-card"><span class="idx">02</span>
+        <h3>成本要在结构上砍，别在单价上抠</h3>
+        <p>一条片子的成本 85% 在视频生成。把供应商从 A 换成 B，最多省两成；把废片率从 3 倍压到 1.5 倍，直接省一半。所以钱要花在首帧门禁、提示词检查、短镜优先这些地方，而不是天天比价。</p>
+      </div>
+      <div class="note-card"><span class="idx">03</span>
+        <h3>显存决定你能做什么，不决定你做得好不好</h3>
+        <p>单卡 24G 能跑 1.3B 级模型，跑不动 14B 级。硬跑的结果不是报错，而是每一步都在 CPU 和显卡之间搬权重——慢十倍，画质还崩。认清边界比硬撑划算：本地做能做的，剩下的交给云。</p>
+      </div>
+      <div class="note-card"><span class="idx">04</span>
+        <h3>资产必须有唯一真相源</h3>
+        <p>角色、场景想从正文里用正则提取，迟早会漏、会串、改名就全断。一份显式的注册表，前期多花一天，后面少炸十次。这条放在任何多步骤的生产流程里都成立。</p>
+      </div>
+      <div class="note-card"><span class="idx">05</span>
+        <h3>在便宜的地方多问，在贵的地方少返工</h3>
+        <p>用户不满意就重做，是这套系统里最贵的成本。所以宁可让他在分镜、首帧、提示词这几个便宜阶段多确认几轮，也不要让他等到成片才说「不行」。这一条改的不是技术，是产品设计。</p>
+      </div>
     </div>
   </div>
 </section>
