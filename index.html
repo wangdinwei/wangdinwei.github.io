@@ -13,8 +13,8 @@
     --line:#1e2633;
     --line-soft:#161c26;
     --text:#eef2f7;
-    --text-2:#9aa7b8;
-    --text-3:#6b7889;
+    --text-2:#a9b6c6;
+    --text-3:#8b98a9;
     --accent:#3b82f6;
     --accent-2:#38bdf8;
     --radius:14px;
@@ -62,7 +62,7 @@
     background:rgba(255,255,255,.02);
     padding:6px 12px;border-radius:999px;margin-bottom:26px;
   }
-  .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e}
+  .dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e}
   h1{
     font-size:clamp(32px,6vw,52px);
     line-height:1.15;letter-spacing:-.02em;font-weight:800;
@@ -85,7 +85,7 @@
   }
   .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px -10px rgba(59,130,246,.7)}
   .btn-primary:hover{background:#2f74e0;transform:translateY(-1px)}
-  .btn-ghost{border:1px solid var(--line);color:var(--text-2);background:rgba(255,255,255,.02)}
+  .btn-ghost{border:1px solid #2a3444;color:#c3cedd;background:rgba(255,255,255,.02)}
   .btn-ghost:hover{border-color:#2c3a4f;color:var(--text)}
 
   /* ---------- Sections ---------- */
@@ -112,13 +112,25 @@
   .arrow{color:var(--accent-2);font-weight:700}
 
   /* stats */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px}
   .stat{
     background:var(--card);border:1px solid var(--line-soft);
     border-radius:var(--radius);padding:20px 18px;
   }
   .stat .n{font-size:26px;font-weight:800;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
   .stat .t{font-size:12.5px;color:var(--text-3);margin-top:2px}
+
+  /* also */
+  .also{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .also-item{
+    background:rgba(255,255,255,.02);border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:16px 18px;
+  }
+  .also-item b{
+    display:block;font-size:20px;color:#fff;letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;margin-bottom:4px;
+  }
+  .also-item span{font-size:13px;color:var(--text-2);line-height:1.55}
 
   /* repos */
   .repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
@@ -168,6 +180,8 @@
     header{padding:64px 0 52px}
     section{padding:52px 0}
     .scope{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .also{grid-template-columns:1fr}
     .contact{padding:28px 22px}
   }
 </style>
@@ -226,9 +240,11 @@
       <div class="stat"><div class="n">14,574</div><div class="t">行 JavaScript</div></div>
       <div class="stat"><div class="n">11</div><div class="t">个生产步骤</div></div>
     </div>
-    <p class="sub" style="margin-bottom:0">
-      另外：一台机器上长期跑 10+ 个独立 AI 服务实例（隔离、托管、自恢复）；单卡 24G 把 FLUX / Wan / IndexTTS 等开源模型调到可用；中文文档与数据自动化（合同、台账、扫描件、CAD）。
-    </p>
+    <div class="also">
+      <div class="also-item"><b>10+</b><span>一台机器上跑 10 个以上独立 AI 服务实例，隔离、托管、掉线自恢复</span></div>
+      <div class="also-item"><b>24G</b><span>单卡把 FLUX / Wan / IndexTTS 等开源模型调到可用，不依赖显卡集群</span></div>
+      <div class="also-item"><b>0 手工</b><span>中文文档与数据自动化：合同、台账、扫描件 OCR、CAD 提取</span></div>
+    </div>
   </div>
 </section>
 
