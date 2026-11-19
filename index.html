@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王丁炜 · Dingwei Wang — AI Application Engineer</title>
+<meta name="description" content="把 AI 从 demo 做到上线：全栈开发、本地模型部署、自动化系统。远程协作。">
+<style>
+  :root{
+    --bg:#070809;
+    --bg-soft:#0d1117;
+    --card:#11151d;
+    --line:#1e2633;
+    --line-soft:#161c26;
+    --text:#eef2f7;
+    --text-2:#9aa7b8;
+    --text-3:#6b7889;
+    --accent:#3b82f6;
+    --accent-2:#38bdf8;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+
+  /* ---------- Hero ---------- */
+  header{
+    position:relative;
+    padding:96px 0 72px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line-soft);
+  }
+  header::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(620px 320px at 15% 0%, rgba(56,189,248,.11), transparent 70%),
+      radial-gradient(520px 300px at 85% 20%, rgba(59,130,246,.09), transparent 70%);
+    pointer-events:none;
+  }
+  header::after{
+    content:"";
+    position:absolute;inset:0;
+    background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(520px 300px at 75% 40%,#000,transparent 75%);
+    -webkit-mask-image:radial-gradient(520px 300px at 75% 40%,#000,transparent 75%);
+    opacity:.5;pointer-events:none;
+  }
+  .hero{position:relative;z-index:1}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--text-2);
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+    padding:6px 12px;border-radius:999px;margin-bottom:26px;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e}
+  h1{
+    font-size:clamp(32px,6vw,52px);
+    line-height:1.15;letter-spacing:-.02em;font-weight:800;
+  }
+  h1 span{
+    background:linear-gradient(100deg,#7dd3fc,#3b82f6);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .role{margin-top:14px;color:var(--text-2);font-size:15px;letter-spacing:.01em}
+  .tagline{
+    margin-top:26px;font-size:clamp(17px,2.4vw,21px);
+    color:var(--text);max-width:640px;
+  }
+  .tagline b{color:#fff}
+  .cta{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:10px;font-size:14.5px;font-weight:600;
+    text-decoration:none;transition:.18s ease;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px -10px rgba(59,130,246,.7)}
+  .btn-primary:hover{background:#2f74e0;transform:translateY(-1px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text-2);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{border-color:#2c3a4f;color:var(--text)}
+
+  /* ---------- Sections ---------- */
+  section{padding:72px 0;border-bottom:1px solid var(--line-soft)}
+  section:last-of-type{border-bottom:0}
+  .label{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent-2);font-weight:700;margin-bottom:14px;
+  }
+  h2{font-size:clamp(22px,3.4vw,28px);letter-spacing:-.01em;margin-bottom:10px;font-weight:700}
+  .sub{color:var(--text-3);font-size:15px;margin-bottom:34px}
+
+  /* situations */
+  .list{display:grid;gap:12px}
+  .item{
+    display:grid;grid-template-columns:22px 1fr;gap:14px;
+    background:var(--card);border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:16px 18px;
+    transition:.18s ease;
+  }
+  .item:hover{border-color:#243044;background:#131822}
+  .item .q{color:var(--text);font-size:15px}
+  .item .a{color:var(--text-2);font-size:14px;margin-top:4px}
+  .arrow{color:var(--accent-2);font-weight:700}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+  .stat{
+    background:var(--card);border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:20px 18px;
+  }
+  .stat .n{font-size:26px;font-weight:800;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
+  .stat .t{font-size:12.5px;color:var(--text-3);margin-top:2px}
+
+  /* repos */
+  .repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .repo{
+    display:block;text-decoration:none;color:inherit;
+    background:var(--card);border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:18px 20px;transition:.18s ease;
+  }
+  .repo:hover{border-color:#2a3a52;transform:translateY(-2px);background:#131822}
+  .repo .name{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+  .repo .name em{font-style:normal;color:var(--accent-2);font-size:13px;opacity:0;transition:.18s}
+  .repo:hover .name em{opacity:1}
+  .repo .desc{font-size:13.5px;color:var(--text-2);margin-top:7px}
+
+  /* stack */
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    font-size:13px;color:var(--text-2);
+    border:1px solid var(--line);border-radius:7px;
+    padding:5px 11px;background:rgba(255,255,255,.015);
+  }
+  .tag.hi{color:#bfdbfe;border-color:#1e3a5f;background:rgba(59,130,246,.08)}
+
+  /* contact */
+  .contact{
+    background:linear-gradient(180deg,#0e1420,#0b0f16);
+    border:1px solid var(--line);border-radius:18px;
+    padding:38px 32px;
+  }
+  .mail{
+    display:inline-flex;align-items:center;gap:10px;
+    margin-top:18px;font-size:clamp(16px,2.4vw,19px);font-weight:700;
+    color:#fff;text-decoration:none;border-bottom:1px solid #2a3a52;padding-bottom:3px;
+  }
+  .mail:hover{color:var(--accent-2);border-color:var(--accent-2)}
+  .note{margin-top:16px;color:var(--text-3);font-size:13.5px}
+  .scope{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+  .scope div{background:rgba(255,255,255,.02);border:1px solid var(--line-soft);border-radius:10px;padding:14px 16px}
+  .scope h4{font-size:13px;color:var(--text-3);font-weight:600;margin-bottom:6px;letter-spacing:.02em}
+  .scope p{font-size:13.5px;color:var(--text-2)}
+
+  footer{padding:36px 0 56px;color:var(--text-3);font-size:13px;text-align:center}
+  footer a{color:var(--text-2);text-decoration:none}
+  footer a:hover{color:var(--accent-2)}
+
+  @media (max-width:640px){
+    header{padding:64px 0 52px}
+    section{padding:52px 0}
+    .scope{grid-template-columns:1fr}
+    .contact{padding:28px 22px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hero">
+    <div class="badge"><span class="dot"></span> 远程协作开放 · 项目制 / 月度</div>
+    <h1>王丁炜<span> · Dingwei Wang</span></h1>
+    <p class="role">AI 应用全栈开发 &nbsp;·&nbsp; 本地模型部署 &nbsp;·&nbsp; 自动化系统</p>
+    <p class="tagline">把 AI 从 <b>「demo 跑通了」</b> 做到 <b>「能上线收钱」</b>。<br>一个人，从后端写到部署。</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="mailto:476743538@qq.com">邮件联系我</a>
+      <a class="btn btn-ghost" href="https://github.com/wangdinwei" target="_blank" rel="noopener">GitHub 主页 →</a>
+      <a class="btn btn-ghost" href="https://github.com/wangdinwei/ai-drama-pipeline" target="_blank" rel="noopener">案例复盘 →</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="label">Where I help</div>
+    <h2>我在解决这一类问题</h2>
+    <p class="sub">如果你正在其中某一条上卡住，大概率我能直接接手。</p>
+    <div class="list">
+      <div class="item"><span class="arrow">→</span><div>
+        <div class="q">AI 功能做出来了，但不敢上线</div>
+        <div class="a">补齐计费、权限、并发、失败重试，让它扛得住真实用户</div></div></div>
+      <div class="item"><span class="arrow">→</span><div>
+        <div class="q">上线了总出故障，日志看不出原因</div>
+        <div class="a">按「进程 → 端口 → 反代 → 日志 → 数据库 → 外部 API」定位，一般一天内到根因</div></div></div>
+      <div class="item"><span class="arrow">→</span><div>
+        <div class="q">模型调用成本压不下来</div>
+        <div class="a">先拆成本结构（多数项目 85% 花在视频生成），降废片率比换供应商有效</div></div></div>
+      <div class="item"><span class="arrow">→</span><div>
+        <div class="q">已有系统越改越乱，没人敢动</div>
+        <div class="a">先做依赖与数据流审计，再按风险顺序小步重构，不停机</div></div></div>
+      <div class="item"><span class="arrow">→</span><div>
+        <div class="q">想接 AI，不知道从哪下手、该花多少钱</div>
+        <div class="a">给方案、报价、分期，先做能验证效果的那一步</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Track record</div>
+    <h2>做过什么</h2>
+    <p class="sub">一套 AI 内容生产平台，从剧本到成片，11 个生产步骤，多用户、计费、可重做。不是 demo。</p>
+    <div class="stats">
+      <div class="stat"><div class="n">64,752</div><div class="t">行 Python</div></div>
+      <div class="stat"><div class="n">2,484</div><div class="t">个路由</div></div>
+      <div class="stat"><div class="n">32</div><div class="t">张数据表</div></div>
+      <div class="stat"><div class="n">626</div><div class="t">个页面模板</div></div>
+      <div class="stat"><div class="n">14,574</div><div class="t">行 JavaScript</div></div>
+      <div class="stat"><div class="n">11</div><div class="t">个生产步骤</div></div>
+    </div>
+    <p class="sub" style="margin-bottom:0">
+      另外：一台机器上长期跑 10+ 个独立 AI 服务实例（隔离、托管、自恢复）；单卡 24G 把 FLUX / Wan / IndexTTS 等开源模型调到可用；中文文档与数据自动化（合同、台账、扫描件、CAD）。
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Repositories</div>
+    <h2>可以看的仓库</h2>
+    <p class="sub">都是能直接读的技术记录，不是空壳。</p>
+    <div class="repos">
+      <a class="repo" href="https://github.com/wangdinwei/ai-drama-pipeline" target="_blank" rel="noopener">
+        <div class="name">📐 ai-drama-pipeline <em>→</em></div>
+        <div class="desc">案例复盘：架构、技术取舍、成本模型、21 个真实故障</div>
+      </a>
+      <a class="repo" href="https://github.com/wangdinwei/local-gpu-deploy" target="_blank" rel="noopener">
+        <div class="name">🖥 local-gpu-deploy <em>→</em></div>
+        <div class="desc">单卡 24G 跑开源模型：FLUX、ComfyUI、llama.cpp、音乐生成</div>
+      </a>
+      <a class="repo" href="https://github.com/wangdinwei/kling-ai-skills" target="_blank" rel="noopener">
+        <div class="name">🎬 kling-ai-skills <em>→</em></div>
+        <div class="desc">可灵视频生产：角色一致性、口型对齐、提示词质量门禁</div>
+      </a>
+      <a class="repo" href="https://github.com/wangdinwei/hermes-skills-kit" target="_blank" rel="noopener">
+        <div class="name">🧱 hermes-skills-kit <em>→</em></div>
+        <div class="desc">AI 应用工程笔记：从 demo 到生产的 24 个坑</div>
+      </a>
+      <a class="repo" href="https://github.com/wangdinwei/chinese-doc-toolkit" target="_blank" rel="noopener">
+        <div class="name">📄 chinese-doc-toolkit <em>→</em></div>
+        <div class="desc">中文文档批量生产：合同、报价单、报表、扫描件重建</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Stack</div>
+    <h2>技术栈</h2>
+    <p class="sub">只列真正上过生产的东西。</p>
+    <div class="tags">
+      <span class="tag hi">Python</span><span class="tag hi">Flask</span><span class="tag hi">PostgreSQL</span>
+      <span class="tag">FastAPI</span><span class="tag">SQLAlchemy</span><span class="tag">Alembic</span>
+      <span class="tag">JavaScript</span><span class="tag">Jinja2</span><span class="tag">esbuild</span>
+      <span class="tag hi">Linux</span><span class="tag">systemd</span><span class="tag">Docker</span>
+      <span class="tag">nginx</span><span class="tag">Caddy</span><span class="tag">Cloudflare Tunnel</span>
+      <span class="tag hi">ComfyUI</span><span class="tag hi">FLUX</span><span class="tag">Wan</span>
+      <span class="tag">Sonic</span><span class="tag">LatentSync</span><span class="tag hi">IndexTTS</span>
+      <span class="tag">Whisper</span><span class="tag">llama.cpp</span><span class="tag">vLLM</span>
+      <span class="tag hi">Kling 可灵</span><span class="tag">阿里百炼</span><span class="tag">火山引擎</span>
+      <span class="tag">Runway</span><span class="tag">微信支付 v3</span><span class="tag">飞书开放平台</span>
+      <span class="tag">ffmpeg</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Contact</div>
+    <div class="contact">
+      <h2>想聊具体的事，直接发邮件</h2>
+      <p class="sub" style="margin-bottom:0">说清楚你现在卡在哪、想做到什么程度，我回你方案和报价。</p>
+      <a class="mail" href="mailto:476743538@qq.com">476743538@qq.com <span style="font-size:14px;color:var(--text-3)">↗</span></a>
+      <p class="note">需要微信或电话沟通，邮件里说一声，我回你联系方式。</p>
+      <div class="scope">
+        <div>
+          <h4>能做</h4>
+          <p>AI 应用开发 · 模型接入与调优 · 自动化系统 · 疑难排障 · 中文文档与数据自动化</p>
+        </div>
+        <div>
+          <h4>不做</h4>
+          <p>纯设计稿 · 纯提示词代写 · 只出方案不写代码 · 效果无法验证的项目</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    王丁炜 · Dingwei Wang &nbsp;|&nbsp; <a href="https://github.com/wangdinwei">GitHub</a> &nbsp;|&nbsp; 远程协作
+  </div>
+</footer>
+
+</body>
+</html>
