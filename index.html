@@ -140,6 +140,23 @@
   }
   .shot figcaption b{color:#dbe4ef;font-weight:600}
 
+
+  /* posts */
+  .posts{display:grid;gap:10px}
+  .post{
+    display:grid;grid-template-columns:44px 1fr 24px;align-items:center;gap:16px;
+    background:var(--card);border:1px solid var(--line-soft);border-radius:12px;
+    padding:16px 18px;text-decoration:none;color:inherit;transition:.18s ease;
+  }
+  .post:hover{border-color:#2a3a52;background:#131822;transform:translateX(3px)}
+  .post .num{
+    font-size:12px;font-weight:800;color:#2f4058;font-variant-numeric:tabular-nums;
+  }
+  .post h3{font-size:15px;color:#eaf0f7;font-weight:600;margin-bottom:3px;line-height:1.45}
+  .post p{font-size:13px;color:var(--text-3);line-height:1.5}
+  .post .go{color:#33465f;font-size:16px;transition:.18s}
+  .post:hover .go{color:var(--accent-2)}
+
   /* notes */
   .notes{display:grid;gap:12px}
   .note-card{
@@ -314,6 +331,47 @@
   </div>
 </section>
 
+
+<section>
+  <div class="wrap">
+    <div class="label">Writing</div>
+    <h2>写下来的东西</h2>
+    <p class="sub">把项目里的故障写成能看懂的文章。别人常常是从这些文章找到我的。</p>
+    <div class="posts">
+      <a class="post" href="https://github.com/wangdinwei/engineering-notes/blob/main/01-gunicorn-multi-worker-state.md" target="_blank" rel="noopener">
+        <span class="num">01</span>
+        <div><h3>gunicorn 多 worker 下，你的全局变量是假的</h3>
+        <p>开发环境 100% 复现不出来的状态丢失，以及 preload 引发的连接池问题</p></div>
+        <span class="go">→</span>
+      </a>
+      <a class="post" href="https://github.com/wangdinwei/engineering-notes/blob/main/02-vram-not-oom-but-slow.md" target="_blank" rel="noopener">
+        <span class="num">02</span>
+        <div><h3>显存够了却不报错，才是显卡最坑的地方</h3>
+        <p>不 OOM 却慢十倍、脸崩——判据是 GPU 利用率，不是显存占用率</p></div>
+        <span class="go">→</span>
+      </a>
+      <a class="post" href="https://github.com/wangdinwei/engineering-notes/blob/main/03-ai-product-dies-at-problem-20.md" target="_blank" rel="noopener">
+        <span class="num">03</span>
+        <div><h3>AI 项目死在第二十个问题上，不是死在模型上</h3>
+        <p>21 个故障的分类统计：90% 和 AI 无关</p></div>
+        <span class="go">→</span>
+      </a>
+      <a class="post" href="https://github.com/wangdinwei/engineering-notes/blob/main/04-real-cost-of-ai-video.md" target="_blank" rel="noopener">
+        <span class="num">04</span>
+        <div><h3>一条 AI 视频到底花多少钱：拆开算给你看</h3>
+        <p>成本结构、废片率这个真正的成本杀手、自建与 API 的临界点</p></div>
+        <span class="go">→</span>
+      </a>
+      <a class="post" href="https://github.com/wangdinwei/engineering-notes/blob/main/05-wechat-pay-v3-pitfalls.md" target="_blank" rel="noopener">
+        <span class="num">05</span>
+        <div><h3>微信支付 v3 接入：三个会让人排查一整天的坑</h3>
+        <p>回调 302、401、解密失败，以及退款时最容易算错的那笔账</p></div>
+        <span class="go">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="label">Repositories</div>
@@ -335,6 +393,10 @@
       <a class="repo" href="https://github.com/wangdinwei/hermes-skills-kit" target="_blank" rel="noopener">
         <div class="name">🧱 hermes-skills-kit <em>→</em></div>
         <div class="desc">AI 应用工程笔记：从 demo 到生产的 24 个坑</div>
+      </a>
+      <a class="repo" href="https://github.com/wangdinwei/engineering-notes" target="_blank" rel="noopener">
+        <div class="name">✍️ engineering-notes <em>→</em></div>
+        <div class="desc">技术文章：21 个生产故障、显存陷阱、支付坑、成本结构</div>
       </a>
       <a class="repo" href="https://github.com/wangdinwei/chinese-doc-toolkit" target="_blank" rel="noopener">
         <div class="name">📄 chinese-doc-toolkit <em>→</em></div>
