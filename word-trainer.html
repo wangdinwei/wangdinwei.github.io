@@ -2022,13 +2022,35 @@ function ttsText(w){
   if (/^[A-Z]+$/.test(w.en)) return w.en.toLowerCase();
   return w.en;
 }
-function say(text){
-  if (typeof speechSynthesis === "undefined"){ alert("此浏览器不支持发音，请用 Chrome / Safari"); return; }
+/* ── 发音：优先播预生成音频（响度已标准化到 -10 LUFS），失败回退系统语音 ── */
+const AUDIO_BASE = "./say/";
+let curAudio = null;
+
+function sayTTS(text){
+  if (typeof speechSynthesis === "undefined") return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = "en-US"; u.rate = 0.82;
+  u.lang = "en-US"; u.rate = 1.0; u.volume = 1.0;   /* 音量拉满，语速恢复正常 */
   const v = pickVoice(); if (v) u.voice = v;
   speechSynthesis.speak(u);
+}
+
+function say(text, wordIdx){
+  /* 有预生成音频就用它 —— 音量和音质都比系统语音好 */
+  const n = (typeof wordIdx === "number") ? wordIdx : idx;
+  if (typeof n === "number" && n >= 0 && n < WORDS.length){
+    try {
+      if (curAudio){ try { curAudio.pause(); } catch(e){} curAudio = null; }
+      const a = new Audio(AUDIO_BASE + n + ".mp3");
+      a.volume = 1.0;
+      a.preload = "auto";
+      curAudio = a;
+      const p = a.play();
+      if (p && p.catch) p.catch(() => sayTTS(text));   /* 播放失败（文件缺失/被拦）回退 */
+      return;
+    } catch(e){ /* 落到下面 */ }
+  }
+  sayTTS(text);
 }
 
 function setBar(){
@@ -2080,12 +2102,12 @@ function render(){
   const nextB = document.getElementById("next");
   const target = w.en;
 
-  setTimeout(()=>{ sp.focus({preventScroll:true}); say(ttsText(w)); }, 220);
+  setTimeout(()=>{ sp.focus({preventScroll:true}); say(ttsText(w), idx); }, 220);
 
   document.getElementById("say").onclick = e => {
     const el = e.currentTarget;
     el.classList.add("playing");
-    say(ttsText(w));
+    say(ttsText(w), idx);
     setTimeout(()=>el.classList.remove("playing"), 950);
   };
   document.getElementById("prev").onclick = () => { if (idx > 0){ idx--; render(); } };
@@ -2153,7 +2175,7 @@ document.getElementById("jumpBtn").addEventListener("click", doJump);
 document.addEventListener("keydown", e => {
   const t = e.target;
   if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return;
-  if (e.key === "s" || e.key === "S"){ if (idx < WORDS.length) say(ttsText(WORDS[idx])); }
+  if (e.key === "s" || e.key === "S"){ if (idx < WORDS.length) say(ttsText(WORDS[idx]), idx); }
 });
 
 /* ── 手机键盘弹起：用 visualViewport 实时压高度，把卡片整体上压 ── */
