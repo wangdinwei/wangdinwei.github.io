@@ -383,6 +383,8 @@ function renderDone(){
 }
 
 // 启动
+totalEl.textContent = DATA.length;
+passedEl.textContent = 0;
 mainEl.innerHTML = `
   <div class="qcard" style="text-align:center">
     <div class="zh" style="font-size:22px;margin-bottom:10px">技术单词听写</div>
