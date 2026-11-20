@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技术名词发音学习表 · 王丁炜</title>
+<style>
+  :root{
+    --bg:#070809; --card:#0e1420; --card2:#121a28; --line:#1e2a3d;
+    --text:#e8eef7; --text2:#9fb0c8; --text3:#64748b;
+    --accent:#3b82f6; --accent2:#60d5fa; --good:#34d399; --warn:#fbbf24;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    padding:0 0 80px;line-height:1.6;
+  }
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(7,8,9,.92);
+    backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+    padding:16px 20px 12px;
+  }
+  h1{font-size:19px;margin:0 0 4px;font-weight:700}
+  .sub{font-size:12.5px;color:var(--text3);margin-bottom:12px}
+  .search{
+    width:100%;padding:11px 14px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--text);
+    font-size:15px;outline:none;
+  }
+  .search:focus{border-color:var(--accent)}
+  .filters{
+    display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;
+    scrollbar-width:none;
+  }
+  .filters::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;padding:6px 14px;border-radius:20px;font-size:13px;
+    border:1px solid var(--line);background:transparent;color:var(--text2);
+    cursor:pointer;white-space:nowrap;transition:.15s;
+  }
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .speed{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:12.5px;color:var(--text3)}
+  .speed input{flex:1;accent-color:var(--accent)}
+  main{padding:18px 20px}
+  .group-title{
+    font-size:13px;color:var(--accent2);font-weight:700;letter-spacing:.06em;
+    margin:26px 0 12px;text-transform:uppercase;
+  }
+  .grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1100px){.grid{grid-template-columns:1fr 1fr 1fr}}
+  .card{
+    background:linear-gradient(180deg,var(--card),var(--card2));
+    border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;
+    cursor:pointer;transition:.18s;position:relative;overflow:hidden;
+  }
+  .card:active{transform:scale(.985)}
+  .card:hover{border-color:#2a4a72;box-shadow:0 6px 24px rgba(59,130,246,.12)}
+  .card .en{font-size:20px;font-weight:700;letter-spacing:.01em;display:flex;align-items:center;gap:9px}
+  .spk{
+    font-size:14px;opacity:.55;transition:.15s;
+  }
+  .card:hover .spk{opacity:1}
+  .ipa{font-size:13.5px;color:var(--accent2);font-family:"SF Mono",Consolas,monospace;margin-top:2px}
+  .zh{font-size:15px;color:var(--warn);margin-top:5px;font-weight:600;letter-spacing:.02em}
+  .zh::before{content:"读作 ";font-size:11.5px;color:var(--text3);font-weight:400}
+  .desc{font-size:13.5px;color:var(--text2);margin-top:9px;line-height:1.62}
+  .playing{border-color:var(--good)!important;box-shadow:0 0 0 2px rgba(52,211,153,.18)}
+  footer{
+    position:fixed;bottom:0;left:0;right:0;padding:12px 20px;
+    background:rgba(7,8,9,.94);border-top:1px solid var(--line);
+    font-size:12px;color:var(--text3);text-align:center;backdrop-filter:blur(12px);
+  }
+  .empty{color:var(--text3);text-align:center;padding:40px 0;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>技术名词 · 发音学习表</h1>
+  <div class="sub">点卡片就发音 · 音标 + 中文谐音 + 大白话解释</div>
+  <input class="search" id="search" placeholder="搜英文、谐音或中文意思…">
+  <div class="filters" id="filters"></div>
+  <div class="speed">
+    <span>语速</span>
+    <input type="range" id="rate" min="0.5" max="1.2" step="0.1" value="0.85">
+    <span id="rateVal">0.85×</span>
+  </div>
+</header>
+
+<main id="list"></main>
+
+<footer>点任意卡片朗读 · 建议先听一遍再跟读</footer>
+
+<script>
+const DATA = [
+  // ===== 语言与基础 =====
+  {c:"语言与基础", en:"Python", ipa:"/ˈpaɪθən/", zh:"派森", d:"编程语言。我主要用它写后端，语法简单、库多。"},
+  {c:"语言与基础", en:"JavaScript", ipa:"/ˈdʒɑːvəskrɪpt/", zh:"加瓦-斯克瑞普特", d:"浏览器里的编程语言，网页的点击、动画都靠它。"},
+  {c:"语言与基础", en:"SQL", ipa:"/ˌes kjuː ˈel/", zh:"艾斯-秋-艾尔", d:"查数据库的语言。想从表里挑数据，就写一句 SQL。"},
+  {c:"语言与基础", en:"Bash", ipa:"/bæʃ/", zh:"拜什", d:"Linux 命令行脚本语言。服务器上批量干活用它。"},
+  {c:"语言与基础", en:"Java", ipa:"/ˈdʒɑːvə/", zh:"加瓦", d:"一种老牌编程语言，企业系统常用（和 JavaScript 没关系）。"},
+  {c:"语言与基础", en:"Go", ipa:"/ɡoʊ/", zh:"够", d:"Google 出的编程语言，写高并发服务很合适。"},
+  {c:"语言与基础", en:"Rust", ipa:"/rʌst/", zh:"拉斯特", d:"新语言，主打安全和不崩溃，学习曲线陡。"},
+
+  // ===== 框架与开发 =====
+  {c:"框架与开发", en:"Flask", ipa:"/flæsk/", zh:"弗拉斯克", d:"Python 的网站框架，轻量灵活。像盖房子的脚手架，结构自己搭。"},
+  {c:"框架与开发", en:"FastAPI", ipa:"/fɑːst eɪ piː aɪ/", zh:"法斯特-诶皮艾", d:"另一个 Python 网站框架，比 Flask 新，性能更好。"},
+  {c:"框架与开发", en:"Django", ipa:"/ˈdʒæŋɡoʊ/", zh:"詹够", d:"Python 重型框架，什么都有现成的，但不够灵活。"},
+  {c:"框架与开发", en:"API", ipa:"/ˌeɪ piː ˈaɪ/", zh:"诶-皮-艾", d:"应用程序接口。说白了是插座——别人有本事，插上就能用。"},
+  {c:"框架与开发", en:"SDK", ipa:"/ˌes diː ˈkeɪ/", zh:"艾斯-迪-K", d:"别人打包好的工具包，装上直接调用，省得自己写。"},
+  {c:"框架与开发", en:"JSON", ipa:"/ˈdʒeɪsən/", zh:"杰森", d:"程序之间传数据的格式，长得像 {\"名字\":\"张三\"}。"},
+  {c:"框架与开发", en:"REST", ipa:"/rest/", zh:"瑞斯特", d:"一种接口设计风格，用网址表示资源，用 GET/POST 表示动作。"},
+  {c:"框架与开发", en:"GraphQL", ipa:"/ˈɡræf kjuː el/", zh:"格拉夫-秋-艾尔", d:"另一种接口方式，客户端说要什么字段就返回什么。"},
+  {c:"框架与开发", en:"endpoint", ipa:"/ˈendpɔɪnt/", zh:"恩德-波因特", d:"接口地址。一个网址对应一个功能，就叫一个 endpoint。"},
+  {c:"框架与开发", en:"payload", ipa:"/ˈpeɪloʊd/", zh:"佩-罗德", d:"请求里真正传的数据内容（不含地址和头信息）。"},
+  {c:"框架与开发", en:"middleware", ipa:"/ˈmɪdlweər/", zh:"米德尔-维尔", d:"中间件。请求进来后、到你的代码前，先经过的一层处理（比如登录校验）。"},
+  {c:"框架与开发", en:"ORM", ipa:"/ˌoʊ ɑːr ˈem/", zh:"欧-阿尔-艾姆", d:"对象关系映射。让你用 Python 代码操作数据库，不用手写 SQL。"},
+  {c:"框架与开发", en:"CRUD", ipa:"/krʌd/", zh:"克拉德", d:"增删改查四件事的缩写，任何管理系统都逃不开。"},
+  {c:"框架与开发", en:"frontend", ipa:"/ˈfrʌntend/", zh:"弗兰特-恩德", d:"前端，用户看得见的部分（页面、按钮、动效）。"},
+  {c:"框架与开发", en:"backend", ipa:"/ˈbækend/", zh:"拜克-恩德", d:"后端，用户看不见的部分（数据、逻辑、接口）。"},
+
+  // ===== 数据库 =====
+  {c:"数据库", en:"PostgreSQL", ipa:"/ˈpoʊstɡres kjuː el/", zh:"剖斯特-格瑞斯-秋-艾尔", d:"开源数据库，企业级。比 MySQL 更严格，功能更强。"},
+  {c:"数据库", en:"MySQL", ipa:"/ˌmaɪ es kjuː ˈel/", zh:"买-艾斯-秋-艾尔", d:"最流行的开源数据库之一，中小项目常用。"},
+  {c:"数据库", en:"SQLite", ipa:"/ˌes kjuː laɪt/", zh:"艾斯-秋-莱特", d:"一个文件就是一个数据库。适合小项目，但多人同时写会锁。"},
+  {c:"数据库", en:"Redis", ipa:"/ˈredɪs/", zh:"瑞迪斯", d:"内存数据库，读写极快。常用来存缓存、队列、会话。"},
+  {c:"数据库", en:"MongoDB", ipa:"/ˈmɑːŋɡoʊ diː biː/", zh:"芒够-迪比", d:"文档型数据库，不用建表，结构灵活。"},
+  {c:"数据库", en:"schema", ipa:"/ˈskiːmə/", zh:"斯基马", d:"数据库的结构定义——有哪些表、每个表有哪些字段。"},
+  {c:"数据库", en:"migration", ipa:"/maɪˈɡreɪʃn/", zh:"迈-格瑞申", d:"迁移。数据库结构改了，要把老数据安全搬到新结构上。"},
+  {c:"数据库", en:"index", ipa:"/ˈɪndeks/", zh:"因德克斯", d:"索引。像书的目录，加了对的索引，查询能快几百倍。"},
+  {c:"数据库", en:"transaction", ipa:"/trænˈzækʃn/", zh:"传-扎克申", d:"事务。一组操作要么全成功要么全失败（转账不能扣了钱没到账）。"},
+  {c:"数据库", en:"replica", ipa:"/ˈreplɪkə/", zh:"瑞普利卡", d:"副本。同一份数据存多份，一台挂了还有别的顶上。"},
+  {c:"数据库", en:"sharding", ipa:"/ˈʃɑːrdɪŋ/", zh:"沙丁", d:"分片。数据太大装不下，按规则切到多台机器上。"},
+
+  // ===== 运维与部署 =====
+  {c:"运维与部署", en:"Linux", ipa:"/ˈlɪnəks/", zh:"利纳克斯", d:"服务器操作系统，没有图形界面，全靠命令操作。"},
+  {c:"运维与部署", en:"Ubuntu", ipa:"/ʊˈbʊntuː/", zh:"乌本图", d:"最常用的 Linux 发行版之一，上手友好。"},
+  {c:"运维与部署", en:"nginx", ipa:"/ˈendʒɪn eks/", zh:"恩진-艾克斯", d:"读作 engine-x。网站的「门卫」，接收所有访问再转给后面的程序。"},
+  {c:"运维与部署", en:"systemd", ipa:"/ˈsɪstəmd/", zh:"西斯特姆-迪", d:"Linux 的管家。负责开机启动程序、程序挂了自动拉起。"},
+  {c:"运维与部署", en:"Docker", ipa:"/ˈdɒkər/", zh:"道克尔", d:"集装箱。程序打包进去，搬到哪台机器都能跑，不会「你机器上能跑我这跑不了」。"},
+  {c:"运维与部署", en:"Kubernetes", ipa:"/ˌkjuːbərˈnetiːz/", zh:"Q-伯-尼提兹", d:"简称 K8s。管一大堆 Docker 集装箱的调度系统，大公司用。"},
+  {c:"运维与部署", en:"reverse proxy", ipa:"/rɪˈvɜːrs ˈprɑːksi/", zh:"瑞弗斯-普拉克西", d:"反向代理。外面的人只看到门卫，看不到里面有几间房。"},
+  {c:"运维与部署", en:"load balancer", ipa:"/loʊd ˈbælənsər/", zh:"罗德-巴伦瑟", d:"负载均衡。把访问量分给多台服务器，避免一台累死。"},
+  {c:"运维与部署", en:"SSL", ipa:"/ˌes es ˈel/", zh:"艾斯-艾斯-艾尔", d:"加密证书。网址前面那把锁，让数据传输不被偷看。"},
+  {c:"运维与部署", en:"Cloudflare", ipa:"/ˈklaʊdfler/", zh:"克劳德-弗莱尔", d:"一家 CDN + 安全服务商，能隐藏真实 IP、防攻击、做隧道。"},
+  {c:"运维与部署", en:"Tunnel", ipa:"/ˈtʌnl/", zh:"探诺", d:"隧道。没有公网 IP 也能让外面访问到内网服务。"},
+  {c:"运维与部署", en:"Tailscale", ipa:"/ˈteɪlskeɪl/", zh:"泰尔-斯凯尔", d:"组网工具。把几台分散的机器连成一个虚拟局域网。"},
+  {c:"运维与部署", en:"VPS", ipa:"/ˌviː piː ˈes/", zh:"V-皮-艾斯", d:"虚拟专用服务器。云上一台属于自己的机器。"},
+  {c:"运维与部署", en:"SSH", ipa:"/ˌes es ˈeɪtʃ/", zh:"艾斯-艾斯-诶吃", d:"远程登录服务器的协议。用命令行连上一台远程机器。"},
+  {c:"运维与部署", en:"cron", ipa:"/krɒn/", zh:"克朗", d:"定时任务。让程序按点自动跑（每天几点、每周几）。"},
+  {c:"运维与部署", en:"daemon", ipa:"/ˈdiːmən/", zh:"迪蒙", d:"守护进程。一直在后台跑、不占终端窗口的程序。"},
+  {c:"运维与部署", en:"backup", ipa:"/ˈbækʌp/", zh:"拜克-阿普", d:"备份。数据存两份，一份丢了还有一份。"},
+  {c:"运维与部署", en:"rollback", ipa:"/ˈroʊlbæk/", zh:"罗尔-拜克", d:"回滚。新版本出问题，退回上一个能用的版本。"},
+  {c:"运维与部署", en:"uptime", ipa:"/ˈʌptaɪm/", zh:"阿普-泰姆", d:"在线时长。服务器连续运行多久没挂。"},
+  {c:"运维与部署", en:"monitoring", ipa:"/ˈmɑːnɪtərɪŋ/", zh:"马尼特灵", d:"监控。盯着服务器和服务的状态，出事第一时间知道。"},
+  {c:"运维与部署", en:"logging", ipa:"/ˈlɔːɡɪŋ/", zh:"洛京", d:"打日志。程序运行留下的记录，出问题第一件事就是看它。"},
+
+  // ===== AI 与模型 =====
+  {c:"AI与模型", en:"LLM", ipa:"/ˌel el ˈem/", zh:"艾尔-艾尔-艾姆", d:"大语言模型。像 DeepSeek、GPT 这种能理解文字、生成文字的 AI。"},
+  {c:"AI与模型", en:"GPT", ipa:"/ˌdʒiː piː ˈtiː/", zh:"吉-皮-提", d:"OpenAI 的大模型系列，也是「预训练变换器」的缩写。"},
+  {c:"AI与模型", en:"prompt", ipa:"/prɑːmpt/", zh:"普朗普特", d:"提示词。你让 AI 干什么的那段话。写好提示词是门手艺。"},
+  {c:"AI与模型", en:"token", ipa:"/ˈtoʊkən/", zh:"托肯", d:"AI 计费单位。大约一个汉字是 1–2 个 token，按量扣钱。"},
+  {c:"AI与模型", en:"inference", ipa:"/ˈɪnfərəns/", zh:"因弗伦斯", d:"推理。模型「思考」并输出结果的过程，很吃显卡。"},
+  {c:"AI与模型", en:"fine-tuning", ipa:"/faɪn ˈtjuːnɪŋ/", zh:"范-秋宁", d:"微调。拿现成模型再训练一下，让它专精某个领域。"},
+  {c:"AI与模型", en:"LoRA", ipa:"/ˈlɔːrə/", zh:"洛拉", d:"一种轻量微调方法。给模型加个小配件，就能让它专精某个人脸或风格。"},
+  {c:"AI与模型", en:"RAG", ipa:"/ræɡ/", zh:"拉格", d:"检索增强生成。让 AI 先查你的资料再回答，减少瞎编。"},
+  {c:"AI与模型", en:"embedding", ipa:"/ɪmˈbedɪŋ/", zh:"因-贝丁", d:"把文字变成一串数字，让机器能比较「意思像不像」。"},
+  {c:"AI与模型", en:"vector", ipa:"/ˈvektər/", zh:"维克特", d:"向量。一串数字，AI 用它表示语义，搜索时算距离找相近的。"},
+  {c:"AI与模型", en:"GPU", ipa:"/ˌdʒiː piː ˈjuː/", zh:"吉-皮-优", d:"图形处理器，也就是显卡。AI 计算主要靠它。"},
+  {c:"AI与模型", en:"VRAM", ipa:"/ˈviː ræm/", zh:"V-然姆", d:"显存，显卡的内存。24G 显存决定你能跑多大的模型，和电脑内存不是一回事。"},
+  {c:"AI与模型", en:"CUDA", ipa:"/ˈkuːdə/", zh:"库达", d:"NVIDIA 的并行计算平台。AI 框架基本都要靠它跑在显卡上。"},
+  {c:"AI与模型", en:"quantization", ipa:"/ˌkwɑːntɪˈzeɪʃn/", zh:"匡提-泽申", d:"量化。把模型精度降低一点，省显存、跑得更快，画质略降。"},
+  {c:"AI与模型", en:"FLUX", ipa:"/flʌks/", zh:"弗拉克斯", d:"一个很强的开源 AI 画图模型，可以自己部署。"},
+  {c:"AI与模型", en:"ComfyUI", ipa:"/ˈkʌmfi juː ˈaɪ/", zh:"康菲-U-艾", d:"读作 comfy-UI。拖方块搭流程的 AI 画图工具，像积木拼装。"},
+  {c:"AI与模型", en:"Diffusion", ipa:"/dɪˈfjuːʒn/", zh:"迪-弗由申", d:"扩散模型。从噪点一步步去噪生成图片的技术路线。"},
+  {c:"AI与模型", en:"Whisper", ipa:"/ˈwɪspər/", zh:"威斯珀", d:"OpenAI 开源的语音识别模型，把语音转成文字。能在本地跑。"},
+  {c:"AI与模型", en:"TTS", ipa:"/ˌtiː tiː ˈes/", zh:"提-提-艾斯", d:"文字转语音。让 AI 把你的文字读出来。"},
+  {c:"AI与模型", en:"ASR", ipa:"/ˌeɪ es ˈɑːr/", zh:"诶-艾斯-阿尔", d:"语音识别。把说的话转成文字（Whisper 就是干这个）。"},
+  {c:"AI与模型", en:"lipsync", ipa:"/ˈlɪp sɪŋk/", zh:"利普-辛克", d:"口型同步。让照片/视频里的人按音频说话，嘴型对得上。"},
+  {c:"AI与模型", en:"VLM", ipa:"/ˌviː el ˈem/", zh:"V-艾尔-艾姆", d:"视觉语言模型。既能看图又能读文字的 AI。"},
+
+  // ===== 音视频 =====
+  {c:"音视频", en:"ffmpeg", ipa:"/ˌef ef ˈem peɡ/", zh:"艾弗-艾弗-艾姆-派格", d:"处理视频音频的瑞士军刀。命令行剪辑、转码、混音、烧字幕全靠它。"},
+  {c:"音视频", en:"codec", ipa:"/ˈkoʊdek/", zh:"寇德克", d:"编解码器。决定视频用什么格式压缩（H.264、H.265 这些）。"},
+  {c:"音视频", en:"bitrate", ipa:"/ˈbɪt reɪt/", zh:"比特-瑞特", d:"码率。每秒用多少数据，越高画质越好文件越大。"},
+  {c:"音视频", en:"LUFS", ipa:"/ˌel juː ef ˈes/", zh:"艾尔-优-艾弗-艾斯", d:"响度标准单位。视频平台按它统一音量，避免忽大忽小。"},
+  {c:"音视频", en:"subtitle", ipa:"/ˈsʌbtaɪtl/", zh:"萨布-泰头", d:"字幕。时间轴对不齐，字幕就会一跳一跳。"},
+  {c:"音视频", en:"keyframe", ipa:"/ˈkiː freɪm/", zh:"基-弗雷姆", d:"关键帧。视频里的「基准画面」，剪辑精确定位要靠它。"},
+
+  // ===== 浏览器与自动化 =====
+  {c:"浏览器与自动化", en:"Playwright", ipa:"/ˈpleɪraɪt/", zh:"普雷-赖特", d:"控制浏览器的工具。让程序自己去点网页、填表、发布内容。"},
+  {c:"浏览器与自动化", en:"Selenium", ipa:"/səˈliːniəm/", zh:"瑟-利尼姆", d:"老牌的浏览器自动化工具，比 Playwright 早。"},
+  {c:"浏览器与自动化", en:"Chrome", ipa:"/kroʊm/", zh:"克罗姆", d:"谷歌的浏览器。"},
+  {c:"浏览器与自动化", en:"CDP", ipa:"/ˌsiː diː ˈpiː/", zh:"西-迪-皮", d:"Chrome 调试协议。能远程控制浏览器，也能接管已经打开的窗口。"},
+  {c:"浏览器与自动化", en:"headless", ipa:"/ˈhedləs/", zh:"海德勒斯", d:"无头模式。浏览器不显示界面在后台跑，很多网站会拦。"},
+  {c:"浏览器与自动化", en:"WAF", ipa:"/wæf/", zh:"瓦夫", d:"Web 应用防火墙。网站的安全门卫，会拦掉看起来像机器人（爬虫）的访问。"},
+  {c:"浏览器与自动化", en:"webhook", ipa:"/ˈwebhʊk/", zh:"韦布-胡克", d:"回调通知。有事发生时，对方主动往你指定的地址发一条消息。"},
+  {c:"浏览器与自动化", en:"crawler", ipa:"/ˈkrɔːlər/", zh:"克罗勒", d:"爬虫。程序自动去网页上抓取信息。"},
+
+  // ===== 安全与认证 =====
+  {c:"安全与认证", en:"JWT", ipa:"/ˌdʒeɪ ˈdʌbljuː tiː/", zh:"杰-达布留-提", d:"JSON Web Token。一种登录凭证，服务器发给你，之后你带着它证明身份。"},
+  {c:"安全与认证", en:"OAuth", ipa:"/ˈoʊ ɔːθ/", zh:"欧-奥斯", d:"授权协议。「用微信登录」就是它，不用把密码给对方。"},
+  {c:"安全与认证", en:"CSRF", ipa:"/ˌsiː es ɑːr ˈef/", zh:"西-艾斯-阿尔-艾弗", d:"跨站请求伪造。别人诱导你点了链接，就借你的身份操作。"},
+  {c:"安全与认证", en:"XSS", ipa:"/ˌeks es ˈes/", zh:"艾克斯-艾斯-艾斯", d:"跨站脚本攻击。往页面里注入恶意代码。"},
+  {c:"安全与认证", en:"CORS", ipa:"/kɔːrz/", zh:"考尔斯", d:"跨域资源共享。浏览器限制不同域名之间互相请求数据的规则。"},
+  {c:"安全与认证", en:"encryption", ipa:"/ɪnˈkrɪpʃn/", zh:"因-克瑞普申", d:"加密。把数据变成看不懂的样子，只有对方能还原。"},
+  {c:"安全与认证", en:"signature", ipa:"/ˈsɪɡnətʃər/", zh:"西格纳彻", d:"签名。验证消息是不是真的来自对方（支付回调必须验）。"},
+  {c:"安全与认证", en:"idempotent", ipa:"/aɪˈdempətənt/", zh:"爱-登泼滕特", d:"幂等。同样的请求重复发很多次，结果一样，不会重复扣钱。"},
+
+  // ===== 支付与业务 =====
+  {c:"支付与业务", en:"callback", ipa:"/ˈkɔːlbæk/", zh:"考尔-拜克", d:"回调。你付完钱，微信主动通知你系统「钱到了」，不是你去问。"},
+  {c:"支付与业务", en:"checkout", ipa:"/ˈtʃekaʊt/", zh:"切克-奥特", d:"下单结算流程。从点购买到付款完成的整段。"},
+  {c:"支付与业务", en:"refund", ipa:"/ˈriːfʌnd/", zh:"瑞-凡德", d:"退款。要把实付和赠送的积分分开算，否则会退超。"},
+  {c:"支付与业务", en:"ledger", ipa:"/ˈledʒər/", zh:"莱杰", d:"台账。每笔钱进出都记一笔，能对得上账。"},
+  {c:"支付与业务", en:"webhook signature", ipa:"/ˈwebhʊk ˈsɪɡnətʃər/", zh:"韦布-胡克 西格纳彻", d:"回调验签。确认这条到账通知是微信真发的，不是假的。"},
+
+  // ===== 通用工程概念 =====
+  {c:"通用概念", en:"concurrency", ipa:"/kənˈkɜːrənsi/", zh:"肯-克伦西", d:"并发。很多人同时访问。并发处理不好，系统就会卡死或者数据错乱。"},
+  {c:"通用概念", en:"cache", ipa:"/kæʃ/", zh:"卡什", d:"缓存。把常用的结果先存起来，下次直接拿，不用重新算。"},
+  {c:"通用概念", en:"queue", ipa:"/kjuː/", zh:"秋", d:"队列。任务排队等着一个个处理，防止一拥而上把系统压垮。"},
+  {c:"通用概念", en:"latency", ipa:"/ˈleɪtənsi/", zh:"雷滕西", d:"延迟。从发出请求到收到回应花了多久。"},
+  {c:"通用概念", en:"throughput", ipa:"/ˈθruːpʊt/", zh:"斯鲁-普特", d:"吞吐量。单位时间能处理多少请求。"},
+  {c:"通用概念", en:"scaling", ipa:"/ˈskeɪlɪŋ/", zh:"斯凯灵", d:"扩容。用户变多了，加机器、加资源顶上去。"},
+  {c:"通用概念", en:"failover", ipa:"/ˈfeɪloʊvər/", zh:"费尔-欧弗", d:"故障转移。一台挂了，自动切到备用那台。"},
+  {c:"通用概念", en:"deployment", ipa:"/dɪˈplɔɪmənt/", zh:"迪普洛伊门特", d:"部署。把写好的程序放到服务器上跑起来。"},
+  {c:"通用概念", en:"repository", ipa:"/rɪˈpɑːzətɔːri/", zh:"瑞-帕泽托瑞", d:"仓库。代码存放的地方，GitHub 上就是一个个 repo。"},
+  {c:"通用概念", en:"commit", ipa:"/kəˈmɪt/", zh:"科-米特", d:"提交。把改动的代码存一次档，留个记录能回退。"},
+  {c:"通用概念", en:"branch", ipa:"/bræntʃ/", zh:"布兰奇", d:"分支。在主线之外开一条平行线改代码，改好再合回去。"},
+  {c:"通用概念", en:"merge", ipa:"/mɜːrdʒ/", zh:"么吉", d:"合并。把分支上的改动并回主线。"},
+  {c:"通用概念", en:"debug", ipa:"/ˌdiːˈbʌɡ/", zh:"迪-巴格", d:"调试。找出程序为什么不对，并修好它。"},
+  {c:"通用概念", en:"refactor", ipa:"/ˌriːˈfæktər/", zh:"瑞-法克特", d:"重构。功能不变，把代码结构改得更清爽。"},
+  {c:"通用概念", en:"production", ipa:"/prəˈdʌkʃn/", zh:"普-达克申", d:"生产环境。真实用户在用的那套系统，不是测试环境。"},
+  {c:"通用概念", en:"staging", ipa:"/ˈsteɪdʒɪŋ/", zh:"斯泰京", d:"预发环境。上线前的最后一道演练，配置和正式一样。"},
+  {c:"通用概念", en:"bug", ipa:"/bʌɡ/", zh:"巴格", d:"程序缺陷。代码没按预期工作。"},
+  {c:"通用概念", en:"fix", ipa:"/fɪks/", zh:"菲克斯", d:"修复。"},
+];
+
+const CATS = ["全部", ...Array.from(new Set(DATA.map(x => x.c)))];
+let curCat = "全部";
+let rate = 0.85;
+let curSpeaking = null;
+
+const filtersEl = document.getElementById("filters");
+const listEl = document.getElementById("list");
+const searchEl = document.getElementById("search");
+const rateEl = document.getElementById("rate");
+const rateValEl = document.getElementById("rateVal");
+
+// 优先选英文语音
+let voices = [];
+function loadVoices(){
+  voices = speechSynthesis.getVoices();
+  if(!voices.length){ setTimeout(loadVoices, 300); }
+}
+loadVoices();
+if (typeof speechSynthesis !== "undefined") {
+  speechSynthesis.onvoiceschanged = () => { voices = speechSynthesis.getVoices(); };
+}
+
+function pickVoice(){
+  if(!voices.length) voices = speechSynthesis.getVoices();
+  const pref = [
+    v => /en-US/i.test(v.lang) && /google|samantha|zira|aria/i.test(v.name),
+    v => /en-US/i.test(v.lang),
+    v => /^en/i.test(v.lang),
+  ];
+  for (const f of pref) {
+    const hit = voices.find(f);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+function speak(text, cardEl){
+  if (typeof speechSynthesis === "undefined") {
+    alert("这个浏览器不支持发音，建议用 Chrome 或 Safari 打开");
+    return;
+  }
+  speechSynthesis.cancel();
+  if (curSpeaking) curSpeaking.classList.remove("playing");
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US";
+  u.rate = rate;
+  const v = pickVoice();
+  if (v) u.voice = v;
+  if (cardEl){
+    cardEl.classList.add("playing");
+    curSpeaking = cardEl;
+    u.onend = () => cardEl.classList.remove("playing");
+    u.onerror = () => cardEl.classList.remove("playing");
+  }
+  speechSynthesis.speak(u);
+}
+
+function render(){
+  const kw = searchEl.value.trim().toLowerCase();
+  listEl.innerHTML = "";
+
+  let items = DATA;
+  if (curCat !== "全部") items = items.filter(x => x.c === curCat);
+  if (kw) {
+    items = items.filter(x =>
+      x.en.toLowerCase().includes(kw) ||
+      x.zh.includes(kw) ||
+      x.d.includes(kw) ||
+      x.ipa.toLowerCase().includes(kw)
+    );
+  }
+
+  if (!items.length){
+    listEl.innerHTML = '<div class="empty">没找到，换个关键词试试</div>';
+    return;
+  }
+
+  const groups = {};
+  items.forEach(x => { (groups[x.c] = groups[x.c] || []).push(x); });
+
+  Object.keys(groups).forEach(cat => {
+    const t = document.createElement("div");
+    t.className = "group-title";
+    t.textContent = cat;
+    listEl.appendChild(t);
+
+    const g = document.createElement("div");
+    g.className = "grid";
+
+    groups[cat].forEach(x => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="en">${x.en}<span class="spk">🔊</span></div>
+        <div class="ipa">${x.ipa}</div>
+        <div class="zh">${x.zh}</div>
+        <div class="desc">${x.d}</div>
+      `;
+      card.addEventListener("click", () => speak(x.en, card));
+      g.appendChild(card);
+    });
+    listEl.appendChild(g);
+  });
+}
+
+function renderFilters(){
+  filtersEl.innerHTML = "";
+  CATS.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip" + (c === curCat ? " on" : "");
+    b.textContent = c;
+    b.addEventListener("click", () => { curCat = c; renderFilters(); render(); window.scrollTo({top:0,behavior:"smooth"}); });
+    filtersEl.appendChild(b);
+  });
+}
+
+searchEl.addEventListener("input", render);
+rateEl.addEventListener("input", () => {
+  rate = parseFloat(rateEl.value);
+  rateValEl.textContent = rate.toFixed(2) + "×";
+});
+
+renderFilters();
+render();
+</script>
+</body>
+</html>
