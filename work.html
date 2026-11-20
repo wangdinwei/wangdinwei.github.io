@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王丁炜 · 做过的项目</title>
+<style>
+:root{
+  --bg:#070809;--card:#0f1622;--card2:#131c2b;--line:#1e2a3d;
+  --text:#e9eff8;--text2:#a7b6ca;--text3:#6b7a90;
+  --accent:#3b82f6;--accent2:#5ec8f5;--good:#34d399;--warn:#fbbf24;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.8;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px}
+
+.hero{padding:60px 24px 42px;text-align:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.16),transparent 62%)}
+.hero h1{font-size:36px;font-weight:800;margin:0 0 12px;letter-spacing:-.5px;
+  background:linear-gradient(135deg,#fff,#8fb8e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{color:var(--text2);font-size:15.5px;max-width:600px;margin:0 auto}
+.hero .nav{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero .nav a{font-size:13.5px;color:var(--text2);text-decoration:none;padding:7px 15px;
+  border:1px solid var(--line);border-radius:20px;background:var(--card);transition:.15s}
+.hero .nav a:hover{border-color:var(--accent);color:#cfe4ff}
+
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 90px}
+
+.project{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+  border-radius:20px;padding:30px 26px;margin:34px 0;position:relative;overflow:hidden}
+.project::before{content:'';position:absolute;top:-50%;right:-10%;width:280px;height:280px;
+  background:radial-gradient(circle,rgba(59,130,246,.1),transparent 70%);pointer-events:none}
+
+.p-head{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.p-num{width:34px;height:34px;border-radius:10px;background:rgba(59,130,246,.16);
+  border:1px solid rgba(59,130,246,.4);display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;color:var(--accent2);flex-shrink:0}
+.p-title{font-size:23px;font-weight:800;color:#fff;letter-spacing:-.2px}
+.p-tag{display:inline-block;font-size:11.5px;color:var(--good);background:rgba(52,211,153,.12);
+  border:1px solid rgba(52,211,153,.3);padding:2px 10px;border-radius:14px;margin-left:8px;
+  vertical-align:middle;font-weight:600}
+.p-lead{color:var(--text2);font-size:15.5px;margin:12px 0 22px;line-height:1.85}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0}
+.metric{background:#0a1119;border:1px solid var(--line);border-radius:11px;padding:13px 10px;text-align:center}
+.metric .n{font-size:21px;font-weight:800;color:var(--accent2);line-height:1.2}
+.metric .l{font-size:11.5px;color:var(--text3);margin-top:4px}
+
+.section-h{font-size:13px;color:var(--accent2);font-weight:700;letter-spacing:.05em;
+  margin:22px 0 9px;text-transform:uppercase}
+
+ul.plain{margin:0;padding-left:20px;color:var(--text2);font-size:15px}
+ul.plain li{margin:7px 0}
+ul.plain strong{color:#fff}
+
+.stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{font-size:12.5px;color:var(--text2);background:#0a1119;border:1px solid var(--line);
+  padding:4px 11px;border-radius:8px;font-family:"SF Mono",Consolas,monospace}
+
+.p-link{display:inline-flex;align-items:center;gap:7px;margin-top:22px;padding:11px 20px;
+  background:rgba(59,130,246,.14);border:1px solid rgba(59,130,246,.4);border-radius:11px;
+  color:#cfe4ff;text-decoration:none;font-size:14.5px;font-weight:600;transition:.16s}
+.p-link:hover{background:rgba(59,130,246,.24)}
+
+.note{background:rgba(59,130,246,.07);border-left:3px solid var(--accent);border-radius:0 9px 9px 0;
+  padding:14px 18px;margin:26px 0;color:var(--text2);font-size:14.5px}
+.note p{margin:0}
+
+footer{border-top:1px solid var(--line);padding:28px 20px 40px;text-align:center;
+  color:var(--text3);font-size:13px;line-height:2}
+footer a{color:var(--accent2);text-decoration:none}
+
+.top-btn{position:fixed;right:20px;bottom:24px;width:44px;height:44px;border-radius:50%;
+  background:rgba(59,130,246,.9);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:19px;text-decoration:none;box-shadow:0 6px 20px rgba(59,130,246,.35);z-index:20}
+
+@media(max-width:600px){
+  .hero{padding:44px 18px 32px}
+  .hero h1{font-size:28px}
+  body{font-size:15.5px}
+  .wrap{padding:0 14px 70px}
+  .project{padding:24px 18px;border-radius:16px}
+  .p-title{font-size:20px}
+  .metric .n{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>王丁炜 · 做过的项目</h1>
+  <div class="sub">两个从零做到上线的完整系统，不是 demo<br>
+    <span style="font-size:13.5px;color:var(--text3)">一个人完成：需求 → 设计 → 编码 → 部署 → 运维</span>
+  </div>
+  <div class="nav">
+    <a href="https://lenghu.tech/me/">📋 能力全景</a>
+    <a href="https://github.com/wangdinwei">💻 GitHub</a>
+    <a href="mailto:476743538@qq.com">✉ 联系我</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- 项目 1 -->
+<div class="project">
+  <div class="p-head">
+    <div class="p-num">01</div>
+    <div class="p-title">AI 内容生产平台<span class="p-tag">已上线运营</span></div>
+  </div>
+  <p class="p-lead">
+    从「一段故事」到「一集可发布的成片」，全流程自动化。剧本 → 分镜 → 出图 → 出视频 → 配音 → 字幕 → 混流，11 个生产步骤串成一条流水线，支持多用户、积分计费、任意步骤重做。
+  </p>
+
+  <div class="metrics">
+    <div class="metric"><div class="n">64,752</div><div class="l">行 Python</div></div>
+    <div class="metric"><div class="n">2,484</div><div class="l">个路由</div></div>
+    <div class="metric"><div class="n">626</div><div class="l">个页面模板</div></div>
+    <div class="metric"><div class="n">32</div><div class="l">张数据表</div></div>
+    <div class="metric"><div class="n">11</div><div class="l">个生产步骤</div></div>
+    <div class="metric"><div class="n">14,574</div><div class="l">行 JavaScript</div></div>
+  </div>
+
+  <div class="section-h">解决的核心问题</div>
+  <ul class="plain">
+    <li><strong>角色跨镜头一致</strong> — 角色注册表 + 六视图标准照，不是靠提示词碰运气</li>
+    <li><strong>音画严格同步</strong> — 60 路音频逐句锚定时间轴，字幕与口型对齐可做到 ±1 帧</li>
+    <li><strong>成本可控</strong> — 拆出成本结构（85% 花在视频生成），靠降废片率省下的钱比换供应商多</li>
+    <li><strong>失败可重做</strong> — 任一步骤单独重跑，不需要从头来一遍</li>
+    <li><strong>能收钱</strong> — 积分扣费、订单、退款（含赠送积分追踪）、微信支付 v3</li>
+  </ul>
+
+  <div class="section-h">技术栈</div>
+  <div class="stack">
+    <span class="chip">Flask</span><span class="chip">PostgreSQL</span><span class="chip">Alembic</span>
+    <span class="chip">Jinja2</span><span class="chip">esbuild</span><span class="chip">nginx</span>
+    <span class="chip">systemd</span><span class="chip">Kling</span><span class="chip">阿里百炼</span>
+    <span class="chip">火山引擎</span><span class="chip">微信支付 v3</span><span class="chip">Chatwoot</span>
+    <span class="chip">ffmpeg</span>
+  </div>
+
+  <a class="p-link" href="https://github.com/wangdinwei/ai-drama-pipeline">📐 看架构复盘、技术取舍、21 个真实故障 →</a>
+</div>
+
+<!-- 项目 2 -->
+<div class="project">
+  <div class="p-head">
+    <div class="p-num">02</div>
+    <div class="p-title">建筑工程管理小程序<span class="p-tag">已上线运营</span></div>
+  </div>
+  <p class="p-lead">
+    工地现场用的移动管理工具。从飞书小程序全量迁移到微信小程序，覆盖项目、采购、进度、施工日志、合同、质量、安全、成本、风险等 14 个业务模块，一线人员在手机上就能填报、审批、查数据。
+  </p>
+
+  <div class="metrics">
+    <div class="metric"><div class="n">45</div><div class="l">个页面</div></div>
+    <div class="metric"><div class="n">14</div><div class="l">个业务模块</div></div>
+    <div class="metric"><div class="n">4</div><div class="l">个版本迭代</div></div>
+    <div class="metric"><div class="n">9</div><div class="l">类业务字典 API</div></div>
+  </div>
+
+  <div class="section-h">解决的核心问题</div>
+  <ul class="plain">
+    <li><strong>现场数据能落地</strong> — 施工日志、质量安全巡检在手机上直接填，不用回办公室补台账</li>
+    <li><strong>跨平台迁移</strong> — 飞书小程序 API（tt.*）批量改写为微信（wx.*），业务逻辑零丢失</li>
+    <li><strong>发布自动化</strong> — miniprogram-ci 自动上传，每次迭代带 CHANGELOG 和 md5 校验</li>
+    <li><strong>字典可配置</strong> — 9 类业务字典走动态管理 API，改分类不用改代码</li>
+  </ul>
+
+  <div class="section-h">技术栈</div>
+  <div class="stack">
+    <span class="chip">微信小程序原生</span><span class="chip">Vant</span><span class="chip">Node.js</span>
+    <span class="chip">miniprogram-ci</span><span class="chip">腾讯云</span>
+  </div>
+</div>
+
+<div class="note">
+  <p><strong>为什么这两个可以放在一起看：</strong>一个偏 AI 与内容生产（云端 GPU、模型 API、音视频），一个偏传统行业数字化（移动端、多模块、现场使用）。两者都是单人在真实约束下从零做到上线并持续运维，不是课程作业或 demo。</p>
+</div>
+
+</div>
+
+<a class="top-btn" href="#">↑</a>
+
+<footer>
+  王丁炜 · <a href="https://lenghu.tech/me/">能力全景</a> · <a href="https://github.com/wangdinwei">GitHub</a> · <a href="mailto:476743538@qq.com">476743538@qq.com</a><br>
+  <span style="opacity:.7">所有数字来自真实项目，可核对</span>
+</footer>
+
+</body>
+</html>
