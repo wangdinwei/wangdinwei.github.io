@@ -11,50 +11,68 @@
   --accent:#3b82f6; --accent2:#5ec8f5; --good:#34d399; --bad:#f87171; --warn:#fbbf24;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--text);min-height:100vh;
+body{margin:0;background:var(--bg);color:var(--text);height:100vh;height:100dvh;overflow:hidden;
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  display:flex;flex-direction:column;line-height:1.6}
+  display:flex;flex-direction:column;line-height:1.5}
 
-.top{padding:13px 18px 9px;border-bottom:1px solid var(--line);
-  background:rgba(7,8,9,.96);position:sticky;top:0;z-index:9;backdrop-filter:blur(12px)}
-.tr{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;
-  color:var(--text3);margin-bottom:8px}
-.tr b{color:var(--accent2);font-size:14px}
-.bar{height:4px;background:#16202e;border-radius:2px;overflow:hidden}
+.top{padding:8px 16px 6px;border-bottom:1px solid var(--line);
+  background:rgba(7,8,9,.96);flex-shrink:0;backdrop-filter:blur(12px)}
+.tr{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;
+  color:var(--text3);margin-bottom:5px}
+.tr b{color:var(--accent2);font-size:12.5px}
+.bar{height:3px;background:#16202e;border-radius:2px;overflow:hidden}
 .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));
   transition:width .3s}
 
-main{flex:1;padding:18px 16px 8px;max-width:600px;margin:0 auto;width:100%;
-  display:flex;flex-direction:column;justify-content:center}
+.jump-row{display:flex;align-items:center;gap:5px;margin-top:5px;font-size:11px;color:var(--text3)}
+.jump-row input{width:54px;padding:3px 5px;font-size:11.5px;text-align:center;
+  background:#0a1119;border:1px solid var(--line);border-radius:6px;color:#fff;outline:none;
+  font-family:"SF Mono",Consolas,monospace;-moz-appearance:textfield}
+.jump-row input::-webkit-outer-spin-button,.jump-row input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.jump-row input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(59,130,246,.12)}
+.jump-row button{padding:3px 10px;font-size:11px;border-radius:6px;cursor:pointer;
+  background:rgba(59,130,246,.16);border:1px solid rgba(59,130,246,.4);color:#cfe4ff;
+  font-weight:600;transition:.15s}
+.jump-row button:hover{background:rgba(59,130,246,.28)}
+.jump-row button:active{transform:scale(.96)}
+
+main{flex:1;padding:8px 14px;max-width:600px;margin:0 auto;width:100%;min-height:0;
+  display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 
 .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
-  border-radius:22px;padding:26px 20px 22px;text-align:center;position:relative;overflow:hidden}
+  border-radius:16px;padding:14px 16px 13px;text-align:center;position:relative;overflow:hidden}
 .card::before{content:'';position:absolute;top:-70%;left:50%;transform:translateX(-50%);
-  width:240px;height:240px;background:radial-gradient(circle,rgba(59,130,246,.14),transparent 70%);
+  width:220px;height:220px;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);
   pointer-events:none}
 
-.batch{display:inline-block;font-size:11.5px;color:var(--accent2);background:rgba(59,130,246,.12);
-  border:1px solid rgba(59,130,246,.25);padding:3px 11px;border-radius:20px;margin-bottom:16px;
+.batch{display:inline-block;font-size:10.5px;color:var(--accent2);background:rgba(59,130,246,.12);
+  border:1px solid rgba(59,130,246,.25);padding:2px 9px;border-radius:14px;margin-bottom:7px;
   letter-spacing:.02em}
 
-.word{font-size:38px;font-weight:800;color:#fff;letter-spacing:.5px;line-height:1.2;
-  margin-bottom:6px;word-break:break-word}
-.ipa{font-size:15px;color:var(--accent2);font-family:"SF Mono",Consolas,monospace;margin-bottom:9px}
-.zh{font-size:17px;color:var(--warn);font-weight:700;margin-bottom:18px;letter-spacing:.03em}
-.zh::before{content:'读作 ';font-size:13px;color:var(--text3);font-weight:400;letter-spacing:0}
+.word{font-size:clamp(22px,4.2vh,32px);font-weight:800;color:#fff;letter-spacing:.3px;
+  line-height:1.15;margin-bottom:3px;word-break:break-word}
+.ipa{font-size:clamp(11px,1.6vh,13.5px);color:var(--accent2);
+  font-family:"SF Mono",Consolas,monospace;margin-bottom:5px}
+.zh{font-size:clamp(12.5px,1.8vh,15px);color:var(--warn);font-weight:700;margin-bottom:9px;
+  letter-spacing:.02em}
+.zh::before{content:'读作 ';font-size:11.5px;color:var(--text3);font-weight:400;letter-spacing:0}
 
-.speak{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.15);
-  border:1px solid rgba(59,130,246,.4);color:#cfe4ff;padding:11px 24px;border-radius:36px;
-  font-size:15px;font-weight:600;cursor:pointer;transition:.16s;margin-bottom:18px}
+.speak{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.15);
+  border:1px solid rgba(59,130,246,.4);color:#cfe4ff;padding:7px 18px;border-radius:30px;
+  font-size:13.5px;font-weight:600;cursor:pointer;transition:.16s;margin-bottom:9px}
 .speak:active{transform:scale(.96)}
 .speak:hover{background:rgba(59,130,246,.26)}
 
-.divider{height:1px;background:var(--line);margin:0 0 16px}
-.mean{font-size:16px;color:var(--text2);margin-bottom:20px;line-height:1.7}
+.divider{height:1px;background:var(--line);margin:0 0 9px}
+.mean{font-size:clamp(14px,1.95vh,16px);color:#ffffff;font-weight:600;
+  margin:0 auto 10px;line-height:1.5;padding:7px 15px;display:inline-block;max-width:100%;
+  background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.22);border-radius:9px}
+.mean::before{content:'意思 ';font-size:11px;color:rgba(255,255,255,.45);font-weight:400;
+  letter-spacing:.05em}
 
-.spell{width:100%;padding:14px 16px;font-size:20px;text-align:center;letter-spacing:.5px;
-  background:#080d14;border:2px solid var(--line);border-radius:13px;color:#fff;outline:none;
-  font-family:"SF Mono",Consolas,monospace;transition:.16s}
+.spell{width:100%;padding:9px 13px;font-size:clamp(16px,2.4vh,19px);text-align:center;
+  letter-spacing:.4px;background:#080d14;border:2px solid var(--line);border-radius:10px;
+  color:#fff;outline:none;font-family:"SF Mono",Consolas,monospace;transition:.16s}
 .spell:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
 .spell.correct{border-color:var(--good);color:var(--good);background:rgba(52,211,153,.07)}
 .spell.incorrect{border-color:var(--bad);color:var(--bad);background:rgba(248,113,113,.07);
@@ -62,16 +80,17 @@ main{flex:1;padding:18px 16px 8px;max-width:600px;margin:0 auto;width:100%;
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}
   50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
 
-.fb{margin-top:11px;font-size:14px;min-height:20px;color:var(--text3)}
+.fb{margin-top:6px;font-size:12.5px;min-height:17px;color:var(--text3)}
 .fb.ok{color:var(--good);font-weight:600}
 .fb.no{color:var(--bad);font-weight:600}
 .fb.go{color:var(--accent2)}
 
-.tip{margin-top:6px;font-size:11.5px;color:var(--text3);line-height:1.7}
+.tip{margin-top:2px;font-size:10.5px;color:var(--text3);line-height:1.5}
 
-.actions{display:flex;gap:10px;margin-top:16px}
-.btn{flex:1;padding:13px;border-radius:12px;font-size:15px;font-weight:600;
-  border:1px solid var(--line);background:transparent;color:var(--text2);cursor:pointer;transition:.15s}
+.actions{display:flex;gap:8px;margin-top:9px}
+.btn{flex:1;padding:9px;border-radius:9px;font-size:14px;font-weight:600;
+  border:1px solid var(--line);background:transparent;color:var(--text2);cursor:pointer;
+  transition:.15s}
 .btn:active{transform:scale(.97)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .btn.primary:disabled{opacity:.32;cursor:not-allowed;background:#25324a;border-color:#25324a}
@@ -79,24 +98,68 @@ main{flex:1;padding:18px 16px 8px;max-width:600px;margin:0 auto;width:100%;
 .btn.ghost:hover{border-color:#2d4d75;color:#fff}
 
 /* 完成页 */
-.done{text-align:center;padding:20px 4px}
-.done .big{font-size:40px;font-weight:800;margin-bottom:10px;
+.done{text-align:center;padding:10px 4px}
+.done .big{font-size:32px;font-weight:800;margin-bottom:6px;
   background:linear-gradient(135deg,var(--accent2),var(--good));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.done p{color:var(--text2);font-size:15px;margin:0 0 22px}
+.done p{color:var(--text2);font-size:14px;margin:0 0 14px}
 
-footer{padding:12px 18px 20px;text-align:center;font-size:11.5px;color:var(--text3)}
+footer{padding:5px 14px 7px;text-align:center;font-size:10.5px;color:var(--text3);flex-shrink:0}
 footer span{color:var(--accent2)}
+
+/* 极矮屏（笔记本 768/800 高）进一步压缩 */
+@media (max-height:820px){
+  .card{padding:11px 14px 11px;border-radius:14px}
+  .batch{margin-bottom:5px;font-size:10px}
+  .zh{margin-bottom:7px}
+  .speak{padding:6px 16px;margin-bottom:7px;font-size:13px}
+  .mean{margin-bottom:8px}
+  .tip{display:none}
+  .actions{margin-top:7px}
+  .btn{padding:8px}
+}
+@media (max-height:700px){
+  .divider{margin-bottom:6px}
+  .ipa{margin-bottom:3px}
+  .word{font-size:clamp(20px,3.8vh,28px)}
+  footer{display:none}
+}
+
+/* 手机：允许滚动（软键盘弹出时不压瘪内容），字号放大便于阅读 */
+@media (max-width:600px){
+  body{height:auto;min-height:100dvh;overflow:auto}
+  main{min-height:calc(100dvh - 124px);padding:12px 16px;overflow:visible}
+  .card{padding:20px 18px 18px;border-radius:18px}
+  .batch{font-size:11px;margin-bottom:10px;padding:3px 10px}
+  .word{font-size:clamp(28px,7.2vw,38px);margin-bottom:6px}
+  .ipa{font-size:14px;margin-bottom:8px}
+  .zh{font-size:17px;margin-bottom:14px}
+  .speak{padding:11px 22px;font-size:15px;margin-bottom:14px}
+  .divider{margin-bottom:14px}
+  .mean{font-size:15.5px;margin:0 auto 16px;padding:8px 16px;line-height:1.5}
+  .spell{padding:13px;font-size:19px;border-radius:12px}
+  .fb{font-size:13.5px;margin-top:9px;min-height:20px}
+  .tip{display:block;font-size:11.5px;margin-top:6px}
+  .actions{margin-top:14px;gap:10px}
+  .btn{padding:12px;font-size:15.5px;border-radius:11px}
+  footer{padding:8px 16px 14px;font-size:11px}
+}
 </style>
 </head>
 <body>
 
 <div class="top">
   <div class="tr">
-    <span>第 <b id="cur">1</b> / 117 个</span>
+    <span>第 <b id="cur">1</b> / 177 个</span>
     <span id="mastered">已掌握 0</span>
   </div>
   <div class="bar"><div class="fill" id="fill"></div></div>
+  <div class="jump-row">
+    <span>跳到第</span>
+    <input id="jumpTo" type="number" min="1" max="177" inputmode="numeric" placeholder="序号">
+    <span>个</span>
+    <button id="jumpBtn">跳转</button>
+  </div>
 </div>
 
 <main id="main"></main>
@@ -911,6 +974,426 @@ const WORDS = [
   "batch": "第 7 批：工程与媒体"
  },
  {
+  "en": "PDF",
+  "ipa": "/ˌpiː diː ˈef/",
+  "zh": "皮-迪-艾弗",
+  "mean": "文档格式，合同报表都用它",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "DOCX",
+  "ipa": "/dɒks/",
+  "zh": "道克斯",
+  "mean": "Word 文档格式",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "XLSX",
+  "ipa": "/eks els eks/",
+  "zh": "艾克斯-艾尔斯-艾克斯",
+  "mean": "Excel 表格格式",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "CSV",
+  "ipa": "/ˌsiː es ˈviː/",
+  "zh": "西-艾斯-V",
+  "mean": "逗号分隔的表格文本",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "MP4",
+  "ipa": "/ˌem piː ˈfɔːr/",
+  "zh": "艾姆-皮-佛",
+  "mean": "最常见的视频格式",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "MP3",
+  "ipa": "/ˌem piː ˈθriː/",
+  "zh": "艾姆-皮-斯瑞",
+  "mean": "最常见的音频格式",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "WAV",
+  "ipa": "/weɪv/",
+  "zh": "维夫",
+  "mean": "无损音频格式",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "PNG",
+  "ipa": "/pɪŋ/",
+  "zh": "拼",
+  "mean": "带透明的图片格式",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "SVG",
+  "ipa": "/ˌes viː ˈdʒiː/",
+  "zh": "艾斯-V-吉",
+  "mean": "矢量图格式，放大不糊",
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "CLI",
+  "ipa": "/ˌsiː el ˈaɪ/",
+  "zh": "西-艾尔-艾",
+  "mean": "命令行界面",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "pip",
+  "ipa": "/pɪp/",
+  "zh": "皮普",
+  "mean": "Python 装包工具",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "npm",
+  "ipa": "/ˌen piː ˈem/",
+  "zh": "恩-皮-艾姆",
+  "mean": "Node 装包工具",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "git",
+  "ipa": "/ɡɪt/",
+  "zh": "给特",
+  "mean": "代码版本管理工具",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "env",
+  "ipa": "/ˈenv/",
+  "zh": "恩弗",
+  "mean": "环境变量 / 环境配置",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "config",
+  "ipa": "/kənˈfɪɡ/",
+  "zh": "肯-菲格",
+  "mean": "配置文件",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "patch",
+  "ipa": "/pætʃ/",
+  "zh": "派奇",
+  "mean": "补丁，小范围改代码",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "diff",
+  "ipa": "/dɪf/",
+  "zh": "迪夫",
+  "mean": "两版代码的差异",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "clone",
+  "ipa": "/kloʊn/",
+  "zh": "克隆",
+  "mean": "把仓库复制到本地",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "push",
+  "ipa": "/pʊʃ/",
+  "zh": "普什",
+  "mean": "把代码推到远端",
+  "batch": "第 9 批：命令行与配置"
+ },
+ {
+  "en": "URL",
+  "ipa": "/ˌjuː ɑːr ˈel/",
+  "zh": "优-阿尔-艾尔",
+  "mean": "网址，一个地址",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "DNS",
+  "ipa": "/ˌdiː en ˈes/",
+  "zh": "迪-恩-艾斯",
+  "mean": "把域名翻译成 IP",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "TLS",
+  "ipa": "/ˌtiː el ˈes/",
+  "zh": "提-艾尔-艾斯",
+  "mean": "加密传输协议",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "CDN",
+  "ipa": "/ˌsiː diː ˈen/",
+  "zh": "西-迪-恩",
+  "mean": "就近分发内容的网络",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "port",
+  "ipa": "/pɔːrt/",
+  "zh": "波特",
+  "mean": "端口，一个服务的门牌号",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "header",
+  "ipa": "/ˈhedər/",
+  "zh": "海德尔",
+  "mean": "请求头，附带的信息",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "cookie",
+  "ipa": "/ˈkʊki/",
+  "zh": "库奇",
+  "mean": "浏览器存的小凭据",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "session",
+  "ipa": "/ˈseʃn/",
+  "zh": "塞申",
+  "mean": "会话，你登录后的一段状态",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "UUID",
+  "ipa": "/ˌjuː juː aɪ ˈdiː/",
+  "zh": "优-优-艾-迪",
+  "mean": "唯一编号",
+  "batch": "第 10 批：网络"
+ },
+ {
+  "en": "process",
+  "ipa": "/ˈprɑːses/",
+  "zh": "普拉塞斯",
+  "mean": "进程，一个跑起来的程序",
+  "batch": "第 11 批：进程与并发"
+ },
+ {
+  "en": "thread",
+  "ipa": "/θred/",
+  "zh": "斯瑞德",
+  "mean": "线程，进程里的小执行单元",
+  "batch": "第 11 批：进程与并发"
+ },
+ {
+  "en": "worker",
+  "ipa": "/ˈwɜːrkər/",
+  "zh": "沃克尔",
+  "mean": "干活的进程 / 工作线程",
+  "batch": "第 11 批：进程与并发"
+ },
+ {
+  "en": "lock",
+  "ipa": "/lɑːk/",
+  "zh": "洛克",
+  "mean": "锁，防止两个任务抢同一份数据",
+  "batch": "第 11 批：进程与并发"
+ },
+ {
+  "en": "async",
+  "ipa": "/eɪˈsɪŋk/",
+  "zh": "诶-辛克",
+  "mean": "异步，不用等前一步做完",
+  "batch": "第 11 批：进程与并发"
+ },
+ {
+  "en": "HTML",
+  "ipa": "/ˌeɪtʃ tiː em ˈel/",
+  "zh": "诶吃-提-艾姆-艾尔",
+  "mean": "网页的结构语言",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "CSS",
+  "ipa": "/ˌsiː es ˈes/",
+  "zh": "西-艾斯-艾斯",
+  "mean": "网页的样式语言",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "DOM",
+  "ipa": "/dɒm/",
+  "zh": "道姆",
+  "mean": "浏览器里的页面结构树",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "component",
+  "ipa": "/kəmˈpoʊnənt/",
+  "zh": "肯-坡嫩特",
+  "mean": "组件，可复用的页面部件",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "responsive",
+  "ipa": "/rɪˈspɑːnsɪv/",
+  "zh": "瑞-斯班西弗",
+  "mean": "自适应，手机电脑都好看",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "z-index",
+  "ipa": "/zed ˈɪndeks/",
+  "zh": "Z-因德克斯",
+  "mean": "层级，谁盖在谁上面",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "Bootstrap",
+  "ipa": "/ˈbuːtstræp/",
+  "zh": "布特-斯特拉普",
+  "mean": "一套现成的网页样式库",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "Tailwind",
+  "ipa": "/ˈteɪlwɪnd/",
+  "zh": "泰尔-温德",
+  "mean": "另一套样式库，写类名即样式",
+  "batch": "第 12 批：前端"
+ },
+ {
+  "en": "GGUF",
+  "ipa": "/ɡʌf/",
+  "zh": "嘎夫",
+  "mean": "一种量化的模型文件格式",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "VAE",
+  "ipa": "/ˌviː eɪ ˈiː/",
+  "zh": "V-诶-伊",
+  "mean": "图像编码解码器",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "CLIP",
+  "ipa": "/klɪp/",
+  "zh": "克里普",
+  "mean": "让模型懂图像和文字对应",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "latent",
+  "ipa": "/ˈleɪtnt/",
+  "zh": "雷滕特",
+  "mean": "隐空间，模型内部的表示",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "transformer",
+  "ipa": "/trænsˈfɔːrmər/",
+  "zh": "传斯-福默",
+  "mean": "现代大模型的底层结构",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "attention",
+  "ipa": "/əˈtenʃn/",
+  "zh": "呃-滕申",
+  "mean": "注意力机制，模型抓重点",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "checkpoint",
+  "ipa": "/ˈtʃekpɔɪnt/",
+  "zh": "切克-波因特",
+  "mean": "模型存档点",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "batch",
+  "ipa": "/bætʃ/",
+  "zh": "拜奇",
+  "mean": "批，一次处理多少条",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "seed",
+  "ipa": "/siːd/",
+  "zh": "西德",
+  "mean": "随机种子，同种子出同结果",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "sampler",
+  "ipa": "/ˈsæmplər/",
+  "zh": "桑普勒",
+  "mean": "采样器，决定出图风格",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "dry-run",
+  "ipa": "/draɪ rʌn/",
+  "zh": "拽-然",
+  "mean": "试跑，只演示不真执行",
+  "batch": "第 13 批：AI 深度"
+ },
+ {
+  "en": "deliverable",
+  "ipa": "/dɪˈlɪvərəbl/",
+  "zh": "迪-利弗勒波",
+  "mean": "交付物，你要交给对方的东西",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "milestone",
+  "ipa": "/ˈmaɪlstoʊn/",
+  "zh": "迈尔-斯通",
+  "mean": "里程碑，阶段性节点",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "scope",
+  "ipa": "/skoʊp/",
+  "zh": "斯科普",
+  "mean": "范围，这次做什么不做什么",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "retainer",
+  "ipa": "/rɪˈteɪnər/",
+  "zh": "瑞-泰纳",
+  "mean": "月度服务费",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "stakeholder",
+  "ipa": "/ˈsteɪkhoʊldər/",
+  "zh": "斯泰克-候德",
+  "mean": "相关方，能拍板或受影响的人",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "SLA",
+  "ipa": "/ˌes el ˈeɪ/",
+  "zh": "艾斯-艾尔-诶",
+  "mean": "服务承诺，多久响应多快恢复",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "trade-off",
+  "ipa": "/ˈtreɪd ɔːf/",
+  "zh": "吹德-奥夫",
+  "mean": "取舍，要这个就得放那个",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
+  "en": "backlog",
+  "ipa": "/ˈbæklɔːɡ/",
+  "zh": "拜克-洛格",
+  "mean": "待办清单",
+  "batch": "第 14 批：协作与商务"
+ },
+ {
   "en": "reverse proxy",
   "ipa": "/rɪˈvɜːrs ˈprɑːksi/",
   "zh": "瑞弗斯-普拉克西",
@@ -958,6 +1441,19 @@ function updateBar(){
   fillEl.style.width = (idx / WORDS.length * 100) + "%";
   masteredEl.textContent = "已掌握 " + mastered.size;
 }
+
+const jumpEl = document.getElementById("jumpTo");
+function doJump(){
+  let n = parseInt(jumpEl.value, 10);
+  if (!n || n < 1) { jumpEl.value = ""; return; }
+  n = Math.min(n, WORDS.length);
+  idx = n - 1;
+  jumpEl.value = "";
+  jumpEl.blur();
+  render();
+}
+jumpEl.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); doJump(); } });
+document.getElementById("jumpBtn").addEventListener("click", doJump);
 
 function render(){
   updateBar();
