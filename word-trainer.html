@@ -306,17 +306,22 @@ function render(){
     return;
   }
 
-  // 测试模式：只给中文意思 + 音标，要拼出英文
+  // 测试模式：完整显示英文原文/音标/中文带读/播放/中文意思，下面拼写练习
   mainEl.innerHTML = `
     <div class="qcard">
-      <div class="zh">${w.mean}</div>
+      <div class="zh" style="font-size:30px;letter-spacing:.5px">${w.en}</div>
       <div class="ipa">${w.ipa}</div>
+      <div style="font-size:16px;color:var(--warn);font-weight:600;margin-bottom:18px">
+        读作 ${w.zh}
+      </div>
       <div class="speaker" id="spk"><span class="ico">🔊</span> 听发音</div>
-      <input class="answer" id="ans" placeholder="输入英文单词" autocomplete="off"
+      <div style="border-top:1px solid var(--line);margin:18px 0 16px"></div>
+      <div style="font-size:15.5px;color:var(--text2);margin-bottom:20px">${w.mean}</div>
+      <input class="answer" id="ans" placeholder="照着拼一遍，加深记忆" autocomplete="off"
              autocorrect="off" autocapitalize="off" spellcheck="false">
       <div class="hint" id="hint"></div>
       <div class="actions">
-        <button class="btn ghost" id="hintBtn">提示</button>
+        <button class="btn ghost" id="skip">跳过</button>
         <button class="btn primary" id="submit">提交</button>
       </div>
     </div>`;
@@ -328,12 +333,7 @@ function render(){
   setTimeout(()=>{ ansEl.focus(); speak(w.en); }, 260);
 
   document.getElementById("spk").onclick = () => speak(w.en);
-  document.getElementById("hintBtn").onclick = () => {
-    state.hint = Math.min(3, state.hint + 1);
-    if (state.hint === 1) hintEl.innerHTML = `首字母 <b>${w.en[0]}</b> · 共 ${w.en.replace(/\s/g,'').length} 个字母`;
-    else if (state.hint === 2) hintEl.innerHTML = `<b>${w.en.slice(0, Math.ceil(w.en.length/2))}${'_'.repeat(w.en.length-Math.ceil(w.en.length/2))}</b>`;
-    else hintEl.innerHTML = `答案：<span class="right">${w.en}</span>`;
-  };
+  document.getElementById("skip").onclick = () => { state.idx++; render(); };
 
   function check(){
     const got = ansEl.value.trim();
