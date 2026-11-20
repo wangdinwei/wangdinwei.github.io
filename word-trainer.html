@@ -3,168 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#05070c">
 <title>技术单词训练器</title>
 <style>
 :root{
-  --bg:#070809; --card:#0f1622; --card2:#141d2b; --line:#1f2b3d;
-  --text:#e9eff8; --text2:#9fb0c8; --text3:#65758b;
-  --accent:#3b82f6; --accent2:#5ec8f5; --good:#34d399; --bad:#f87171; --warn:#fbbf24;
+  --bg:#05070c;
+  --panel:#0b1220;
+  --panel2:#101a2b;
+  --line:#1b2941;
+  --ink:#eef4fc;
+  --ink2:#93a6c0;
+  --ink3:#5b6b84;
+  --blue:#4b8cff;
+  --cyan:#5fd0f5;
+  --amber:#f5b942;
+  --amber-soft:#fbd98a;
+  --green:#35d39a;
+  --red:#ff6b6b;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--text);height:100vh;height:100dvh;overflow:hidden;
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  display:flex;flex-direction:column;line-height:1.5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  display:flex;flex-direction:column;overflow:hidden;
+  /* 背景光斑 */
+  background-image:
+    radial-gradient(900px 420px at 50% -8%, rgba(75,140,255,.16), transparent 68%),
+    radial-gradient(700px 380px at 88% 108%, rgba(95,208,245,.07), transparent 70%);
+}
 
-.top{padding:8px 16px 6px;border-bottom:1px solid var(--line);
-  background:rgba(7,8,9,.96);flex-shrink:0;backdrop-filter:blur(12px)}
-.tr{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;
-  color:var(--text3);margin-bottom:5px}
-.tr b{color:var(--accent2);font-size:12.5px}
-.bar{height:3px;background:#16202e;border-radius:2px;overflow:hidden}
-.fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:width .3s}
+/* ───────── 顶部进度 ───────── */
+.hdr{flex-shrink:0;padding:11px 18px 0}
+.hdr-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.counter{font-size:11.5px;color:var(--ink3);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.counter b{color:var(--cyan);font-size:14px;font-weight:700}
+.counter .sep{opacity:.4;margin:0 3px}
+.right-meta{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:9px}
+.right-meta .dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.track{margin-top:8px;height:2px;background:#121c2c;border-radius:2px;overflow:hidden;position:relative}
+.track-fill{height:100%;width:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  box-shadow:0 0 10px rgba(95,208,245,.55);transition:width .32s cubic-bezier(.4,0,.2,1)}
 
-.jump-row{display:flex;align-items:center;gap:5px;margin-top:5px;font-size:11px;color:var(--text3)}
-.jump-row input{width:54px;padding:3px 5px;font-size:11.5px;text-align:center;
-  background:#0a1119;border:1px solid var(--line);border-radius:6px;color:#fff;outline:none;
-  font-family:"SF Mono",Consolas,monospace;-moz-appearance:textfield}
-.jump-row input::-webkit-outer-spin-button,.jump-row input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.jump-row input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(59,130,246,.12)}
-.jump-row button{padding:3px 10px;font-size:11px;border-radius:6px;cursor:pointer;
-  background:rgba(59,130,246,.16);border:1px solid rgba(59,130,246,.4);color:#cfe4ff;
-  font-weight:600;transition:.15s}
-.jump-row button:hover{background:rgba(59,130,246,.28)}
-.jump-row button:active{transform:scale(.96)}
+/* 跳转条 */
+.jump{display:flex;align-items:center;gap:6px;margin-top:7px;font-size:10.5px;color:var(--ink3)}
+.jump input{width:50px;padding:2px 4px;font-size:11px;text-align:center;color:var(--ink);
+  background:#0a1120;border:1px solid var(--line);border-radius:5px;outline:none;
+  font-family:"SF Mono",Menlo,Consolas,monospace;-moz-appearance:textfield;transition:.15s}
+.jump input::-webkit-outer-spin-button,.jump input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.jump input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(75,140,255,.14)}
+.jump input::placeholder{color:#3b475c}
+.jump button{padding:2px 9px;font-size:10.5px;font-weight:600;color:#a9c8ff;cursor:pointer;
+  background:rgba(75,140,255,.13);border:1px solid rgba(75,140,255,.32);border-radius:5px;transition:.15s}
+.jump button:hover{background:rgba(75,140,255,.24)}
+.jump button:active{transform:scale(.95)}
 
-main{flex:1;padding:8px 14px;max-width:600px;margin:0 auto;width:100%;min-height:0;
-  display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+/* ───────── 主舞台 ───────── */
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:10px 16px}
 
-.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
-  border-radius:16px;padding:14px 16px 13px;text-align:center;position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;top:-70%;left:50%;transform:translateX(-50%);
-  width:220px;height:220px;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);
-  pointer-events:none}
+/* 渐变描边卡片 */
+.card{
+  position:relative;width:100%;max-width:560px;border-radius:20px;
+  padding:1px; /* 描边厚度 */
+  background:linear-gradient(158deg,rgba(95,208,245,.42),rgba(75,140,255,.13) 46%,rgba(24,36,58,.55) 100%);
+  box-shadow:0 22px 60px -28px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.02) inset;
+  animation:cardIn .34s cubic-bezier(.22,.9,.28,1);
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(9px) scale(.988)}to{opacity:1;transform:none}}
+.card-inner{
+  border-radius:19px;padding:20px 22px 18px;text-align:center;
+  background:linear-gradient(180deg,#0c1524,#0a1220 62%,#0b1322);
+  position:relative;overflow:hidden;
+}
+/* 单词背后柔光 */
+.card-inner::before{
+  content:'';position:absolute;left:50%;top:-58%;transform:translateX(-50%);
+  width:360px;height:240px;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(75,140,255,.16),transparent 68%);
+}
 
-.batch{display:inline-block;font-size:10.5px;color:var(--accent2);background:rgba(59,130,246,.12);
-  border:1px solid rgba(59,130,246,.25);padding:2px 9px;border-radius:14px;margin-bottom:7px;
-  letter-spacing:.02em}
+.batch{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;
+  color:#8fb6ff;background:rgba(75,140,255,.1);border:1px solid rgba(75,140,255,.22);
+  padding:2px 9px;border-radius:20px;letter-spacing:.06em;margin-bottom:11px}
+.batch::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--blue)}
 
-.word{font-size:clamp(22px,4.2vh,32px);font-weight:800;color:#fff;letter-spacing:.3px;
-  line-height:1.15;margin-bottom:3px;word-break:break-word}
-.ipa{font-size:clamp(11px,1.6vh,13.5px);color:var(--accent2);
-  font-family:"SF Mono",Consolas,monospace;margin-bottom:5px}
-.zh{font-size:clamp(12.5px,1.8vh,15px);color:var(--warn);font-weight:700;margin-bottom:9px;
-  letter-spacing:.02em}
-.zh::before{content:'读作 ';font-size:11.5px;color:var(--text3);font-weight:400;letter-spacing:0}
+.word{
+  font-size:clamp(27px,4.6vh,41px);font-weight:800;line-height:1.08;letter-spacing:-.4px;
+  color:#fff;word-break:break-word;
+  text-shadow:0 0 26px rgba(120,175,255,.28);
+}
+.ipa{margin-top:5px;font-size:clamp(11px,1.55vh,13.5px);color:var(--cyan);opacity:.9;
+  font-family:"SF Mono",Menlo,Consolas,monospace;letter-spacing:.02em}
+.zh{margin-top:4px;font-size:clamp(12px,1.7vh,14.5px);color:#e0a93c;font-weight:600}
+.zh span{color:var(--ink3);font-weight:400;font-size:11px;margin-right:2px}
 
-.speak{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.15);
-  border:1px solid rgba(59,130,246,.4);color:#cfe4ff;padding:7px 18px;border-radius:30px;
-  font-size:13.5px;font-weight:600;cursor:pointer;transition:.16s;margin-bottom:9px}
-.speak:active{transform:scale(.96)}
-.speak:hover{background:rgba(59,130,246,.26)}
+/* 发音：圆形按钮 */
+.say{margin:11px auto 0;width:44px;height:44px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;position:relative;
+  background:radial-gradient(circle at 35% 30%,rgba(95,208,245,.28),rgba(75,140,255,.1));
+  border:1px solid rgba(95,208,245,.4);transition:.18s}
+.say svg{width:19px;height:19px;fill:none;stroke:#d3ebff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.say:hover{background:radial-gradient(circle at 35% 30%,rgba(95,208,245,.42),rgba(75,140,255,.16));
+  box-shadow:0 0 20px rgba(95,208,245,.3)}
+.say:active{transform:scale(.93)}
+.say.playing{animation:pulse .9s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,208,245,.4)}100%{box-shadow:0 0 0 13px rgba(95,208,245,0)}}
 
-.divider{height:1px;background:var(--line);margin:0 0 9px}
-.mean{font-size:clamp(14px,1.95vh,16px);color:#ffffff;font-weight:600;
-  margin:0 auto 10px;line-height:1.5;padding:7px 15px;display:inline-block;max-width:100%;
-  background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.22);border-radius:9px}
-.mean::before{content:'意思 ';font-size:11px;color:rgba(255,255,255,.45);font-weight:400;
-  letter-spacing:.05em}
+/* 意思：答案块 */
+.meaning{position:relative;margin:13px auto 0;max-width:100%;display:inline-block;
+  padding:8px 16px 8px 14px;border-radius:10px;text-align:left;
+  background:linear-gradient(100deg,rgba(245,185,66,.085),rgba(245,185,66,.025));
+  border:1px solid rgba(245,185,66,.17)}
+.meaning::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;
+  border-radius:2px;background:linear-gradient(180deg,rgba(245,185,66,.85),rgba(245,185,66,.1))}
+.meaning .lbl{font-size:9.5px;letter-spacing:.16em;color:rgba(245,185,66,.62);
+  font-weight:700;display:block;line-height:1.5;margin-bottom:1px}
+.meaning .txt{font-size:clamp(14px,1.95vh,16.5px);font-weight:600;color:#fff;line-height:1.4}
 
-.spell{width:100%;padding:9px 13px;font-size:clamp(16px,2.4vh,19px);text-align:center;
-  letter-spacing:.4px;background:#080d14;border:2px solid var(--line);border-radius:10px;
-  color:#fff;outline:none;font-family:"SF Mono",Consolas,monospace;transition:.16s}
-.spell:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
-.spell.correct{border-color:var(--good);color:var(--good);background:rgba(52,211,153,.07)}
-.spell.incorrect{border-color:var(--bad);color:var(--bad);background:rgba(248,113,113,.07);
-  animation:shake .3s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}
-  50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+/* 拼写输入 */
+.field{margin-top:15px;position:relative}
+.field input{
+  width:100%;padding:11px 14px;text-align:center;
+  font-size:clamp(16px,2.3vh,19px);font-weight:600;letter-spacing:.06em;
+  color:#fff;background:#060b14;border:1.5px solid #1f2e47;border-radius:11px;
+  outline:none;font-family:"SF Mono",Menlo,Consolas,monospace;
+  transition:border-color .18s,box-shadow .18s,background .18s;
+}
+.field input::placeholder{color:#465568;font-weight:400;letter-spacing:.02em;
+  font-family:-apple-system,"PingFang SC",sans-serif;font-size:.82em;transition:opacity .12s}
+.field input:focus::placeholder{opacity:0}
+.field input:focus{border-color:var(--blue);background:#080f1b;
+  box-shadow:0 0 0 3px rgba(75,140,255,.1)}
+.field input.ok{border-color:var(--green);color:var(--green);background:rgba(53,211,154,.06);
+  box-shadow:0 0 0 3px rgba(53,211,154,.13)}
+.field input.bad{border-color:var(--red);color:#ff9a9a;background:rgba(255,107,107,.06);
+  animation:shake .32s}
+@keyframes shake{0%,100%{transform:translateX(0)}22%{transform:translateX(-6px)}
+  48%{transform:translateX(6px)}72%{transform:translateX(-3px)}}
 
-.fb{margin-top:6px;font-size:12.5px;min-height:17px;color:var(--text3)}
-.fb.ok{color:var(--good);font-weight:600}
-.fb.no{color:var(--bad);font-weight:600}
-.fb.go{color:var(--accent2)}
+.fb{margin-top:7px;height:16px;font-size:11.5px;line-height:16px;color:var(--ink3)}
+.fb.ok{color:var(--green);font-weight:600}
+.fb.no{color:var(--red);font-weight:600}
+.fb.go{color:#7fb4ff}
 
-.tip{margin-top:2px;font-size:10.5px;color:var(--text3);line-height:1.5}
+/* 按钮组 */
+.nav{display:flex;gap:8px;margin-top:11px}
+.btn{flex:1;padding:10px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;
+  border:1px solid #1f2e47;background:transparent;color:#8fa3bd;transition:.15s}
+.btn:hover{border-color:#2c4160;color:#cfe0f5}
+.btn:active{transform:scale(.975)}
+.btn.main{background:linear-gradient(180deg,#3f7ff0,#2f68d4);border-color:#4b8cff;color:#fff;
+  box-shadow:0 6px 18px -8px rgba(75,140,255,.85)}
+.btn.main:hover:not(:disabled){background:linear-gradient(180deg,#4b8cff,#3a74e0)}
+.btn.main:disabled{background:#141d2d;border-color:#25334b;color:#4d5e78;
+  box-shadow:none;cursor:not-allowed}
 
-.actions{display:flex;gap:8px;margin-top:9px}
-.btn{flex:1;padding:9px;border-radius:9px;font-size:14px;font-weight:600;
-  border:1px solid var(--line);background:transparent;color:var(--text2);cursor:pointer;
-  transition:.15s}
-.btn:active{transform:scale(.97)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.primary:disabled{opacity:.32;cursor:not-allowed;background:#25324a;border-color:#25324a}
-.btn.primary:hover:not(:disabled){background:#2f6fd8}
-.btn.ghost:hover{border-color:#2d4d75;color:#fff}
+/* 正确时整卡闪光 */
+.card.flash .card-inner::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 42%,rgba(53,211,154,.17),transparent 62%);
+  animation:flashOut .55s ease-out forwards}
+@keyframes flashOut{from{opacity:1}to{opacity:0}}
+
+/* 底部 */
+.foot{flex-shrink:0;padding:6px 18px 9px;text-align:center;font-size:10.5px;color:#5a6b85;letter-spacing:.03em}
+.foot kbd{font-family:inherit;color:#8fa8c8;background:#0d1626;border:1px solid #223350;
+  border-radius:4px;padding:0 4px;font-size:9.5px}
 
 /* 完成页 */
-.done{text-align:center;padding:10px 4px}
-.done .big{font-size:32px;font-weight:800;margin-bottom:6px;
-  background:linear-gradient(135deg,var(--accent2),var(--good));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.done p{color:var(--text2);font-size:14px;margin:0 0 14px}
+.done{text-align:center;padding:16px 6px}
+.done .big{font-size:34px;font-weight:800;letter-spacing:-1px;
+  background:linear-gradient(135deg,var(--cyan),var(--green));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.done .sub{margin:7px 0 16px;font-size:13px;color:var(--ink2)}
 
-footer{padding:5px 14px 7px;text-align:center;font-size:10.5px;color:var(--text3);flex-shrink:0}
-footer span{color:var(--accent2)}
-
-/* 极矮屏（笔记本 768/800 高）进一步压缩 */
-@media (max-height:820px){
-  .card{padding:11px 14px 11px;border-radius:14px}
-  .batch{margin-bottom:5px;font-size:10px}
-  .zh{margin-bottom:7px}
-  .speak{padding:6px 16px;margin-bottom:7px;font-size:13px}
-  .mean{margin-bottom:8px}
-  .tip{display:none}
-  .actions{margin-top:7px}
-  .btn{padding:8px}
-}
-@media (max-height:700px){
-  .divider{margin-bottom:6px}
-  .ipa{margin-bottom:3px}
-  .word{font-size:clamp(20px,3.8vh,28px)}
-  footer{display:none}
-}
-
-/* 手机：允许滚动（软键盘弹出时不压瘪内容），字号放大便于阅读 */
+/* ───────── 手机 ───────── */
 @media (max-width:600px){
-  body{height:auto;min-height:100dvh;overflow:auto}
-  main{min-height:calc(100dvh - 124px);padding:12px 16px;overflow:visible}
-  .card{padding:20px 18px 18px;border-radius:18px}
-  .batch{font-size:11px;margin-bottom:10px;padding:3px 10px}
-  .word{font-size:clamp(28px,7.2vw,38px);margin-bottom:6px}
-  .ipa{font-size:14px;margin-bottom:8px}
-  .zh{font-size:17px;margin-bottom:14px}
-  .speak{padding:11px 22px;font-size:15px;margin-bottom:14px}
-  .divider{margin-bottom:14px}
-  .mean{font-size:15.5px;margin:0 auto 16px;padding:8px 16px;line-height:1.5}
-  .spell{padding:13px;font-size:19px;border-radius:12px}
-  .fb{font-size:13.5px;margin-top:9px;min-height:20px}
-  .tip{display:block;font-size:11.5px;margin-top:6px}
-  .actions{margin-top:14px;gap:10px}
-  .btn{padding:12px;font-size:15.5px;border-radius:11px}
-  footer{padding:8px 16px 14px;font-size:11px}
+  body{overflow:auto;min-height:100dvh}
+  .hdr{padding:12px 16px 0}
+  .stage{min-height:auto;padding:12px 14px 6px;align-items:flex-start}
+  .card-inner{padding:22px 18px 20px;border-radius:17px}
+  .word{font-size:clamp(30px,8vw,40px)}
+  .ipa{font-size:13.5px;margin-top:7px}
+  .zh{font-size:15px;margin-top:6px}
+  .say{width:50px;height:50px;margin-top:15px}
+  .say svg{width:20px;height:20px}
+  .meaning{margin-top:16px;padding:10px 18px 10px 15px}
+  .meaning .txt{font-size:16px}
+  .field{margin-top:17px}
+  .field input{padding:13px 15px;font-size:18px}
+  .fb{height:19px;font-size:12.5px;line-height:19px;margin-top:9px}
+  .nav{margin-top:13px;gap:10px}
+  .btn{padding:12px;font-size:15px;border-radius:11px}
+  .foot{padding:10px 16px 14px;font-size:10.5px}
+}
+
+/* 极矮屏（笔记本 768 高） */
+@media (max-height:790px) and (min-width:601px){
+  .card-inner{padding:15px 20px 14px}
+  .batch{margin-bottom:8px}
+  .say{width:38px;height:38px;margin-top:9px}
+  .say svg{width:16px;height:16px}
+  .meaning{margin-top:10px;padding:6px 14px 6px 12px}
+  .field{margin-top:11px}
+  .field input{padding:9px 13px}
+  .fb{margin-top:5px;height:14px;line-height:14px}
+  .nav{margin-top:8px}
+  .btn{padding:8px}
+  .foot{padding:4px 18px 6px}
+}
+@media (max-height:680px) and (min-width:601px){
+  .foot{display:none}
+  .batch{display:none}
+  .card-inner{padding:12px 18px 12px}
+  .word{font-size:clamp(24px,4vh,32px)}
 }
 </style>
 </head>
 <body>
 
-<div class="top">
-  <div class="tr">
-    <span>第 <b id="cur">1</b> / 177 个</span>
-    <span id="mastered">已掌握 0</span>
+<header class="hdr">
+  <div class="hdr-row">
+    <span class="counter">第 <b id="cur">1</b><span class="sep">/</span>177</span>
+    <span class="right-meta"><span class="dot"></span><span id="mastered">已掌握 0</span></span>
   </div>
-  <div class="bar"><div class="fill" id="fill"></div></div>
-  <div class="jump-row">
-    <span>跳到第</span>
+  <div class="track"><div class="track-fill" id="fill"></div></div>
+  <div class="jump">
+    <span>跳到</span>
     <input id="jumpTo" type="number" min="1" max="177" inputmode="numeric" placeholder="序号">
     <span>个</span>
     <button id="jumpBtn">跳转</button>
   </div>
-</div>
+</header>
 
-<main id="main"></main>
+<main class="stage" id="stage"></main>
 
-<footer>拼对了自动跳下一个 · 拼错就改 · <span>按 S 重听发音</span></footer>
+<footer class="foot">拼对自动进入下一个 · 拼错就改 · 按 <kbd>S</kbd> 重听发音</footer>
 
 <script>
 const WORDS = [
@@ -978,63 +1053,63 @@ const WORDS = [
   "ipa": "/ˌpiː diː ˈef/",
   "zh": "皮-迪-艾弗",
   "mean": "文档格式，合同报表都用它",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "DOCX",
   "ipa": "/dɒks/",
   "zh": "道克斯",
   "mean": "Word 文档格式",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "XLSX",
   "ipa": "/eks els eks/",
   "zh": "艾克斯-艾尔斯-艾克斯",
   "mean": "Excel 表格格式",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "CSV",
   "ipa": "/ˌsiː es ˈviː/",
   "zh": "西-艾斯-V",
   "mean": "逗号分隔的表格文本",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "MP4",
   "ipa": "/ˌem piː ˈfɔːr/",
   "zh": "艾姆-皮-佛",
   "mean": "最常见的视频格式",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "MP3",
   "ipa": "/ˌem piː ˈθriː/",
   "zh": "艾姆-皮-斯瑞",
   "mean": "最常见的音频格式",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "WAV",
   "ipa": "/weɪv/",
   "zh": "维夫",
   "mean": "无损音频格式",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "PNG",
   "ipa": "/pɪŋ/",
   "zh": "拼",
   "mean": "带透明的图片格式",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "SVG",
   "ipa": "/ˌes viː ˈdʒiː/",
   "zh": "艾斯-V-吉",
   "mean": "矢量图格式，放大不糊",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "CLI",
@@ -1398,28 +1473,29 @@ const WORDS = [
   "ipa": "/rɪˈvɜːrs ˈprɑːksi/",
   "zh": "瑞弗斯-普拉克西",
   "mean": "反向代理",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：其他"
  },
  {
   "en": "load balancer",
   "ipa": "/loʊd ˈbælənsər/",
   "zh": "罗德-巴伦瑟",
   "mean": "负载均衡",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 8 批：其他"
  }
 ];
-
 let idx = 0;
-let mastered = new Set();
-const mainEl = document.getElementById("main");
-const curEl = document.getElementById("cur");
-const fillEl = document.getElementById("fill");
-const masteredEl = document.getElementById("mastered");
+const mastered = new Set();
 
+const stageEl   = document.getElementById("stage");
+const curEl     = document.getElementById("cur");
+const fillEl    = document.getElementById("fill");
+const masteredEl= document.getElementById("mastered");
+const jumpEl    = document.getElementById("jumpTo");
+
+/* ── 发音 ── */
 let voices = [];
 function loadVoices(){ voices = speechSynthesis.getVoices(); if(!voices.length) setTimeout(loadVoices,300); }
 if (typeof speechSynthesis !== "undefined"){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
-
 function pickVoice(){
   if(!voices.length) voices = speechSynthesis.getVoices();
   const rules = [v=>/en-US/i.test(v.lang)&&/google|samantha|aria|zira/i.test(v.name),
@@ -1427,8 +1503,8 @@ function pickVoice(){
   for(const r of rules){ const f = voices.find(r); if(f) return f; }
   return null;
 }
-function speak(text){
-  if (typeof speechSynthesis === "undefined"){ alert("这个浏览器不支持发音，请用 Chrome 或 Safari"); return; }
+function say(text){
+  if (typeof speechSynthesis === "undefined"){ alert("此浏览器不支持发音，请用 Chrome / Safari"); return; }
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "en-US"; u.rate = 0.82;
@@ -1436,116 +1512,124 @@ function speak(text){
   speechSynthesis.speak(u);
 }
 
-function updateBar(){
+function setBar(){
   curEl.textContent = Math.min(idx + 1, WORDS.length);
   fillEl.style.width = (idx / WORDS.length * 100) + "%";
   masteredEl.textContent = "已掌握 " + mastered.size;
 }
 
-const jumpEl = document.getElementById("jumpTo");
-function doJump(){
-  let n = parseInt(jumpEl.value, 10);
-  if (!n || n < 1) { jumpEl.value = ""; return; }
-  n = Math.min(n, WORDS.length);
-  idx = n - 1;
-  jumpEl.value = "";
-  jumpEl.blur();
-  render();
-}
-jumpEl.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); doJump(); } });
-document.getElementById("jumpBtn").addEventListener("click", doJump);
-
+/* ── 渲染 ── */
 function render(){
-  updateBar();
+  setBar();
   if (idx >= WORDS.length) return renderDone();
   const w = WORDS[idx];
 
-  mainEl.innerHTML = `
-    <div class="card">
-      <div class="batch">${w.batch}</div>
-      <div class="word">${w.en}</div>
-      <div class="ipa">${w.ipa}</div>
-      <div class="zh">${w.zh}</div>
-      <div class="speak" id="spk">🔊 听发音</div>
-      <div class="divider"></div>
-      <div class="mean">${w.mean}</div>
-      <input class="spell" id="spell" placeholder="照着拼一遍" autocomplete="off"
-             autocorrect="off" autocapitalize="off" spellcheck="false">
-      <div class="fb" id="fb"></div>
-      <div class="tip">不区分大小写 · 拼对自动进入下一个</div>
-      <div class="actions">
-        <button class="btn ghost" id="prev">上一个</button>
-        <button class="btn primary" id="next" disabled>下一个</button>
+  stageEl.innerHTML = `
+    <div class="card" id="card">
+      <div class="card-inner">
+        <span class="batch">${w.batch}</span>
+        <div class="word">${w.en}</div>
+        <div class="ipa">${w.ipa}</div>
+        <div class="zh"><span>读作</span>${w.zh}</div>
+        <div class="say" id="say" title="听发音">
+          <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+        </div>
+        <div class="meaning">
+          <span class="lbl">意思</span>
+          <span class="txt">${w.mean}</span>
+        </div>
+        <div class="field">
+          <input id="spell" placeholder="照着拼一遍" autocomplete="off" autocorrect="off"
+                 autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="fb" id="fb"></div>
+        <div class="nav">
+          <button class="btn" id="prev">上一个</button>
+          <button class="btn main" id="next" disabled>下一个</button>
+        </div>
       </div>
     </div>`;
 
-  const sp = document.getElementById("spell");
-  const fb = document.getElementById("fb");
-  const nextBtn = document.getElementById("next");
-
-  setTimeout(()=>{ sp.focus(); speak(w.en); }, 250);
-  document.getElementById("spk").onclick = () => speak(w.en);
-  document.getElementById("prev").onclick = () => { if(idx>0){ idx--; render(); } };
-  nextBtn.onclick = () => { if(!nextBtn.disabled){ idx++; render(); } };
-
+  const card  = document.getElementById("card");
+  const sp    = document.getElementById("spell");
+  const fb    = document.getElementById("fb");
+  const nextB = document.getElementById("next");
   const target = w.en;
 
-  sp.addEventListener("input", () => {
-    const val = sp.value.trim();
-    if (val === "") { fb.textContent = ""; fb.className = "fb"; sp.className = "spell"; nextBtn.disabled = true; return; }
+  setTimeout(()=>{ sp.focus({preventScroll:true}); say(w.en); }, 220);
 
-    if (val.toLowerCase() === target.toLowerCase()) {
-      // 拼对了
-      sp.className = "spell correct";
-      fb.textContent = "✅ 正确！";
+  document.getElementById("say").onclick = e => {
+    const el = e.currentTarget;
+    el.classList.add("playing");
+    say(w.en);
+    setTimeout(()=>el.classList.remove("playing"), 950);
+  };
+  document.getElementById("prev").onclick = () => { if (idx > 0){ idx--; render(); } };
+  nextB.onclick = () => { if (!nextB.disabled){ idx++; render(); } };
+
+  /* 实时校验（逻辑不变） */
+  sp.addEventListener("input", () => {
+    const v = sp.value.trim();
+    if (v === ""){ sp.className = ""; fb.textContent = ""; fb.className = "fb"; nextB.disabled = true; return; }
+
+    if (v.toLowerCase() === target.toLowerCase()){
+      sp.className = "ok";
+      fb.textContent = "✓ 正确";
       fb.className = "fb ok";
-      nextBtn.disabled = false;
+      nextB.disabled = false;
       mastered.add(target);
       masteredEl.textContent = "已掌握 " + mastered.size;
-      setTimeout(() => { idx++; render(); }, 780);
-    } else if (target.toLowerCase().startsWith(val.toLowerCase())) {
-      // 还是前缀，正在输入
-      sp.className = "spell";
-      fb.textContent = "💡 继续…";
+      card.classList.add("flash");
+      setTimeout(()=>{ idx++; render(); }, 760);
+    } else if (target.toLowerCase().startsWith(v.toLowerCase())){
+      sp.className = "";
+      fb.textContent = "继续…";
       fb.className = "fb go";
-      nextBtn.disabled = true;
-    } else if (val.length >= target.length) {
-      // 长度够了但拼错
-      sp.className = "spell incorrect";
-      fb.textContent = "❌ 不对，再试试";
+      nextB.disabled = true;
+    } else if (v.length >= target.length){
+      sp.className = "bad";
+      fb.textContent = "不对，再试试";
       fb.className = "fb no";
-      nextBtn.disabled = true;
+      nextB.disabled = true;
     } else {
-      sp.className = "spell";
+      sp.className = "";
       fb.textContent = "";
       fb.className = "fb";
-      nextBtn.disabled = true;
+      nextB.disabled = true;
     }
   });
 
   sp.addEventListener("keydown", e => {
-    if (e.key === "Enter" && !nextBtn.disabled) { idx++; render(); }
+    if (e.key === "Enter" && !nextB.disabled){ idx++; render(); }
   });
 }
 
 function renderDone(){
   fillEl.style.width = "100%";
-  mainEl.innerHTML = `
-    <div class="done">
+  stageEl.innerHTML = `
+    <div class="card"><div class="card-inner done">
       <div class="big">${WORDS.length} / ${WORDS.length}</div>
-      <p>全部过完一遍了，已掌握 ${mastered.size} 个</p>
-      <div class="actions">
-        <button class="btn ghost" id="again">再来一轮</button>
-      </div>
-    </div>`;
+      <div class="sub">全部过完，已掌握 ${mastered.size} 个</div>
+      <div class="nav"><button class="btn main" id="again">再来一轮</button></div>
+    </div></div>`;
   document.getElementById("again").onclick = () => { idx = 0; mastered.clear(); render(); };
 }
 
+/* ── 跳转 ── */
+function doJump(){
+  let n = parseInt(jumpEl.value, 10);
+  if (!n || n < 1){ jumpEl.value = ""; return; }
+  idx = Math.min(n, WORDS.length) - 1;
+  jumpEl.value = ""; jumpEl.blur(); render();
+}
+jumpEl.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); doJump(); } });
+document.getElementById("jumpBtn").addEventListener("click", doJump);
+
+/* ── 快捷键 S 重听 ── */
 document.addEventListener("keydown", e => {
-  if (e.key === "s" || e.key === "S") {
-    if (document.activeElement && document.activeElement.id === "spell") return;
-    if (idx < WORDS.length) speak(WORDS[idx].en);
-  }
+  const t = e.target;
+  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return;
+  if (e.key === "s" || e.key === "S"){ if (idx < WORDS.length) say(WORDS[idx].en); }
 });
 
 render();
