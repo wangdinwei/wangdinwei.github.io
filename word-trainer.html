@@ -301,8 +301,8 @@ const WORDS = [
  },
  {
   "en": "SQLite",
-  "ipa": "/ˌes kjuː laɪt/",
-  "zh": "艾斯-秋-莱特",
+  "ipa": "/ˈsiːkwəl laɪt/",
+  "zh": "西扣-莱特",
   "mean": "最省事的数据库，就一个文件。不用装服务、不用开账号，适合小工具。",
   "batch": "第 2 批：数据库"
  },
@@ -474,7 +474,7 @@ const WORDS = [
  {
   "en": "Kubernetes",
   "ipa": "/ˌkjuːbərˈnetiːz/",
-  "zh": "Q-伯-尼提兹",
+  "zh": "库伯-尼提兹",
   "mean": "管一大堆 Docker 箱子的总管。机器挂了自动换一台重建。小项目用它反而更累。",
   "batch": "第 3 批：服务器与运维"
  },
@@ -557,10 +557,9 @@ const WORDS = [
  {
   "en": "VRAM",
   "ipa": "/ˈviː ræm/",
-  "zh": "V-R-A-M",
+  "zh": "维-然姆",
   "mean": "显卡自己的内存。模型得先塞进这块内存里才跑得动，塞不下就报错，或者慢得像蜗牛。",
-  "batch": "第 4 批：AI 与模型",
-  "spell": true
+  "batch": "第 4 批：AI 与模型"
  },
  {
   "en": "CUDA",
@@ -599,8 +598,8 @@ const WORDS = [
  },
  {
   "en": "ComfyUI",
-  "ipa": "/ˈkʌmfi juː ˈaɪ/",
-  "zh": "康菲-U-艾",
+  "ipa": "/ˈkʌmfi juː aɪ/",
+  "zh": "康菲-优艾",
   "mean": "拖方块搭画图流程的工具。一个方块干一件事，连起来就是一条出图的流水线。",
   "batch": "第 4 批：AI 与模型"
  },
@@ -648,8 +647,8 @@ const WORDS = [
  },
  {
   "en": "quantization",
-  "ipa": "/ˌkwɑːntɪˈzeɪʃn/",
-  "zh": "匡提-泽申",
+  "ipa": "/ˌkwɑːntəˈzeɪʃn/",
+  "zh": "匡特-泽申",
   "mean": "把模型压缩一下，让它占的显卡内存少一半甚至更多。代价是稍微笨一点点。显存不够时首选这招。",
   "batch": "第 4 批：AI 与模型"
  },
@@ -886,8 +885,8 @@ const WORDS = [
  },
  {
   "en": "LUFS",
-  "ipa": "/ˌel juː ef ˈes/",
-  "zh": "艾尔-优-艾弗-艾斯",
+  "ipa": "/lʌfs/",
+  "zh": "鲁夫斯",
   "mean": "衡量声音听起来有多响的标准。比看峰值靠谱，平台一般要求压到 -14 左右。",
   "batch": "第 7 批：工程与媒体"
  },
@@ -1084,10 +1083,9 @@ const WORDS = [
  {
   "en": "DOCX",
   "ipa": "/dɒks/",
-  "zh": "D-O-C-X",
+  "zh": "道克斯",
   "mean": "Word 文档。适合还要反复改的稿子。转 PDF 前先翻一遍，看看分页和字体有没有乱。",
-  "batch": "第 8 批：文件与格式",
-  "spell": true
+  "batch": "第 8 批：文件与格式"
  },
  {
   "en": "XLSX",
@@ -1356,7 +1354,7 @@ const WORDS = [
  },
  {
   "en": "z-index",
-  "ipa": "/zed ˈɪndeks/",
+  "ipa": "/ˈziː ɪndeks/",
   "zh": "Z-因德克斯",
   "mean": "层级，谁压在谁上面。只对定位过的元素管用，父级也会影响，是常见的坑。",
   "batch": "第 12 批：前端"
@@ -1456,7 +1454,7 @@ const WORDS = [
  {
   "en": "deliverable",
   "ipa": "/dɪˈlɪvərəbl/",
-  "zh": "迪-利弗勒波",
+  "zh": "迪利弗勒波",
   "mean": "交付物。你要交给对方的那几样具体东西：代码、文档、成片、报表。谈的时候先说清，后面不吵架。",
   "batch": "第 14 批：协作与商务"
  },
@@ -1546,10 +1544,15 @@ function pickVoice(){
   return null;
 }
 function ttsText(w){
-  if (!w.spell) return w.en;
-  if (w.en === "MySQL") return "My S Q L";
-  if (w.en === "PostgreSQL") return "Postgres Q L";
-  return w.en.split("").join(" ");
+  // 缩写：逐字母读
+  if (w.spell){
+    if (w.en === "MySQL") return "My S Q L";
+    if (w.en === "PostgreSQL") return "Postgres Q L";
+    return w.en.split("").join(" ");
+  }
+  // 全大写但有单词读音的（LUFS/WAV/PNG/CLIP…）：转小写，TTS 才会念成单词
+  if (/^[A-Z]+$/.test(w.en)) return w.en.toLowerCase();
+  return w.en;
 }
 function say(text){
   if (typeof speechSynthesis === "undefined"){ alert("此浏览器不支持发音，请用 Chrome / Safari"); return; }
