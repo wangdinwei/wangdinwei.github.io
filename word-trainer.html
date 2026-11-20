@@ -97,6 +97,7 @@ body{
   font-family:"SF Mono",Menlo,Consolas,monospace;letter-spacing:.02em}
 .zh{margin-top:4px;font-size:clamp(12px,1.7vh,14.5px);color:#e0a93c;font-weight:600}
 .zh span{color:var(--ink3);font-weight:400;font-size:11px;margin-right:2px}
+.zh.abbr{font-family:"SF Mono",Menlo,Consolas,monospace;letter-spacing:.1em;font-size:clamp(12px,1.65vh,14px)}
 
 /* 发音：圆形按钮 */
 .say{margin:11px auto 0;width:44px;height:44px;border-radius:50%;cursor:pointer;
@@ -250,9 +251,10 @@ const WORDS = [
  {
   "en": "SQL",
   "ipa": "/ˌes kjuː ˈel/",
-  "zh": "艾斯-秋-艾尔",
+  "zh": "S-Q-L",
   "mean": "跟数据库说话用的语言。记住四个字：查、加、改、删，日常够用了。",
-  "batch": "第 1 批：编程语言"
+  "batch": "第 1 批：编程语言",
+  "spell": true
  },
  {
   "en": "Bash",
@@ -278,9 +280,10 @@ const WORDS = [
  {
   "en": "MySQL",
   "ipa": "/ˌmaɪ es kjuː ˈel/",
-  "zh": "买-艾斯-秋-艾尔",
+  "zh": "My-S-Q-L",
   "mean": "用的人最多的免费数据库。中小网站基本都用它，资料多、好找人问。",
-  "batch": "第 2 批：数据库"
+  "batch": "第 2 批：数据库",
+  "spell": true
  },
  {
   "en": "Redis",
@@ -341,9 +344,10 @@ const WORDS = [
  {
   "en": "PostgreSQL",
   "ipa": "/ˈpoʊstɡres kjuː el/",
-  "zh": "剖斯特-格瑞斯-秋-艾尔",
+  "zh": "Postgres-Q-L",
   "mean": "一个很能打的免费数据库，功能全。我这个项目的数据都存它里面。",
-  "batch": "第 2 批：数据库"
+  "batch": "第 2 批：数据库",
+  "spell": true
  },
  {
   "en": "transaction",
@@ -355,23 +359,26 @@ const WORDS = [
  {
   "en": "SSL",
   "ipa": "/ˌes es ˈel/",
-  "zh": "艾斯-艾斯-艾尔",
+  "zh": "S-S-L",
   "mean": "网址前面那把锁。有了它，你和网站之间传的东西别人看不见。",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 3 批：服务器与运维",
+  "spell": true
  },
  {
   "en": "VPS",
   "ipa": "/ˌviː piː ˈes/",
-  "zh": "V-皮-艾斯",
+  "zh": "V-P-S",
   "mean": "在云上租的一台电脑。有独立 IP、有管理员权限，一个月几十块起。",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 3 批：服务器与运维",
+  "spell": true
  },
  {
   "en": "SSH",
   "ipa": "/ˌes es ˈeɪtʃ/",
-  "zh": "艾斯-艾斯-诶吃",
+  "zh": "S-S-H",
   "mean": "远程连服务器的办法。敲一条命令就连上去，所有远程操作都靠它。",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 3 批：服务器与运维",
+  "spell": true
  },
  {
   "en": "cron",
@@ -390,7 +397,7 @@ const WORDS = [
  {
   "en": "nginx",
   "ipa": "/ˈendʒɪn eks/",
-  "zh": "恩진-艾克斯",
+  "zh": "恩珍-艾克斯",
   "mean": "网站的看门人。所有请求先到它手上，它再决定给谁：静态文件自己发，接口转给后端。",
   "batch": "第 3 批：服务器与运维"
  },
@@ -488,16 +495,18 @@ const WORDS = [
  {
   "en": "LLM",
   "ipa": "/ˌel el ˈem/",
-  "zh": "艾尔-艾尔-艾姆",
+  "zh": "L-L-M",
   "mean": "会读会写的大模型，ChatGPT、DeepSeek 都是。原理说白了就是一直在猜下一个词，猜得多了就冒出了本事。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "GPT",
   "ipa": "/ˌdʒiː piː ˈtiː/",
-  "zh": "吉-皮-提",
+  "zh": "G-P-T",
   "mean": "OpenAI 家那系列模型。现在也成了这类模型的通用叫法，很多家的名字里都带这三个字母。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "RAG",
@@ -509,30 +518,34 @@ const WORDS = [
  {
   "en": "GPU",
   "ipa": "/ˌdʒiː piː ˈjuː/",
-  "zh": "吉-皮-优",
+  "zh": "G-P-U",
   "mean": "显卡。AI 的计算全压在它身上，一块好卡能顶一堆 CPU。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "TTS",
   "ipa": "/ˌtiː tiː ˈes/",
-  "zh": "提-提-艾斯",
+  "zh": "T-T-S",
   "mean": "文字转人声。给一段字，它念出来给你。现在还能指定谁的声音、说多快、什么情绪。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "ASR",
   "ipa": "/ˌeɪ es ˈɑːr/",
-  "zh": "诶-艾斯-阿尔",
+  "zh": "A-S-R",
   "mean": "人声转文字，跟 TTS 正好反过来。开会录音、视频字幕都靠它。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "VLM",
   "ipa": "/ˌviː el ˈem/",
-  "zh": "V-艾尔-艾姆",
+  "zh": "V-L-M",
   "mean": "既能看图又能读字的模型。你给它一张截图问里面有啥，它答得出来。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "LoRA",
@@ -544,9 +557,10 @@ const WORDS = [
  {
   "en": "VRAM",
   "ipa": "/ˈviː ræm/",
-  "zh": "V-然姆",
+  "zh": "V-R-A-M",
   "mean": "显卡自己的内存。模型得先塞进这块内存里才跑得动，塞不下就报错，或者慢得像蜗牛。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "spell": true
  },
  {
   "en": "CUDA",
@@ -642,23 +656,26 @@ const WORDS = [
  {
   "en": "API",
   "ipa": "/ˌeɪ piː ˈaɪ/",
-  "zh": "诶-皮-艾",
+  "zh": "A-P-I",
   "mean": "接口。说白了就是个插座：你按约定把东西递过去，它给你回结果。两边都不用管对方里面怎么做的。",
-  "batch": "第 5 批：框架与接口"
+  "batch": "第 5 批：框架与接口",
+  "spell": true
  },
  {
   "en": "SDK",
   "ipa": "/ˌes diː ˈkeɪ/",
-  "zh": "艾斯-迪-K",
+  "zh": "S-D-K",
   "mean": "别人给你打好的工具包。把调接口那些麻烦事包成一按就用的按钮。",
-  "batch": "第 5 批：框架与接口"
+  "batch": "第 5 批：框架与接口",
+  "spell": true
  },
  {
   "en": "ORM",
   "ipa": "/ˌoʊ ɑːr ˈem/",
-  "zh": "欧-阿尔-艾姆",
+  "zh": "O-R-M",
   "mean": "用代码操作数据库的办法，不用手写 SQL。省事，但复杂查询会拖慢，该手写还得手写。",
-  "batch": "第 5 批：框架与接口"
+  "batch": "第 5 批：框架与接口",
+  "spell": true
  },
  {
   "en": "JSON",
@@ -747,23 +764,26 @@ const WORDS = [
  {
   "en": "JWT",
   "ipa": "/ˌdʒeɪ ˈdʌbljuː tiː/",
-  "zh": "杰-达布留-提",
+  "zh": "J-W-T",
   "mean": "登录用的凭证。服务器发你一串加密字符串，以后每次请求带上，证明「我是谁」。它默认撤不回来。",
-  "batch": "第 6 批：安全与支付"
+  "batch": "第 6 批：安全与支付",
+  "spell": true
  },
  {
   "en": "XSS",
   "ipa": "/ˌeks es ˈes/",
-  "zh": "艾克斯-艾斯-艾斯",
+  "zh": "X-S-S",
   "mean": "别人把坏代码塞进网页，你的浏览器就替它执行了。防法是用户输入的一律不当代码看。",
-  "batch": "第 6 批：安全与支付"
+  "batch": "第 6 批：安全与支付",
+  "spell": true
  },
  {
   "en": "CSRF",
   "ipa": "/ˌsiː es ɑːr ˈef/",
-  "zh": "西-艾斯-阿尔-艾弗",
+  "zh": "C-S-R-F",
   "mean": "一种骗局：趁你登录着，诱导你点了别处发来的链接，替你干了本不想干的事。防法是检查来源、加一次性令牌。",
-  "batch": "第 6 批：安全与支付"
+  "batch": "第 6 批：安全与支付",
+  "spell": true
  },
  {
   "en": "CORS",
@@ -838,9 +858,10 @@ const WORDS = [
  {
   "en": "CDP",
   "ipa": "/ˌsiː diː ˈpiː/",
-  "zh": "西-迪-皮",
+  "zh": "C-D-P",
   "mean": "Chrome 的遥控协议。能直接接管已经开着的浏览器，登录状态都还在，不用重新登。",
-  "batch": "第 7 批：工程与媒体"
+  "batch": "第 7 批：工程与媒体",
+  "spell": true
  },
  {
   "en": "WAF",
@@ -1055,44 +1076,50 @@ const WORDS = [
  {
   "en": "PDF",
   "ipa": "/ˌpiː diː ˈef/",
-  "zh": "皮-迪-艾弗",
+  "zh": "P-D-F",
   "mean": "文档格式，合同报表都爱用它。最大好处是排版定死了，在谁电脑上打开都一个样。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "DOCX",
   "ipa": "/dɒks/",
-  "zh": "道克斯",
+  "zh": "D-O-C-X",
   "mean": "Word 文档。适合还要反复改的稿子。转 PDF 前先翻一遍，看看分页和字体有没有乱。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "XLSX",
   "ipa": "/eks els eks/",
-  "zh": "艾克斯-艾尔斯-艾克斯",
+  "zh": "X-L-S-X",
   "mean": "Excel 表格。一个文件里能放好几张表，还有公式和图表。程序处理常用 openpyxl。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "CSV",
   "ipa": "/ˌsiː es ˈviː/",
-  "zh": "西-艾斯-V",
+  "zh": "C-S-V",
   "mean": "最土也最通用的表格：一行一条，逗号隔开。啥工具都能读，缺点是没格式，中文容易乱码。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "MP4",
   "ipa": "/ˌem piː ˈfɔːr/",
-  "zh": "艾姆-皮-佛",
+  "zh": "M-P-4",
   "mean": "最常见的视频文件。手机电脑网页都能直接播，平台上传基本都要它。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "MP3",
   "ipa": "/ˌem piː ˈθriː/",
-  "zh": "艾姆-皮-斯瑞",
+  "zh": "M-P-3",
   "mean": "最常见的音频文件。小、到处都能放，是有损压缩。要后期处理就用无损的。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "WAV",
@@ -1111,16 +1138,18 @@ const WORDS = [
  {
   "en": "SVG",
   "ipa": "/ˌes viː ˈdʒiː/",
-  "zh": "艾斯-V-吉",
+  "zh": "S-V-G",
   "mean": "矢量图。用数学式子画形状，放多大都不糊。图标和图表常用，也能用代码生成。",
-  "batch": "第 8 批：文件与格式"
+  "batch": "第 8 批：文件与格式",
+  "spell": true
  },
  {
   "en": "CLI",
   "ipa": "/ˌsiː el ˈaɪ/",
-  "zh": "西-艾尔-艾",
+  "zh": "C-L-I",
   "mean": "命令行。敲字干活，没有按钮点。服务器上基本都是这么操作的。",
-  "batch": "第 9 批：命令行与配置"
+  "batch": "第 9 批：命令行与配置",
+  "spell": true
  },
  {
   "en": "pip",
@@ -1188,30 +1217,34 @@ const WORDS = [
  {
   "en": "URL",
   "ipa": "/ˌjuː ɑːr ˈel/",
-  "zh": "优-阿尔-艾尔",
+  "zh": "U-R-L",
   "mean": "网址。一串地址，指到网上的某个东西。",
-  "batch": "第 10 批：网络"
+  "batch": "第 10 批：网络",
+  "spell": true
  },
  {
   "en": "DNS",
   "ipa": "/ˌdiː en ˈes/",
-  "zh": "迪-恩-艾斯",
+  "zh": "D-N-S",
   "mean": "把网址翻译成机器认得的门牌号。浏览器先问它在哪，拿到号才能连。改完要等一会儿才生效。",
-  "batch": "第 10 批：网络"
+  "batch": "第 10 批：网络",
+  "spell": true
  },
  {
   "en": "TLS",
   "ipa": "/ˌtiː el ˈes/",
-  "zh": "提-艾尔-艾斯",
+  "zh": "T-L-S",
   "mean": "加密的传法。网址前面多个 s 就是用了它。负责把内容锁起来，也确认对面是不是真身。",
-  "batch": "第 10 批：网络"
+  "batch": "第 10 批：网络",
+  "spell": true
  },
  {
   "en": "CDN",
   "ipa": "/ˌsiː diː ˈen/",
-  "zh": "西-迪-恩",
+  "zh": "C-D-N",
   "mean": "各处放一堆复制品的网络。你从最近的那台取，快又省。",
-  "batch": "第 10 批：网络"
+  "batch": "第 10 批：网络",
+  "spell": true
  },
  {
   "en": "port",
@@ -1244,9 +1277,10 @@ const WORDS = [
  {
   "en": "UUID",
   "ipa": "/ˌjuː juː aɪ ˈdiː/",
-  "zh": "优-优-艾-迪",
+  "zh": "U-U-I-D",
   "mean": "一串几乎不会重复的编号。用来标订单、任务、文件，别人没法按顺序猜出别的。",
-  "batch": "第 10 批：网络"
+  "batch": "第 10 批：网络",
+  "spell": true
  },
  {
   "en": "process",
@@ -1286,16 +1320,18 @@ const WORDS = [
  {
   "en": "HTML",
   "ipa": "/ˌeɪtʃ tiː em ˈel/",
-  "zh": "诶吃-提-艾姆-艾尔",
+  "zh": "H-T-M-L",
   "mean": "网页的骨架。用标签说明哪块是标题、哪块是段落、哪块是图。",
-  "batch": "第 12 批：前端"
+  "batch": "第 12 批：前端",
+  "spell": true
  },
  {
   "en": "CSS",
   "ipa": "/ˌsiː es ˈes/",
-  "zh": "西-艾斯-艾斯",
+  "zh": "C-S-S",
   "mean": "网页的衣服。管颜色、大小、间距、摆放。同一份骨架，换套衣服就完全变样。",
-  "batch": "第 12 批：前端"
+  "batch": "第 12 批：前端",
+  "spell": true
  },
  {
   "en": "DOM",
@@ -1349,9 +1385,10 @@ const WORDS = [
  {
   "en": "VAE",
   "ipa": "/ˌviː eɪ ˈiː/",
-  "zh": "V-诶-伊",
+  "zh": "V-A-E",
   "mean": "画图模型最后那一道工序，负责把内部算出来的东西变成真正的图片。",
-  "batch": "第 13 批：AI 深度"
+  "batch": "第 13 批：AI 深度",
+  "spell": true
  },
  {
   "en": "CLIP",
@@ -1454,9 +1491,10 @@ const WORDS = [
  {
   "en": "SLA",
   "ipa": "/ˌes el ˈeɪ/",
-  "zh": "艾斯-艾尔-诶",
+  "zh": "S-L-A",
   "mean": "服务承诺。多久回、多久修好、能保证多少可用率。写进合同就是欠条，别随口应。",
-  "batch": "第 14 批：协作与商务"
+  "batch": "第 14 批：协作与商务",
+  "spell": true
  },
  {
   "en": "trade-off",
@@ -1507,6 +1545,12 @@ function pickVoice(){
   for(const r of rules){ const f = voices.find(r); if(f) return f; }
   return null;
 }
+function ttsText(w){
+  if (!w.spell) return w.en;
+  if (w.en === "MySQL") return "My S Q L";
+  if (w.en === "PostgreSQL") return "Postgres Q L";
+  return w.en.split("").join(" ");
+}
 function say(text){
   if (typeof speechSynthesis === "undefined"){ alert("此浏览器不支持发音，请用 Chrome / Safari"); return; }
   speechSynthesis.cancel();
@@ -1534,7 +1578,7 @@ function render(){
         <span class="batch">${w.batch}</span>
         <div class="word">${w.en}</div>
         <div class="ipa">${w.ipa}</div>
-        <div class="zh"><span>读作</span>${w.zh}</div>
+        <div class="zh${w.spell ? " abbr" : ""}"><span>读作</span>${w.zh}</div>
         <div class="say" id="say" title="听发音">
           <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
         </div>
@@ -1560,12 +1604,12 @@ function render(){
   const nextB = document.getElementById("next");
   const target = w.en;
 
-  setTimeout(()=>{ sp.focus({preventScroll:true}); say(w.en); }, 220);
+  setTimeout(()=>{ sp.focus({preventScroll:true}); say(ttsText(w)); }, 220);
 
   document.getElementById("say").onclick = e => {
     const el = e.currentTarget;
     el.classList.add("playing");
-    say(w.en);
+    say(ttsText(w));
     setTimeout(()=>el.classList.remove("playing"), 950);
   };
   document.getElementById("prev").onclick = () => { if (idx > 0){ idx--; render(); } };
@@ -1633,7 +1677,7 @@ document.getElementById("jumpBtn").addEventListener("click", doJump);
 document.addEventListener("keydown", e => {
   const t = e.target;
   if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return;
-  if (e.key === "s" || e.key === "S"){ if (idx < WORDS.length) say(WORDS[idx].en); }
+  if (e.key === "s" || e.key === "S"){ if (idx < WORDS.length) say(ttsText(WORDS[idx])); }
 });
 
 render();
