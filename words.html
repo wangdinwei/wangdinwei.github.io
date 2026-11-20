@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 编程英语单词学习 - 73词进阶版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            background: #4ade80;
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .progress-text {
+            margin-top: 5px;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .jump-container {
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .jump-label {
+            font-size: 12px;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        .jump-input {
+            width: 50px;
+            padding: 4px 8px;
+            border: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            outline: none;
+        }
+        
+        .jump-input:focus {
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+        }
+        
+        .jump-btn {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .jump-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .card-container {
+            padding: 20px 15px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .word-card {
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .word {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .meaning {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .pronunciation {
+            font-size: 15px;
+            color: #888;
+            background: #f3f4f6;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        .batch-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-prev {
+            background: #f3f4f6;
+            color: #333;
+        }
+        
+        .btn-prev:hover {
+            background: #e5e7eb;
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-speak {
+            background: #4ade80;
+            color: white;
+        }
+        
+        .btn-speak:hover {
+            background: #22c55e;
+        }
+        
+        .btn-mastered {
+            background: #fbbf24;
+            color: white;
+        }
+        
+        .btn-mastered:hover {
+            background: #f59e0b;
+        }
+        
+        .spell-container {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 2px dashed #667eea;
+        }
+        
+        .spell-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .spell-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .spell-input:focus {
+            border-color: #667eea;
+        }
+        
+        .spell-input.correct {
+            border-color: #4ade80;
+            background: #f0fdf4;
+        }
+        
+        .spell-input.incorrect {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+        
+        .spell-feedback {
+            font-size: 13px;
+            text-align: center;
+            margin-top: 6px;
+            min-height: 20px;
+            font-weight: 600;
+        }
+        
+        .spell-feedback.correct {
+            color: #4ade80;
+        }
+        
+        .spell-feedback.incorrect {
+            color: #ef4444;
+        }
+        
+        .spell-hint {
+            font-size: 10px;
+            color: #999;
+            text-align: center;
+            margin-top: 4px;
+        }
+        
+        .stats {
+            background: #f9fafb;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 3px;
+        }
+        
+        .completed-message {
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .completed-message h2 {
+            color: #4ade80;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .completed-message p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-restart {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 OpenClaw 编程英语单词</h1>
+            <div style="font-size: 12px; margin-bottom: 5px;">73 词进阶版 · 12 个主题批次</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">第 1 / 73 个</div>
+            
+            <div class="jump-container">
+                <span class="jump-label">跳转到：</span>
+                <input type="number" class="jump-input" id="jumpInput" min="1" max="73" placeholder="序号">
+                <button class="jump-btn" onclick="jumpToWord()">跳转</button>
+            </div>
+        </div>
+        
+        <div class="card-container">
+            <div class="word-card" id="wordCard">
+                <div class="batch-tag" id="batchTag">第 1 批：基础核心词汇</div>
+                <div class="word" id="wordText">Prompt</div>
+                <div class="meaning" id="meaningText">提示词/提示</div>
+                <div class="pronunciation" id="pronunciationText">【普若 - 姆普特】</div>
+                
+                <div class="controls">
+                    <button class="btn btn-prev" id="btnPrev" onclick="prevWord()">⬅️ 上一个</button>
+                    <button class="btn btn-speak" id="btnSpeak" onclick="speakWord()">🔊 发音</button>
+                    <button class="btn btn-mastered" id="btnMastered" onclick="markMastered()">⭐ 已掌握</button>
+                </div>
+                
+                <div class="spell-container" id="spellContainer">
+                    <div class="spell-label">📝 拼写练习：输入这个单词</div>
+                    <input type="text" class="spell-input" id="spellInput" placeholder="输入单词..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                    <div class="spell-feedback" id="spellFeedback"></div>
+                    <div class="spell-hint">提示：不区分大小写，输完自动进入下一个 | 按 S 听发音</div>
+                </div>
+                
+                <div class="controls" style="margin-top: 12px;">
+                    <button class="btn btn-next" id="btnNext" onclick="nextWord()" disabled style="opacity: 0.5;">下一个 ➡️</button>
+                </div>
+            </div>
+            
+            <div class="completed-message hidden" id="completedMessage">
+                <h2>🎉 太棒了！</h2>
+                <p>你已经学完了全部 73 个单词！</p>
+                <p id="masteredCount">已掌握：0 / 73</p>
+                <button class="btn btn-restart" onclick="restart()">🔄 重新学习</button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalStat">73</div>
+                <div class="stat-label">总单词数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="masteredStat">0</div>
+                <div class="stat-label">已掌握</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="remainingStat">73</div>
+                <div class="stat-label">待学习</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            // ====== 第 1 批：基础核心词汇（保留，剔除 API/Key/Model/Agent/Token）======
+            { word: "Endpoint", meaning: "API 端点/接口地址", pronunciation: "【恩德 - 波因特】", batch: "第 1 批：基础核心词汇" },
+            { word: "Browser", meaning: "网页浏览器", pronunciation: "【布 - 绕 - 则 - 儿】", batch: "第 1 批：基础核心词汇" },
+            
+            // 第 2 批：架构与服务（剔除 Server）
+            { word: "Client", meaning: "客户端", pronunciation: "【克 - 来 - 恩特】", batch: "第 2 批：架构与服务" },
+            { word: "Instance", meaning: "实例", pronunciation: "【因 - 斯 - 腾 - 斯】", batch: "第 2 批：架构与服务" },
+            { word: "Clone", meaning: "克隆/复制", pronunciation: "【克 - 漏 - 恩】", batch: "第 2 批：架构与服务" },
+            { word: "Service", meaning: "服务", pronunciation: "【色 - 微 - 斯】", batch: "第 2 批：架构与服务" },
+            { word: "Daemon", meaning: "守护进程", pronunciation: "【迪门】", batch: "第 2 批：架构与服务" },
+            { word: "Startup", meaning: "启动", pronunciation: "【斯 - 大 - 特 - 阿 - 普】", batch: "第 2 批：架构与服务" },
+            { word: "Background", meaning: "后台/背景", pronunciation: "【拜克 - 格 - 绕 - 恩德】", batch: "第 2 批：架构与服务" },
+            
+            // 第 3 批：配置与运行
+            { word: "Quantization", meaning: "量化", pronunciation: "【宽 - 特 - 艾 - 塞 - 深】", batch: "第 3 批：配置与运行" },
+            { word: "Context", meaning: "上下文/语境", pronunciation: "【康 - 泰 - 克斯特】", batch: "第 3 批：配置与运行" },
+            { word: "Cache", meaning: "缓存", pronunciation: "【开 - 许】", batch: "第 3 批：配置与运行" },
+            { word: "Deploy", meaning: "部署", pronunciation: "【底 - 普 - 洛伊】", batch: "第 3 批：配置与运行" },
+            { word: "Profile", meaning: "配置文件/个人资料", pronunciation: "【普 - 肉 - 否】", batch: "第 3 批：配置与运行" },
+            { word: "Session", meaning: "会话", pronunciation: "【赛 - 深】", batch: "第 3 批：配置与运行" },
+            { word: "Runtime", meaning: "运行时", pronunciation: "【软 - 泰 - 母】", batch: "第 3 批：配置与运行" },
+            { word: "Execute", meaning: "执行", pronunciation: "【诶格则可优特】", batch: "第 3 批：配置与运行" },
+            
+            // 第 4 批：网络与通信
+            { word: "Port", meaning: "端口", pronunciation: "【破 - 特】", batch: "第 4 批：网络与通信" },
+            { word: "Process", meaning: "进程", pronunciation: "【普 - 若 - 赛 - 斯】", batch: "第 4 批：网络与通信" },
+            { word: "Request", meaning: "请求", pronunciation: "【瑞 - 快 - 斯特】", batch: "第 4 批：网络与通信" },
+            { word: "Response", meaning: "响应/回复", pronunciation: "【瑞 - 斯 - 庞 - 斯】", batch: "第 4 批：网络与通信" },
+            { word: "Webhook", meaning: "网络钩子（反向回调）", pronunciation: "【韦 - 布 - 虎 - 克】", batch: "第 4 批：网络与通信" },
+            { word: "Permission", meaning: "权限", pronunciation: "【普 - 米 - 深】", batch: "第 4 批：网络与通信" },
+            { word: "Authentication", meaning: "认证/鉴权", pronunciation: "【奥 - 森 - 特 - 艾 - 开 - 深】", batch: "第 4 批：网络与通信" },
+            { word: "Authorization", meaning: "授权", pronunciation: "【奥泽若塞深】", batch: "第 4 批：网络与通信" },
+            { word: "Protocol", meaning: "协议", pronunciation: "【普若 - 吐 - 可 - 儿】", batch: "第 4 批：网络与通信" },
+            { word: "Header", meaning: "头部/标题", pronunciation: "【嗨德儿】", batch: "第 4 批：网络与通信" },
+            
+            // 第 5 批：编程基础
+            { word: "Debug", meaning: "调试", pronunciation: "【迪巴格】", batch: "第 5 批：编程基础" },
+            { word: "Compile", meaning: "编译", pronunciation: "【肯派儿】", batch: "第 5 批：编程基础" },
+            { word: "Variable", meaning: "变量", pronunciation: "【外 - 瑞 - 呃 - 波】", batch: "第 5 批：编程基础" },
+            { word: "Function", meaning: "函数/功能", pronunciation: "【方 - 克 - 深】", batch: "第 5 批：编程基础" },
+            { word: "Loop", meaning: "循环", pronunciation: "【路 - 普】", batch: "第 5 批：编程基础" },
+            
+            // ====== 新增词汇 ======
+            
+            // 第 6 批：Tailscale & 网络（10个）
+            { word: "Tailscale", meaning: "Tailscale（零配置 VPN 工具）", pronunciation: "【忒儿斯可儿】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "Mesh", meaning: "网状网络（节点互联）", pronunciation: "【麦 - 许】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "VPN", meaning: "虚拟专用网络", pronunciation: "【V - P - N】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "Subnet", meaning: "子网/子网络", pronunciation: "【萨 - 布 - 耐 - 特】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "Router", meaning: "路由器", pronunciation: "【如特儿】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "ACL", meaning: "访问控制列表", pronunciation: "【A - C - L】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "MagicDNS", meaning: "神奇 DNS（自动域名解析）", pronunciation: "【麦 - 吉克 - D - N - S】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "Relay", meaning: "中继/中转", pronunciation: "【瑞 - 累】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "Node", meaning: "节点/结点", pronunciation: "【诺 - 德】", batch: "第 6 批：Tailscale & 网络" },
+            { word: "Share", meaning: "共享", pronunciation: "【谢 - 儿】", batch: "第 6 批：Tailscale & 网络" },
+            
+            // 第 7 批：Git & 版本控制（6个）
+            { word: "Commit", meaning: "提交", pronunciation: "【可 - 米 - 特】", batch: "第 7 批：Git & 版本控制" },
+            { word: "Branch", meaning: "分支", pronunciation: "【布软尺】", batch: "第 7 批：Git & 版本控制" },
+            { word: "Merge", meaning: "合并", pronunciation: "【默 - 之】", batch: "第 7 批：Git & 版本控制" },
+            { word: "Push", meaning: "推送", pronunciation: "【普 - 许】", batch: "第 7 批：Git & 版本控制" },
+            { word: "Pull", meaning: "拉取", pronunciation: "【普 - 欧】", batch: "第 7 批：Git & 版本控制" },
+            { word: "Repository", meaning: "仓库", pronunciation: "【瑞 - 怕 - 泽 - 特 - 瑞】", batch: "第 7 批：Git & 版本控制" },
+            
+            // 第 8 批：数据库（5个）
+            { word: "Database", meaning: "数据库", pronunciation: "【代 - 特 - 贝 - 斯】", batch: "第 8 批：数据库" },
+            { word: "Query", meaning: "查询", pronunciation: "【亏 - 瑞】", batch: "第 8 批：数据库" },
+            { word: "Schema", meaning: "模式/架构", pronunciation: "【斯基嘛】", batch: "第 8 批：数据库" },
+            { word: "Migration", meaning: "迁移", pronunciation: "【买 - 格 - 瑞 - 深】", batch: "第 8 批：数据库" },
+            { word: "Index", meaning: "索引", pronunciation: "【因 - 戴 - 克斯】", batch: "第 8 批：数据库" },
+            
+            // 第 9 批：容器 & DevOps（5个）
+            { word: "Container", meaning: "容器", pronunciation: "【肯忒呢儿】", batch: "第 9 批：容器 & DevOps" },
+            { word: "Image", meaning: "镜像", pronunciation: "【依 - 米 - 之】", batch: "第 9 批：容器 & DevOps" },
+            { word: "YAML", meaning: "YAML（数据序列化格式）", pronunciation: "【亚 - 么 - 欧】", batch: "第 9 批：容器 & DevOps" },
+            { word: "Kubernetes", meaning: "Kubernetes（容器编排）", pronunciation: "【库 - 伯 - 耐 - 踢 - 斯】", batch: "第 9 批：容器 & DevOps" },
+            { word: "Volume", meaning: "存储卷/数据卷", pronunciation: "【窝 - 溜 - 姆】", batch: "第 9 批：容器 & DevOps" },
+            
+            // 第 10 批：进阶编程（5个）
+            { word: "Async", meaning: "异步（非阻塞）", pronunciation: "【诶 - 森 - 克】", batch: "第 10 批：进阶编程" },
+            { word: "Thread", meaning: "线程", pronunciation: "【斯 - 瑞 - 德】", batch: "第 10 批：进阶编程" },
+            { word: "Middleware", meaning: "中间件（请求处理管道中的拦截器/过滤器）", pronunciation: "【米斗韦儿】", batch: "第 10 批：进阶编程" },
+            { word: "Callback", meaning: "回调函数", pronunciation: "【靠 - 勒 - 拜 - 克】", batch: "第 10 批：进阶编程" },
+            { word: "Interface", meaning: "接口（抽象协定）", pronunciation: "【因 - 特 - 非 - 斯】", batch: "第 10 批：进阶编程" },
+            
+            // 第 11 批：Linux & 命令行（5个）
+            { word: "Terminal", meaning: "终端", pronunciation: "【特米呢欧】", batch: "第 11 批：Linux & 命令行" },
+            { word: "Directory", meaning: "目录/文件夹", pronunciation: "【第 - 瑞 - 克 - 特 - 瑞】", batch: "第 11 批：Linux & 命令行" },
+            { word: "Pipe", meaning: "管道（数据流传递）", pronunciation: "【派 - 普】", batch: "第 11 批：Linux & 命令行" },
+            { word: "Alias", meaning: "别名", pronunciation: "【诶 - 里 - 俄 - 斯】", batch: "第 11 批：Linux & 命令行" },
+            { word: "Crontab", meaning: "定时任务配置表", pronunciation: "【克 - 让 - 泰 - 布】", batch: "第 11 批：Linux & 命令行" },
+            
+            // 第 12 批：安全 & 认证（5个）
+            { word: "Encryption", meaning: "加密", pronunciation: "【因 - 克 - 瑞 - 普 - 深】", batch: "第 12 批：安全 & 认证" },
+            { word: "Certificate", meaning: "证书", pronunciation: "【色 - 踢 - 非 - 克 - 特】", batch: "第 12 批：安全 & 认证" },
+            { word: "Firewall", meaning: "防火墙", pronunciation: "【发 - 呀 - 沃 - 欧】", batch: "第 12 批：安全 & 认证" },
+            { word: "CORS", meaning: "跨域资源共享", pronunciation: "【靠 - 斯】（字母读）", batch: "第 12 批：安全 & 认证" },
+            { word: "WebSocket", meaning: "WebSocket（全双工通信协议）", pronunciation: "【韦 - 布 - 扫 - 凯 - 特】", batch: "第 12 批：安全 & 认证" }
+        ];
+
+        let currentIndex = 0;
+        let masteredWords = new Set();
+
+        function updateCard() {
+            const currentWord = words[currentIndex];
+            
+            document.getElementById('batchTag').textContent = currentWord.batch;
+            document.getElementById('wordText').textContent = currentWord.word;
+            document.getElementById('meaningText').textContent = currentWord.meaning;
+            document.getElementById('pronunciationText').textContent = currentWord.pronunciation;
+            
+            const spellInput = document.getElementById('spellInput');
+            spellInput.value = '';
+            spellInput.className = 'spell-input';
+            spellInput.disabled = false;
+            spellInput.focus();
+            document.getElementById('spellFeedback').textContent = '';
+            document.getElementById('spellFeedback').className = 'spell-feedback';
+            document.getElementById('btnNext').disabled = true;
+            document.getElementById('btnNext').style.opacity = '0.5';
+            
+            document.getElementById('progressFill').style.width = `${((currentIndex + 1) / words.length) * 100}%`;
+            document.getElementById('progressText').textContent = `第 ${currentIndex + 1} / ${words.length} 个`;
+            
+            document.getElementById('masteredStat').textContent = masteredWords.size;
+            document.getElementById('remainingStat').textContent = words.length - masteredWords.size;
+            
+            document.getElementById('btnPrev').disabled = currentIndex === 0;
+            document.getElementById('btnPrev').style.opacity = currentIndex === 0 ? '0.5' : '1';
+            
+            document.getElementById('jumpInput').max = words.length;
+            
+            const card = document.getElementById('wordCard');
+            card.style.animation = 'none';
+            card.offsetHeight;
+            card.style.animation = 'fadeIn 0.5s ease';
+        }
+
+        function nextWord() {
+            const btnNext = document.getElementById('btnNext');
+            if (btnNext.disabled) {
+                const spellInput = document.getElementById('spellInput');
+                spellInput.focus();
+                spellInput.className = 'spell-input incorrect';
+                document.getElementById('spellFeedback').textContent = '⚠️ 请先完成拼写练习哦！';
+                document.getElementById('spellFeedback').className = 'spell-feedback incorrect';
+                return;
+            }
+            
+            if (currentIndex < words.length - 1) {
+                currentIndex++;
+                updateCard();
+            } else {
+                showCompleted();
+            }
+        }
+
+        function prevWord() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
+
+        function speakWord() {
+            const word = words[currentIndex].word;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.8;
+            speechSynthesis.speak(utterance);
+        }
+
+        function markMastered() {
+            masteredWords.add(currentIndex);
+            updateCard();
+            
+            const btn = document.getElementById('btnMastered');
+            btn.textContent = '✅ 已掌握';
+            btn.style.background = '#4ade80';
+            setTimeout(() => {
+                btn.textContent = '⭐ 已掌握';
+                btn.style.background = '#fbbf24';
+            }, 1000);
+        }
+        
+        document.getElementById('spellInput').addEventListener('input', function(e) {
+            const input = e.target.value.trim();
+            const correctWord = words[currentIndex].word;
+            const feedback = document.getElementById('spellFeedback');
+            const btnNext = document.getElementById('btnNext');
+            
+            if (input.toLowerCase() === correctWord.toLowerCase()) {
+                e.target.className = 'spell-input correct';
+                feedback.textContent = '✅ 正确！太棒了！';
+                feedback.className = 'spell-feedback correct';
+                btnNext.disabled = false;
+                btnNext.style.opacity = '1';
+                
+                setTimeout(() => {
+                    if (currentIndex < words.length - 1) {
+                        currentIndex++;
+                        updateCard();
+                    } else {
+                        showCompleted();
+                    }
+                }, 800);
+            } else {
+                if (correctWord.toLowerCase().startsWith(input.toLowerCase()) && input.length > 0) {
+                    e.target.className = 'spell-input';
+                    feedback.textContent = '💡 继续...';
+                    feedback.className = 'spell-feedback';
+                } else if (input.length >= correctWord.length) {
+                    e.target.className = 'spell-input incorrect';
+                    feedback.textContent = '❌ 不对哦，再试试！';
+                    feedback.className = 'spell-feedback incorrect';
+                } else {
+                    e.target.className = 'spell-input';
+                    feedback.textContent = '';
+                }
+                btnNext.disabled = true;
+                btnNext.style.opacity = '0.5';
+            }
+        });
+
+        function showCompleted() {
+            document.getElementById('wordCard').classList.add('hidden');
+            document.getElementById('completedMessage').classList.remove('hidden');
+            document.getElementById('masteredCount').textContent = `已掌握：${masteredWords.size} / ${words.length}`;
+        }
+
+        function restart() {
+            currentIndex = 0;
+            masteredWords.clear();
+            document.getElementById('wordCard').classList.remove('hidden');
+            document.getElementById('completedMessage').classList.add('hidden');
+            updateCard();
+        }
+        
+        function jumpToWord() {
+            const jumpInput = document.getElementById('jumpInput');
+            const jumpNum = parseInt(jumpInput.value);
+            
+            if (isNaN(jumpNum) || jumpNum < 1 || jumpNum > words.length) {
+                alert('请输入有效的单词序号（1-73）');
+                return;
+            }
+            
+            currentIndex = jumpNum - 1;
+            updateCard();
+            jumpInput.value = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.activeElement === document.getElementById('jumpInput')) {
+                if (e.key === 'Enter') {
+                    jumpToWord();
+                }
+                return;
+            }
+            
+            if (document.activeElement === document.getElementById('spellInput')) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    nextWord();
+                }
+                return;
+            }
+            
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextWord();
+            } else if (e.key === 'ArrowLeft') {
+                prevWord();
+            } else if (e.key === 's' || e.key === 'S') {
+                speakWord();
+            } else if (e.key === 'm' || e.key === 'M') {
+                markMastered();
+            } else if (e.key === 'p' || e.key === 'P') {
+                document.getElementById('spellInput').focus();
+            } else if (e.key === 'j' || e.key === 'J') {
+                document.getElementById('jumpInput').focus();
+            }
+        });
+
+        updateCard();
+    </script>
+</body>
+</html>
