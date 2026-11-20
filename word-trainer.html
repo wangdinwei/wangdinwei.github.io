@@ -292,7 +292,8 @@ const WORDS = [
   "term": "MySQL 数据库",
   "mean": "用的人最多的免费数据库。中小网站基本都用它，资料多、好找人问。",
   "batch": "第 2 批：数据库",
-  "spell": true
+  "tts": "My S Q L",
+  "mixed": true
  },
  {
   "en": "Redis",
@@ -316,7 +317,9 @@ const WORDS = [
   "zh": "西扣-莱特",
   "term": "SQLite 数据库",
   "mean": "最省事的数据库，就一个文件。不用装服务、不用开账号，适合小工具。",
-  "batch": "第 2 批：数据库"
+  "batch": "第 2 批：数据库",
+  "tts": "sequel lite",
+  "mixed": true
  },
  {
   "en": "schema",
@@ -329,10 +332,12 @@ const WORDS = [
  {
   "en": "MongoDB",
   "ipa": "/ˈmɑːŋɡoʊ diː biː/",
-  "zh": "芒够-迪比",
+  "zh": "芒够-D-B",
   "term": "MongoDB 文档数据库",
   "mean": "存数据的格式像一叠便签，每条长得可以不一样，不用先定好格式。",
-  "batch": "第 2 批：数据库"
+  "batch": "第 2 批：数据库",
+  "tts": "Mongo D B",
+  "mixed": true
  },
  {
   "en": "replica",
@@ -365,7 +370,8 @@ const WORDS = [
   "term": "PostgreSQL 数据库",
   "mean": "一个很能打的免费数据库，功能全。我这个项目的数据都存它里面。",
   "batch": "第 2 批：数据库",
-  "spell": true
+  "tts": "Postgres Q L",
+  "mixed": true
  },
  {
   "en": "transaction",
@@ -421,10 +427,12 @@ const WORDS = [
  {
   "en": "nginx",
   "ipa": "/ˈendʒɪn eks/",
-  "zh": "恩珍-艾克斯",
+  "zh": "恩珍-X",
   "term": "Nginx 反向代理",
   "mean": "网站的看门人。所有请求先到它手上，它再决定给谁：静态文件自己发，接口转给后端。",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 3 批：服务器与运维",
+  "tts": "engine X",
+  "mixed": true
  },
  {
   "en": "Ubuntu",
@@ -477,10 +485,12 @@ const WORDS = [
  {
   "en": "systemd",
   "ipa": "/ˈsɪstəmd/",
-  "zh": "西斯特姆-迪",
+  "zh": "西斯特姆-D",
   "term": "systemd 服务管理",
   "mean": "Linux 的保姆。开机自动拉起程序，程序崩了自动重启，还能看日志。",
-  "batch": "第 3 批：服务器与运维"
+  "batch": "第 3 批：服务器与运维",
+  "tts": "system D",
+  "mixed": true
  },
  {
   "en": "logging",
@@ -651,10 +661,12 @@ const WORDS = [
  {
   "en": "ComfyUI",
   "ipa": "/ˈkʌmfi juː aɪ/",
-  "zh": "康菲-优艾",
+  "zh": "康菲-U-I",
   "term": "ComfyUI 工作流工具",
   "mean": "拖方块搭画图流程的工具。一个方块干一件事，连起来就是一条出图的流水线。",
-  "batch": "第 4 批：AI 与模型"
+  "batch": "第 4 批：AI 与模型",
+  "tts": "Comfy U I",
+  "mixed": true
  },
  {
   "en": "Whisper",
@@ -782,18 +794,22 @@ const WORDS = [
  {
   "en": "FastAPI",
   "ipa": "/fɑːst eɪ piː aɪ/",
-  "zh": "法斯特-诶皮艾",
+  "zh": "法斯特-A-P-I",
   "term": "FastAPI 框架",
   "mean": "Python 里更新一点的框架。写接口特别快，自带数据检查，还能自动生成说明书。",
-  "batch": "第 5 批：框架与接口"
+  "batch": "第 5 批：框架与接口",
+  "tts": "Fast A P I",
+  "mixed": true
  },
  {
   "en": "GraphQL",
   "ipa": "/ˈɡræf kjuː el/",
-  "zh": "格拉夫-秋-艾尔",
+  "zh": "格拉夫-Q-L",
   "term": "GraphQL 查询语言",
   "mean": "另一种接口。你说要哪几项，它只给哪几项，不会一次塞一堆你用不上的。",
-  "batch": "第 5 批：框架与接口"
+  "batch": "第 5 批：框架与接口",
+  "tts": "Graph Q L",
+  "mixed": true
  },
  {
   "en": "payload",
@@ -1026,10 +1042,12 @@ const WORDS = [
  {
   "en": "ffmpeg",
   "ipa": "/ˌef ef ˈem peɡ/",
-  "zh": "艾弗-艾弗-艾姆-派格",
+  "zh": "F-F-M-派格",
   "term": "音视频处理工具",
   "mean": "处理音视频的万能工具。剪、拼、转格式、抽声音、加字幕、混音，几乎全包。",
-  "batch": "第 7 批：工程与媒体"
+  "batch": "第 7 批：工程与媒体",
+  "tts": "F F M peg",
+  "mixed": true
  },
  {
   "en": "Chrome",
@@ -1289,10 +1307,11 @@ const WORDS = [
  {
   "en": "npm",
   "ipa": "/ˌen piː ˈem/",
-  "zh": "恩-皮-艾姆",
+  "zh": "N-P-M",
   "term": "Node 包管理器",
   "mean": "前端装依赖、跑打包的工具。装得慢可以换国内镜像。",
-  "batch": "第 9 批：命令行与配置"
+  "batch": "第 9 批：命令行与配置",
+  "spell": true
  },
  {
   "en": "git",
@@ -1515,7 +1534,9 @@ const WORDS = [
   "zh": "Z-因德克斯",
   "term": "层叠顺序",
   "mean": "层级，谁压在谁上面。只对定位过的元素管用，父级也会影响，是常见的坑。",
-  "batch": "第 12 批：前端"
+  "batch": "第 12 批：前端",
+  "tts": "Z index",
+  "mixed": true
  },
  {
   "en": "Bootstrap",
@@ -1725,6 +1746,8 @@ function pickVoice(){
   return null;
 }
 function ttsText(w){
+  // 显式指定了读音文本的，直接用（混合读法词）
+  if (w.tts) return w.tts;
   // 缩写：逐字母读
   if (w.spell){
     if (w.en === "MySQL") return "My S Q L";
@@ -1762,7 +1785,7 @@ function render(){
         <span class="batch">${w.batch}</span>
         <div class="word">${w.en}</div>
         <div class="ipa">${w.ipa}</div>
-        <div class="zh${w.spell ? " abbr" : ""}"><span>读作</span>${w.zh}</div>
+        <div class="zh${w.spell || w.mixed ? " abbr" : ""}"><span>读作</span>${w.zh}</div>
         <div class="say" id="say" title="听发音">
           <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
         </div>
