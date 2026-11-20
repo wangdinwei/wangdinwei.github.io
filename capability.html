@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王丁炜 · 能力全景</title>
+<style>
+:root{--bg:#070809;--card:#0e1420;--line:#1e2a3d;--text:#e8eef7;--text2:#9fb0c8;--text3:#6b7d94;--accent:#3b82f6;--accent2:#60d5fa;--warn:#fbbf24;--good:#34d399}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;padding:0 0 80px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:36px 0 24px;border-bottom:1px solid var(--line);margin-bottom:28px}
+h1{font-size:clamp(22px,5vw,30px);margin:0 0 8px;letter-spacing:-.01em}
+.meta{color:var(--text3);font-size:13px}
+h2{font-size:20px;margin:38px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);color:#fff}
+h3{font-size:17px;margin:26px 0 10px;color:var(--accent2)}
+h4{font-size:15px;margin:20px 0 8px;color:var(--text)}
+p{margin:10px 0;color:var(--text2)}
+strong{color:#fff;font-weight:700}
+blockquote{margin:16px 0;padding:12px 16px;border-left:3px solid var(--accent);background:rgba(59,130,246,.07);border-radius:0 8px 8px 0;color:var(--text2);font-size:14px}
+ul,ol{margin:10px 0;padding-left:22px;color:var(--text2)}
+li{margin:6px 0}
+li strong{color:#fff}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;display:block;overflow-x:auto;white-space:nowrap}
+@media(min-width:700px){table{display:table;white-space:normal}}
+th{background:rgba(59,130,246,.14);color:#fff;font-weight:600;text-align:left;padding:10px 12px;border:1px solid var(--line);white-space:nowrap}
+td{padding:9px 12px;border:1px solid var(--line);color:var(--text2);vertical-align:top}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+code{background:rgba(255,255,255,.07);padding:2px 6px;border-radius:4px;font-family:"SF Mono",Consolas,monospace;font-size:12.5px;color:var(--accent2)}
+pre{background:#0b1119;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;margin:14px 0}
+pre code{background:none;padding:0;color:#a8c4e0;font-size:12.5px;line-height:1.7}
+hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(96,213,250,.3)}
+a:hover{color:#fff;border-color:#fff}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:20px 0 30px}
+.toc p{margin:0 0 8px;color:var(--accent2);font-size:13px;font-weight:600;letter-spacing:.04em}
+.toc ul{margin:0;padding-left:18px;font-size:14px}
+.toc li{margin:4px 0}
+h1,h2,h3{scroll-margin-top:20px}
+footer{padding:36px 20px;text-align:center;color:var(--text3);font-size:12.5px;border-top:1px solid var(--line);margin-top:50px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>王丁炜 · 能力全景</h1>
+  <div class="meta">12 个能力领域 · 每条都对应真做过的事 · 更新 2026-11-19</div>
+</header>
+<h1 id="_1">王丁炜 · 能力全景</h1>
+<blockquote>
+<p>这份文档的目的：把「我到底会什么」说清楚，说给面试官听、说给客户听、也说给自己听。
+原则：<strong>每条都对应真做过的事，每个数字都可查，边界明确写出来。</strong>
+更新：2026-11-19</p>
+</blockquote>
+<hr />
+<h1 id="_2">零、先说我是什么样的人</h1>
+<p>我不是计算机科班出身，是建筑工程出身。所以我的路子和科班不一样：</p>
+<ul>
+<li><strong>我是带着问题去学技术的</strong>，不是先学理论再找用途</li>
+<li><strong>我做的每个东西都是为了解决一个真实的麻烦</strong>，不是为了练手</li>
+<li><strong>我习惯一个人把整条链走完</strong>：从想法、设计、写代码、部署、运维到出问题自己修</li>
+</ul>
+<p>这条路的结果是：<strong>单点深度不如专职的人（比如我不如专职前端做设计，不如算法工程师写算法），但端到端的完整能力是稀缺的</strong>。一个产品从零到上线，绝大多数人只负责其中一段。</p>
+<p>具体证据：
+- 一套 AI 内容生产平台，<strong>64,752 行 Python、2,484 个路由、626 个模板、32 张数据表、11 个生产步骤</strong>，从第一行代码到线上运维全是我
+- 21 个真实生产故障的完整复盘，公开在 GitHub（<code>ai-drama-pipeline</code> 仓库）
+- 一台服务器上长期跑 10+ 个独立 AI Agent 实例
+- 单卡 24G 显卡上跑通了画图、图生视频、口型同步、语音合成全套开源模型</p>
+<hr />
+<h1 id="_3">一、一句话概括</h1>
+<p><strong>我能把 AI 从「demo 跑通了」做到「能上线、能收钱、不天天出故障」。</strong></p>
+<p>拆成三句话：
+1. <strong>能一个人把产品做上线</strong>（前端、后端、数据库、部署、运维全会）
+2. <strong>处理过大量真实生产故障</strong>（不是只在学校里写过作业）
+3. <strong>知道 AI 项目哪里烧钱、怎么省</strong>（成本结构清楚，不是只会调 API）</p>
+<hr />
+<h1 id="_4">二、十二个能力领域（详细）</h1>
+<h2 id="1ai">领域 1｜AI 应用开发（最核心，也是最强）</h2>
+<h3 id="_5">做过什么</h3>
+<p>一套完整的 <strong>AI 内容生产平台</strong>（AI 短剧工坊），把「一段故事」变成「一集成片」的全流程自动化：</p>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>我实现的东西</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>剧本</td>
+<td>分集大纲 → 台词 → 分镜表，AI 生成 + 人工可改</td>
+</tr>
+<tr>
+<td>角色</td>
+<td>角色注册表（cast.json）、六视图标准照生成、跨镜头一致性</td>
+</tr>
+<tr>
+<td>出图</td>
+<td>每个镜头的首帧图，接可灵/千问/ComfyUI</td>
+</tr>
+<tr>
+<td>出视频</td>
+<td>图生视频、运镜、时长控制、废片检测</td>
+</tr>
+<tr>
+<td>配音</td>
+<td>多角色音色、逐句时间轴、语速校准</td>
+</tr>
+<tr>
+<td>字幕</td>
+<td>逐句对齐、双行合并、烧字幕</td>
+</tr>
+<tr>
+<td>装配</td>
+<td>ffmpeg 多路音频混流、BGM 标准化、音量平衡</td>
+</tr>
+<tr>
+<td>计费</td>
+<td>积分扣费、订单、退款（含赠送积分追踪）</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>注册登录、权限、我的作品、任务队列</td>
+</tr>
+<tr>
+<td>客服</td>
+<td>Chatwoot 集成，AI 自动回复</td>
+</tr>
+</tbody>
+</table>
+<p><strong>规模</strong>：64,752 行 Python / 14,574 行 JS / 626 个模板 / 2,484 路由 / 32 张表 / 11 个生产步骤</p>
+<h3 id="_6">会用的工具</h3>
+<p>Flask、FastAPI、PostgreSQL、Alembic、Jinja2、esbuild、Celery/线程任务、systemd、nginx、Docker</p>
+<h3 id="_7">能帮别人解决什么</h3>
+<ul>
+<li>AI 功能做出来了但不敢上线 → 我补齐计费、权限、并发、重试、部署</li>
+<li>生成任务排不上队 / 卡死 / 进度永远 0% → 我改队列架构</li>
+<li>多人同时用就崩 → 我处理并发和 gunicorn 多进程状态问题</li>
+</ul>
+<h3 id="_8">边界</h3>
+<ul>
+<li>不是算法工程师，不做模型训练和论文复现</li>
+<li>不做纯设计（能写可用界面，做不出惊艳视觉）</li>
+</ul>
+<hr />
+<h2 id="2">领域 2｜后端工程</h2>
+<h3 id="_9">做过什么</h3>
+<ul>
+<li><strong>API 设计</strong>：2,484 个路由，覆盖认证、任务、计费、文件、管理后台</li>
+<li><strong>数据库设计</strong>：32 张表，从 SQLite 迁到 PostgreSQL（含 Alembic 迁移）</li>
+<li><strong>并发控制</strong>：多 worker 下的任务队列，用 <code>SELECT FOR UPDATE SKIP LOCKED</code> 防重复消费</li>
+<li><strong>认证体系</strong>：密码 + 短信验证码双登录，CSRF 防护，管理员权限分离</li>
+<li><strong>文件服务</strong>：nginx X-Accel-Redirect 加速，且区分管理员/普通用户的目录权限</li>
+<li><strong>故障处理</strong>：gunicorn 多进程内存不共享、时区统一、缓存失效、连接池配置</li>
+</ul>
+<h3 id="_10">真实故障（可以脱稿讲的）</h3>
+<ol>
+<li><strong>进度永远 0%</strong>：<code>gunicorn -w 4</code> 四个进程各自有内存字典，任务建在 #2，轮询进 #3 查不到。改成落数据库后顺手解决了重启丢状态。</li>
+<li><strong>限流失效</strong>：内存计数器在 4 个进程各算各的，配的 100 次/分实际放行 400 次。</li>
+<li><strong>支付回调 302</strong>：NOTIFY_URL 多写了 blueprint 前缀，微信服务器跳转后丢了 POST body。</li>
+<li><strong>时区错乱</strong>：UTC 和本地时间混在一张表，同一天的记录日期差一天。</li>
+</ol>
+<h3 id="_11">能帮别人解决什么</h3>
+<ul>
+<li>系统越改越乱不敢动 → 先做依赖和数据流审计，再按风险排序小步重构</li>
+<li>上线才出现的 bug，本地复现不出来 → 这是我最有经验的一类</li>
+<li>多个人/多台机器部署，状态对不上 → 外置状态到 DB 或 Redis</li>
+</ul>
+<hr />
+<h2 id="3ai">领域 3｜AI 模型部署与调优（本地 + 云端）</h2>
+<h3 id="_12">做过什么</h3>
+<p>在<strong>单卡 24G 显存</strong>上跑通了一整套开源模型，并且知道每个模型吃多少显存、什么参数会崩：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>模型</th>
+<th>实测数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画图</td>
+<td>FLUX.1 dev fp8 + IP-Adapter + ControlNet</td>
+<td>24G 卡可跑，出图约 20-40 秒</td>
+</tr>
+<tr>
+<td>图生视频</td>
+<td>Wan 2.1、SVD</td>
+<td>512p 短片段可行，第 2 秒易崩脸</td>
+</tr>
+<tr>
+<td>口型同步</td>
+<td>Sonic、LatentSync、Wav2Lip</td>
+<td>4.8 秒音频要跑 205 秒</td>
+</tr>
+<tr>
+<td>语音合成</td>
+<td>IndexTTS（154 个音色 + 克隆）、CosyVoice</td>
+<td>常驻占 6.7G</td>
+</tr>
+<tr>
+<td>语音识别</td>
+<td>whisper.cpp（CUDA 编译）</td>
+<td>中文优先，常驻 2.3G</td>
+</tr>
+<tr>
+<td>文本</td>
+<td>llama.cpp / vLLM，27B / 32B 量化模型</td>
+<td>双卡或量化下沉</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">关键经验（这些是踩坑换来的）</h3>
+<ul>
+<li><strong>显存不够不报 OOM，而是慢十倍然后给你一张废图</strong> —— 因为它在拿内存当显存搬权重</li>
+<li>可用显存 = 单卡容量 − 常驻服务占用（我这台常驻 TTS 6.7G + ACE-Step 3.2G + ComfyUI 2.5G + whisper 2.3G ≈ 15G）</li>
+<li>权重 ≤ 可用显存 × 0.8 才安全</li>
+<li><strong>双卡 ≠ 双倍显存</strong>，模型切分有额外开销</li>
+<li>RTX 5090（Blackwell）需要新 CUDA 版本，老框架直接编译失败</li>
+</ul>
+<h3 id="_14">能帮别人解决什么</h3>
+<ul>
+<li>想本地跑 AI 但不知道买什么卡 → 按任务倒推显存需求</li>
+<li>本地跑通了但太慢/画质差 → 判断是显存不足还是参数问题</li>
+<li>云端 API 太贵 → 算清楚哪些任务该本地、哪些该上云</li>
+</ul>
+<hr />
+<h2 id="4ffmpeg">领域 4｜音视频处理（ffmpeg 全链路）</h2>
+<h3 id="_15">做过什么</h3>
+<ul>
+<li><strong>多路音频混流</strong>：40-60 路配音逐句锚定时间轴，用 <code>adelay + amix</code> 精确对齐</li>
+<li><strong>字幕</strong>：SRT 生成、逐句时间戳校准（whisper 识别 + 文字校正）、双行合并、烧进视频</li>
+<li><strong>音量标准化</strong>：BGM/人声分离处理，LUFS 响度对齐，分段压缩解决「片头小声片尾大声」</li>
+<li><strong>视频拼接与裁剪</strong>：按镜头时长智能裁剪，解决「AI 视频比音频长」的累计误差</li>
+<li><strong>黑帧/废帧检测</strong>：逐帧分析，拼接前清理</li>
+<li><strong>MV 全流程</strong>：歌 → 分镜 → 出图 → 运镜 → 字幕卡点 → 成品（已交付多支）</li>
+</ul>
+<h3 id="_16">能帮别人解决什么</h3>
+<ul>
+<li>音画不同步 → 时间轴对齐（我能做到 ±1 帧）</li>
+<li>字幕一闪而过或对不上口型 → 时间戳重算</li>
+<li>音量忽大忽小 → 分段标准化</li>
+</ul>
+<hr />
+<h2 id="5-ai">领域 5｜音乐与 AI 音频制作</h2>
+<h3 id="_17">做过什么</h3>
+<ul>
+<li><strong>AI 生成歌曲</strong>：ACE-Step、DiffRhythm、MiniMax Music、HeartMuLa 本地部署</li>
+<li><strong>Suno.cn 全流程</strong>：出歌、取 LRC、WAV、人声分离</li>
+<li><strong>双轨制作法</strong>：人声与伴奏分两条腿生成再适配（伴奏更生动）</li>
+<li><strong>音频质量测量</strong>：频谱、音量曲线、动态范围客观评估</li>
+<li><strong>多角色有声小说/广播剧</strong>：多音色交替朗读，逐句时间轴</li>
+<li><strong>已交付作品</strong>：《父亲的账本》《河那边》等</li>
+</ul>
+<h3 id="_18">能帮别人解决什么</h3>
+<ul>
+<li>想要原创 BGM 又怕版权 → 本地生成，免版权</li>
+<li>短视频需要配音但不想自己念 → 154 个音色可选，还能克隆特定声音</li>
+<li>有声书/播客多角色 → 多音色自动分配</li>
+</ul>
+<hr />
+<h2 id="6">领域 6｜消息机器人与自动化运维</h2>
+<h3 id="_19">做过什么</h3>
+<ul>
+<li><strong>飞书 Bot 集群</strong>：一台机器跑 10+ 个独立实例，profile 隔离、systemd 托管、Docker 沙箱、掉线自恢复、版本升级</li>
+<li><strong>企业微信接入</strong>：AI Bot 长连接模式（绕开公网回调），扫码登录、凭据加密、消息收发</li>
+<li><strong>邮箱自动化</strong>：IMAP 读取、规则过滤、自动归档、定时巡检（每 4 小时）</li>
+<li><strong>定时任务体系</strong>：cron 任务管理、任务台账、失败告警、避免重复执行</li>
+<li><strong>微信生态</strong>：小程序登录调试、微信支付接入、公众号/客服</li>
+</ul>
+<h3 id="_20">关键经验</h3>
+<ul>
+<li>在 gateway 进程内重启 gateway 会杀掉自己 → 用一次性 cron 任务脱离进程树</li>
+<li>多实例必须 <code>gateway.standalone: true</code>，否则互相踢下线</li>
+<li>沙箱容器的技能目录是软链，<code>rm -rf</code> 会删到全局真身（踩过 3 次）</li>
+</ul>
+<h3 id="_21">能帮别人解决什么</h3>
+<ul>
+<li>想让 AI 接入公司内部沟通工具 → 飞书/企微/钉钉都能接</li>
+<li>客服重复问题太多 → AI 自动回复 + 人工接管</li>
+<li>定时任务不可靠 → 加失败重试和告警</li>
+</ul>
+<hr />
+<h2 id="7">领域 7｜服务器运维与部署</h2>
+<h3 id="_22">做过什么</h3>
+<ul>
+<li><strong>Linux 运维</strong>：Ubuntu/CentOS 命令行操作，无图形界面服务器全套配置</li>
+<li><strong>服务托管</strong>：systemd 单元编写（自动重启、日志、依赖顺序）</li>
+<li><strong>反向代理</strong>：nginx/Caddy 配置、子路径挂载、SSL 证书、X-Accel-Redirect</li>
+<li><strong>内网穿透</strong>：Cloudflare Tunnel、SSH 反向隧道、Tailscale 组网</li>
+<li><strong>监控与备份</strong>：进程守护、磁盘告警、数据库备份、异地同步</li>
+<li><strong>容器化</strong>：Docker Compose 多服务编排（Chatwoot 五容器）</li>
+<li><strong>问题定位</strong>：进程 → 端口 → 反代 → 日志 → 数据库 → 外部 API，六层排查法</li>
+</ul>
+<h3 id="_23">真实案例</h3>
+<ul>
+<li>家宽没有公网 IP，用 Cloudflare Tunnel 把内网服务暴露出去并配了 HTTPS</li>
+<li>云服务器 443 端口被运营商封，改用 SSH 反向隧道 + 云主机中转</li>
+<li>无显示器服务器上装 Windows 虚拟机，用虚拟显示 + 键盘注入完成安装</li>
+</ul>
+<h3 id="_24">能帮别人解决什么</h3>
+<ul>
+<li>服务天天挂没人管 → 加守护、自动重启、异常告警</li>
+<li>想给自己电脑上的东西做个外网入口 → 隧道 + 域名 + SSL</li>
+<li>一堆服务不知道谁在占资源 → 系统化巡检</li>
+</ul>
+<hr />
+<h2 id="8">领域 8｜文档与数据自动化</h2>
+<h3 id="_25">做过什么</h3>
+<ul>
+<li><strong>合同</strong>：批量生成、审查、修订（中文合同，含押金/违约/付款条款分析）</li>
+<li><strong>PDF</strong>：中文排版（字体、字号、行距规范）、扫描件 OCR 重建、方向校正、PDF 合并拆分</li>
+<li><strong>Excel/台账</strong>：工资台账核对（SUMIF 汇总）、发票台账、账单按交易对方拆分</li>
+<li><strong>报表</strong>：手写工资表照片 → 视觉识别 → 结构化 → 验算 → PDF</li>
+<li><strong>CAD</strong>：DWG/DXF 读取、图纸信息提取、转 SVG/PDF、批量出图</li>
+<li><strong>思维导图</strong>：代码生成圆形辐射式导图 PDF</li>
+</ul>
+<h3 id="_26">能帮别人解决什么</h3>
+<ul>
+<li>每天手工填表/对账 → 自动化，且带验算防错</li>
+<li>扫描件要变成可编辑文档 → OCR + 重建</li>
+<li>合同要批量出但格式不能乱 → 模板化生成</li>
+</ul>
+<hr />
+<h2 id="9">领域 9｜支付与商业化闭环</h2>
+<h3 id="_27">做过什么</h3>
+<ul>
+<li><strong>微信支付 v3</strong>：Native 扫码支付，签名验证、回调验签、AES-GCM 解密</li>
+<li><strong>积分计费系统</strong>：扣费规则单一真相源（DB 驱动），步骤单价可配</li>
+<li><strong>订单与退款</strong>：实付/赠送积分分离追踪，退款金额上限校验</li>
+<li><strong>充值流程</strong>：下单 → 支付 → 回调 → 到账 → 赠送，全链路幂等</li>
+<li><strong>对账</strong>：流水与余额一致性校验</li>
+</ul>
+<h3 id="_28">踩过的三个坑（都能讲成故事）</h3>
+<ol>
+<li><strong>NOTIFY_URL 多写前缀</strong> → 微信回调 302，POST body 丢失</li>
+<li><strong>公钥不匹配</strong> → 401，以为密钥错了实际是证书版本</li>
+<li><strong>APIv3 密钥不匹配</strong> → AES-GCM 解密失败，报错信息完全不指向真正原因</li>
+</ol>
+<h3 id="_29">能帮别人解决什么</h3>
+<ul>
+<li>想收钱但不知道怎么接 → 微信支付全流程</li>
+<li>退款总是算错 → 实付/赠送分离 + 幂等设计</li>
+<li>计费规则散在代码里改不动 → 抽到数据库</li>
+</ul>
+<hr />
+<h2 id="10">领域 10｜浏览器自动化与逆向</h2>
+<h3 id="_30">做过什么</h3>
+<ul>
+<li><strong>Playwright 全自动发布</strong>：登录态持久化（扫码一次长期有效）、自动填表、自动发文章到掘金和 CSDN</li>
+<li><strong>CDP 接管模式</strong>：用户手动扫码登录，程序控制同一个浏览器窗口，不碰密码和验证码</li>
+<li><strong>绕过 WAF</strong>：识别「无头浏览器指纹」，改用有头模式（Xvfb 虚拟显示）</li>
+<li><strong>逆向工具链</strong>：jadx（APK→Java）、apktool（重打包）、Ghidra（二进制反编译）、radare2、frida（动态 hook）、mitmproxy（抓包）</li>
+<li><strong>爬虫</strong>：招标公告、企业信息、视频数据抓取</li>
+</ul>
+<h3 id="_31">关键经验</h3>
+<ul>
+<li><code>curl</code> 能通但浏览器 403 → 是指纹问题，不是 IP 问题，换代理没用</li>
+<li>JS 的 <code>.click()</code> 不触发框架事件委托 → 必须用真实鼠标坐标点击</li>
+<li>点不动的按钮，先去抓服务端错误（<code>expect_response</code>），不要瞎试 UI</li>
+</ul>
+<h3 id="_32">能帮别人解决什么</h3>
+<ul>
+<li>每天手工在网站上做重复操作 → 自动化（发布、填表、抓数据）</li>
+<li>想知道某个 App 怎么实现的 → 拆包分析（合法用途：竞品功能研究）</li>
+</ul>
+<hr />
+<h2 id="11">领域 11｜建筑与工程数字化（我的老本行）</h2>
+<h3 id="_33">做过什么</h3>
+<ul>
+<li><strong>图纸</strong>：DWG/DXF 读取、天正图纸理解、施工图转 3D 效果图、图纸信息提取成通俗报告</li>
+<li><strong>造价</strong>：工程量清单（BOQ）单价对比、13% 调价改写、投资估算审查、单方造价对标</li>
+<li><strong>合同</strong>：施工分包合同起草、商铺租赁合同审查、装修合同、企业间借款文书</li>
+<li><strong>工资</strong>：班组工资台账对账、欠薪受理档案、手写工资表识别转 PDF</li>
+<li><strong>BIM</strong>：广联达 GBQ6/GTJ/GQI 文件处理、IFC 土建+安装合成网页 3D 模型</li>
+<li><strong>工程文书</strong>：联系函、催款函、索赔函、安全措施费论证</li>
+</ul>
+<h3 id="_34">为什么这算优势</h3>
+<p>建筑行业懂 AI 的人极少，AI 圈懂建筑的人几乎没有。<strong>如果客户是工程公司，我是少数能听懂他们说什么、又能真做出东西的人。</strong></p>
+<h3 id="_35">能帮别人解决什么</h3>
+<ul>
+<li>工程公司想做数字化但找不到懂行的人 → 我两边都懂</li>
+<li>图纸/清单/台账类重复劳动 → 自动化</li>
+<li>工程文书写作 → 模板化 + 合规审查</li>
+</ul>
+<hr />
+<h2 id="12">领域 12｜内容创作与运营</h2>
+<h3 id="_36">做过什么</h3>
+<ul>
+<li><strong>AI 短剧</strong>：从故事梗概到成片，多集系列生产</li>
+<li><strong>MV 制作</strong>：歌词字幕定轴、卡点、片头片尾设计</li>
+<li><strong>短视频</strong>：竖屏喜剧、吐槽卡、口播、问答对碰</li>
+<li><strong>数字人</strong>：照片 + 录音 → 口播视频</li>
+<li><strong>播客</strong>：单人讲述 / 双人对话</li>
+<li><strong>账号运营</strong>：内容定位、选题策划、发布流程、数据复盘</li>
+<li><strong>自动化运营</strong>：4 小时邮箱巡检、每日数据回流、每周自动发文</li>
+</ul>
+<h3 id="_37">能帮别人解决什么</h3>
+<ul>
+<li>想做 AI 内容但不知从哪下手 → 全流程可交付</li>
+<li>已经做但产量上不去 → 流水线化</li>
+<li>内容没人看 → 选题和标题优化</li>
+</ul>
+<hr />
+<h1 id="_38">三、按「别人会遇到的问题」重新排列（客户视角）</h1>
+<p>如果你只想知道「他能帮我解决什么」，看这张表：</p>
+<table>
+<thead>
+<tr>
+<th>你遇到的情况</th>
+<th>我能做什么</th>
+<th>大概要多久</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 功能做出来了，不敢上线</td>
+<td>补计费/权限/并发/重试/部署</td>
+<td>1-3 周</td>
+</tr>
+<tr>
+<td>上线了总出故障，日志看不出原因</td>
+<td>六层排查法定位根因</td>
+<td>1-3 天</td>
+</tr>
+<tr>
+<td>模型调用太贵</td>
+<td>拆成本结构，找省钱点</td>
+<td>3-5 天</td>
+</tr>
+<tr>
+<td>想本地跑 AI，不知道买什么卡</td>
+<td>按任务倒推显存需求</td>
+<td>半天</td>
+</tr>
+<tr>
+<td>每天手工填表/对账/发文章</td>
+<td>自动化脚本</td>
+<td>2-5 天</td>
+</tr>
+<tr>
+<td>想收钱但不知道接支付</td>
+<td>微信支付全流程</td>
+<td>3-7 天</td>
+</tr>
+<tr>
+<td>客服问题重复太多</td>
+<td>AI 自动回复 + 人工接管</td>
+<td>3-5 天</td>
+</tr>
+<tr>
+<td>工程图纸/清单要数字化</td>
+<td>图纸解析 + 数据提取</td>
+<td>3-10 天</td>
+</tr>
+<tr>
+<td>想做 AI 短视频/MV 但不会</td>
+<td>全流程代做</td>
+<td>按条计</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_39">四、我不擅长 / 不做的（诚实边界）</h1>
+<table>
+<thead>
+<tr>
+<th>不做</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纯视觉设计、品牌包装</td>
+<td>我能写可用界面，做不出有设计感的视觉</td>
+</tr>
+<tr>
+<td>算法研究、模型训练</td>
+<td>我是应用层，不做论文复现</td>
+</tr>
+<tr>
+<td>大型团队协作、带团队</td>
+<td>独立开发者，习惯一个人闭环</td>
+</tr>
+<tr>
+<td>需要驻场或坐班</td>
+<td>只做远程</td>
+</tr>
+<tr>
+<td>三天交付复杂系统</td>
+<td>单人产能，急单必然砸</td>
+</tr>
+<tr>
+<td>只写提示词不落系统</td>
+<td>那不是我的价值</td>
+</tr>
+<tr>
+<td>说不清怎么验证的项目</td>
+<td>最后一定扯皮</td>
+</tr>
+<tr>
+<td>K8s / 微服务架构设计</td>
+<td>知道概念，没在真实项目上做过</td>
+</tr>
+<tr>
+<td>精通算法与数据结构</td>
+<td>工程够用，面试手撕代码不行</td>
+</tr>
+</tbody>
+</table>
+<p><strong>说「不会」不丢人，说「会」被戳穿才丢人。</strong></p>
+<hr />
+<h1 id="_40">五、三个版本的自我介绍</h1>
+<h2 id="a30">版本 A｜30 秒（电梯里遇到）</h2>
+<blockquote>
+<p>我做 AI 应用落地的。一个人写过一套六万多行的 AI 内容生产平台，从剧本到成片全自动，用户、计费、支付、客服都是我自己做的。强项是让 AI 功能真正上线跑稳，还有把成本压下来。</p>
+</blockquote>
+<h2 id="b2">版本 B｜2 分钟（正式面试开场）</h2>
+<blockquote>
+<p>我建筑工程出身，转行做开发，现在是独立开发者。</p>
+<p>我最主要的作品是一套 AI 内容生产平台：输入一段故事，自动生成分集大纲、分镜、角色形象、每个镜头的画面和视频，再配音、配字幕、合成成片。整个系统 64,752 行 Python、2,484 个接口、32 张数据表，从第一行代码到线上运维都是我一个人。</p>
+<p>里面最难的不是调 AI 接口，是工程问题：多进程下的任务状态、支付的幂等、生成任务排队和失败重试、成本控制。我把踩过的 21 个真实故障全写成了复盘，公开在 GitHub 上。</p>
+<p>我的定位是：<strong>能把 AI 从 demo 做到上线的工程人</strong>。会调 API 的人很多，能让它稳定跑一年的人少。</p>
+</blockquote>
+<h2 id="c10">版本 C｜10 分钟（深入聊，按这个顺序讲）</h2>
+<ol>
+<li><strong>我是谁</strong>：建筑转开发，独立开发者，自学路线</li>
+<li><strong>代表作讲透</strong>：AI 短剧平台，从用户输入到成片的完整链路（挑 2-3 个环节细讲）</li>
+<li><strong>挑一个故障深讲</strong>：gunicorn 多进程进度 0%，从现象到根因到三种解法（体现排查能力）</li>
+<li><strong>成本观</strong>：AI 项目 85% 的钱花在视频生成，降废片率比换供应商有效</li>
+<li><strong>边界</strong>：我不做算法、不做设计，专注把应用做稳</li>
+<li><strong>反问</strong>：你们现在最卡的技术问题是什么？</li>
+</ol>
+<hr />
+<h1 id="_41">六、技术名词表（带发音，见配套网页）</h1>
+<p>👉 打开 <code>tech-glossary.html</code>，点每个词能听发音。</p>
+<p>网页里有：英文、音标、中文谐音、这词是干嘛的白话解释。</p>
+<hr />
+<h1 id="_42">七、最后：这段经历真正的价值</h1>
+<p>不是「我会用很多工具」。工具每年都在换。</p>
+<p>真正稀缺的是这三样：</p>
+<ol>
+<li><strong>端到端能力</strong> — 从想法到上线到运维，一个人走完</li>
+<li><strong>真实故障经验</strong> — 21 个踩过的坑，每个都能讲出根因和解法</li>
+<li><strong>成本意识</strong> — 知道钱花在哪、哪里能省，这是老板最在意的事</li>
+</ol>
+<p><strong>技术会过期，这三样不会。</strong></p>
+</div>
+<footer>王丁炜 · Dingwei Wang &nbsp;|&nbsp; 476743538@qq.com</footer>
+</body>
+</html>
