@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王丁炜 · 能力全景</title>
+<style>
+:root{
+  --bg:#070809; --bg2:#0b0f14; --card:#0f1622; --line:#1e2a3d;
+  --text:#e9eff8; --text2:#a7b6ca; --text3:#6b7a90;
+  --accent:#3b82f6; --accent2:#5ec8f5; --good:#34d399; --warn:#fbbf24;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.85;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:16px}
+
+/* Hero */
+.hero{padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.16),transparent 62%)}
+.hero h1{font-size:40px;font-weight:800;margin:0 0 12px;letter-spacing:-.5px;
+  background:linear-gradient(135deg,#fff,#8fb8e8);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent}
+.hero .sub{color:var(--text2);font-size:16px;margin-bottom:6px}
+.hero .meta{color:var(--text3);font-size:13px;margin-top:18px;letter-spacing:.05em}
+
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+/* 导航 */
+.nav{display:flex;flex-wrap:wrap;gap:8px;padding:20px 0 32px;border-bottom:1px solid var(--line);
+  margin-bottom:36px}
+.nav a{font-size:13px;color:var(--text2);text-decoration:none;padding:6px 13px;
+  border:1px solid var(--line);border-radius:18px;transition:.15s;background:var(--card)}
+.nav a:hover{border-color:var(--accent);color:#cfe4ff;background:rgba(59,130,246,.12)}
+
+/* 正文 */
+h1{font-size:29px;font-weight:800;margin:52px 0 22px;padding-top:22px;
+  border-top:1px solid var(--line);letter-spacing:-.3px}
+h1:first-of-type{border:0;padding-top:0;margin-top:0}
+h2{font-size:20px;font-weight:700;margin:38px 0 14px;color:#fff;
+  padding-left:13px;border-left:3px solid var(--accent);line-height:1.4}
+h3{font-size:17px;font-weight:600;margin:26px 0 10px;color:var(--accent2)}
+p{margin:12px 0;color:var(--text2)}
+strong{color:#fff;font-weight:700}
+em{color:var(--warn);font-style:normal}
+a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(94,200,245,.3)}
+a:hover{border-color:var(--accent2)}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+
+ul,ol{margin:12px 0;padding-left:24px;color:var(--text2)}
+li{margin:7px 0}
+li strong{color:#fff}
+
+blockquote{margin:20px 0;padding:14px 20px;background:rgba(59,130,246,.08);
+  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:var(--text2);font-size:15px}
+blockquote p{margin:0;color:var(--text2)}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14.5px;
+  background:var(--card);border-radius:10px;overflow:hidden;
+  box-shadow:0 0 0 1px var(--line)}
+th{background:#121b28;color:var(--accent2);font-weight:600;text-align:left;
+  padding:11px 14px;font-size:13.5px;letter-spacing:.02em}
+td{padding:10px 14px;border-top:1px solid var(--line);color:var(--text2);vertical-align:top}
+td strong{color:#fff}
+tr:hover td{background:rgba(59,130,246,.04)}
+
+/* 代码 */
+code{background:#141d2b;color:var(--accent2);padding:2px 7px;border-radius:5px;
+  font-size:.9em;font-family:"SF Mono",Consolas,monospace}
+pre{background:#0c121b;border:1px solid var(--line);border-radius:10px;padding:16px;
+  overflow-x:auto;margin:18px 0}
+pre code{background:none;padding:0;color:var(--text2);font-size:13.5px;line-height:1.7}
+
+/* 回到顶部 */
+.top-btn{position:fixed;right:20px;bottom:24px;width:44px;height:44px;border-radius:50%;
+  background:rgba(59,130,246,.9);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:19px;text-decoration:none;box-shadow:0 6px 20px rgba(59,130,246,.35);
+  border:0;transition:.18s;z-index:20}
+.top-btn:hover{background:#2f6fd8;transform:translateY(-2px)}
+
+footer{border-top:1px solid var(--line);padding:30px 22px 44px;text-align:center;
+  color:var(--text3);font-size:13px;line-height:2}
+footer a{color:var(--accent2)}
+
+@media(max-width:600px){
+  .hero{padding:44px 18px 34px}
+  .hero h1{font-size:29px}
+  body{font-size:15.5px}
+  h1{font-size:24px}
+  h2{font-size:18px}
+  .wrap{padding:0 16px 70px}
+  table{font-size:13.5px}
+  th,td{padding:9px 10px}
+  .nav a{font-size:12px;padding:5px 11px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  .nav,.top-btn{display:none}
+  h2{border-color:#333}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>王丁炜</h1>
+  <div class="sub">一个人把产品从零做到上线：需求 → 设计 → 编码 → 部署 → 运维</div>
+  <div class="sub" style="font-size:14px;color:var(--text3)">建筑工程出身 · 非科班 · 端到端交付</div>
+  <div class="meta">16 个能力领域 · 117 个技术词 · 2026-11-20 更新</div>
+</div>
+
+<div class="wrap">
+  <div class="nav"><a href="#0">零、先说我是什么样的人</a><a href="#1">一、十六个能力领域</a><a href="#2">二、按「客户问题」重新排列</a><a href="#3">三、诚实边界（不做的）</a><a href="#4">四、三个版本的自我介绍</a><a href="#5">五、我还在学的（诚实标注）</a><a href="#6">六、最后</a></div>
+  <h1 id="_1">王丁炜 · 能力全景</h1>
+<hr />
+<h1 id="_2" id="0">零、先说我是什么样的人</h1>
+<p>建筑工程出身，不是科班。所以我的路子和科班不同：</p>
+<ul>
+<li><strong>带着问题去学技术</strong>，不是先学理论再找用途</li>
+<li><strong>每个东西都是为了解决一个真实麻烦</strong>，不是练手</li>
+<li><strong>习惯一个人把整条链走完</strong>：需求 → 设计 → 编码 → 部署 → 运维 → 出问题自己修</li>
+</ul>
+<p>结果是：单点深度不如专职的人（不如专职前端做设计，不如算法工程师写算法），但<strong>端到端的完整能力极稀缺</strong>。一个产品从零到上线，绝大多数人只负责其中一段。</p>
+<p><strong>规模证据</strong>：
+- AI 短剧工坊：<strong>64,752 行 Python、2,484 路由、626 模板、32 表、11 生产步骤</strong>
+- 炜达云微信小程序：<strong>45 个页面、14 个业务模块、飞书→微信全量迁移</strong>
+- 210 个可复用技能（每个对应一个真实项目或踩过的坑）
+- 21 个生产故障完整复盘（公开在 GitHub）</p>
+<hr />
+<h1 id="_3" id="1">一、十六个能力领域</h1>
+<h2 id="1ai">领域 1｜AI 应用开发（最强）</h2>
+<p><strong>做过</strong>：AI 短剧工坊，从「一段故事」到「一集成片」全自动。</p>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>剧本</td>
+<td>分集大纲 → 台词 → 分镜表</td>
+</tr>
+<tr>
+<td>角色</td>
+<td>角色注册表、六视图标准照、跨镜头一致性</td>
+</tr>
+<tr>
+<td>出图/出视频</td>
+<td>可灵/千问/ComfyUI 多引擎，运镜与时长控制</td>
+</tr>
+<tr>
+<td>配音</td>
+<td>多角色音色、逐句时间轴、语速校准</td>
+</tr>
+<tr>
+<td>字幕/装配</td>
+<td>逐句对齐、双行合并、ffmpeg 多路混流、BGM 标准化</td>
+</tr>
+<tr>
+<td>计费</td>
+<td>积分扣费、订单、退款（含赠送积分追踪）</td>
+</tr>
+<tr>
+<td>用户/客服</td>
+<td>注册登录、权限、我的作品、Chatwoot AI 客服</td>
+</tr>
+</tbody>
+</table>
+<p><strong>规模</strong>：64,752 行 Python / 14,574 行 JS / 2,484 路由 / 32 表 / 11 步骤</p>
+<p><strong>边界</strong>：不做模型训练、不做纯视觉设计</p>
+<hr />
+<h2 id="2">领域 2｜后端工程</h2>
+<p><strong>做过</strong>：2,484 个路由的 API 体系、32 张表设计、SQLite→PostgreSQL 迁移、多 worker 任务队列（<code>SELECT FOR UPDATE SKIP LOCKED</code>）、双登录认证（密码+短信）、CSRF 防护、X-Accel-Redirect 文件服务（区分管理员/普通用户权限）。</p>
+<p><strong>四个能脱稿讲的真实故障</strong>：</p>
+<ol>
+<li><strong>进度永远 0%</strong> — <code>gunicorn -w 4</code> 四进程各自内存字典，任务建在 #2，轮询进 #3 查不到。改落数据库，顺带解决重启丢状态。</li>
+<li><strong>限流失效</strong> — 内存计数器 4 进程各算各的，配 100 次/分实际放行 400 次。</li>
+<li><strong>支付回调 302</strong> — NOTIFY_URL 多写 blueprint 前缀，微信跳转丢 POST body。</li>
+<li><strong>时区错乱</strong> — UTC 与本地时间混在一张表，同一天记录差一天。</li>
+</ol>
+<hr />
+<h2 id="3ai">领域 3｜AI 模型部署与调优</h2>
+<p><strong>单卡 24G 跑通的</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>模型</th>
+<th>实测</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画图</td>
+<td>FLUX.1 dev fp8 + IP-Adapter + ControlNet</td>
+<td>20–40 秒/张</td>
+</tr>
+<tr>
+<td>图生视频</td>
+<td>Wan 2.1 / SVD</td>
+<td>512p 短片段，第 2 秒易崩脸</td>
+</tr>
+<tr>
+<td>口型</td>
+<td>Sonic / LatentSync / Wav2Lip</td>
+<td>4.8 秒音频跑 205 秒</td>
+</tr>
+<tr>
+<td>语音合成</td>
+<td>IndexTTS（154 音色+克隆）/ CosyVoice</td>
+<td>常驻 6.7G</td>
+</tr>
+<tr>
+<td>语音识别</td>
+<td>whisper.cpp（CUDA 自编译）</td>
+<td>中文优先，常驻 2.3G</td>
+</tr>
+<tr>
+<td>文本</td>
+<td>llama.cpp / vLLM，27B/32B</td>
+<td>量化下沉</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心经验</strong>：
+- 显存不够<strong>不报 OOM</strong>，而是慢十倍然后给废图（在搬权重不是算）
+- 可用显存 = 单卡 − 常驻（我机器常驻 15G，24G 卡实际只有 9G）
+- 权重 ≤ 可用 × 0.8 才安全
+- <strong>双卡 ≠ 双倍显存</strong>（除非做 tensor parallel）
+- RTX 5090 需要新 CUDA，老框架直接编译失败</p>
+<hr />
+<h2 id="4ffmpeg">领域 4｜音视频处理（ffmpeg 全链路）</h2>
+<ul>
+<li><strong>60 路音频混流</strong>：<code>adelay + amix</code> 逐句锚定时间轴</li>
+<li><strong>字幕</strong>：SRT 生成、whisper 识别 + 文字校正、双行合并、烧字幕</li>
+<li><strong>响度</strong>：LUFS 标准化、分段压缩解决「片头小声片尾大声」</li>
+<li><strong>视频</strong>：按镜头时长智能裁剪、黑帧/废帧检测、拼接</li>
+<li><strong>MV 全流程</strong>：歌 → 分镜 → 出图 → 运镜 → 卡点字幕 → 成品（已交付多支）</li>
+</ul>
+<p><strong>能力</strong>：音画同步可做到 <strong>±1 帧</strong></p>
+<hr />
+<h2 id="5-ai">领域 5｜音乐与 AI 音频</h2>
+<ul>
+<li><strong>歌曲生成</strong>：ACE-Step、DiffRhythm、MiniMax Music、HeartMuLa（本地）</li>
+<li><strong>Suno.cn 全流程</strong>：出歌、LRC、WAV、人声分离</li>
+<li><strong>双轨制作法</strong>：人声与伴奏分两条腿生成再适配</li>
+<li><strong>音频质量测量</strong>：频谱、音量曲线、动态范围客观评估</li>
+<li><strong>多角色广播剧 / 有声小说</strong>：多音色 + 逐句时间轴</li>
+<li><strong>已交付</strong>：《父亲的账本》《河那边》</li>
+</ul>
+<hr />
+<h2 id="6-v1">领域 6｜微信小程序开发 ⭐（v1 漏掉）</h2>
+<p><strong>项目：炜达云微信小程序</strong> —— 建筑工程管理工具</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>页面数</td>
+<td><strong>45 个</strong>（app.json 注册）</td>
+</tr>
+<tr>
+<td>业务模块</td>
+<td><strong>14 个</strong>：项目/采购/进度/施工日志/合同/质量/安全/成本/风险/任务/供应商/工人/设备/材料</td>
+</tr>
+<tr>
+<td>技术栈</td>
+<td>微信小程序原生（wx.*）+ Vant 组件库 + 自建 Node 后端</td>
+</tr>
+<tr>
+<td>版本迭代</td>
+<td>v2.1.0 → v2.4.0（每版有 CHANGELOG 和 md5 校验）</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>miniprogram-ci 自动上传 + 腾讯云（weida.host）</td>
+</tr>
+<tr>
+<td>后端</td>
+<td>server.js，含 9 类业务字典动态管理 API（GET/PUT/POST/DELETE）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>做的两件难事</strong>：</p>
+<ol>
+<li><strong>飞书小程序 → 微信小程序全量迁移</strong></li>
+<li><code>tt.*</code> → <code>wx.*</code> 全量替换</li>
+<li>发现并修复 9 个创建页面的 <code>tt.navigateBack()</code> 崩溃（P0）</li>
+<li>
+<p>写了一份 <strong>14KB 的代码质量审计报告</strong>，按 P0/P1/P2 分级</p>
+</li>
+<li>
+<p><strong>登录态与页面栈修复</strong></p>
+</li>
+<li>根因：<code>ensureLogin()</code> 用 navigateTo，返回时重复触发登录检查</li>
+<li>方案：改 reLaunch 彻底重置页面栈</li>
+<li>端到端测试 5 种场景（已登录/未登录/新登录/token过期/reset失效）全通过</li>
+</ol>
+<p><strong>能力判定</strong>：能独立完成小程序从迁移、改造、审计到上传发版的完整闭环。</p>
+<hr />
+<h2 id="7-v1">领域 7｜法律与案件材料处理 ⭐（v1 漏掉）</h2>
+<p><strong>做过</strong>：</p>
+<ul>
+<li><strong>焦家珠案件</strong>：完整案卷整理、律师参考材料汇编（含 zip 归档和案卷外存档）</li>
+<li><strong>胡引昱案</strong>：调解材料</li>
+<li><strong>商铺租赁合同</strong>：审查、漏洞识别、修订版 + PDF</li>
+<li><strong>劳务纠纷和解协议</strong>：民事与刑事路径判断</li>
+<li><strong>企业间借款 / 代收代付</strong>：全套文书起草</li>
+<li><strong>举报信 / 检举控告材料</strong>：按可核查结构成稿</li>
+<li><strong>民事纠纷调解与执行</strong>：给当事人能看懂的文件</li>
+</ul>
+<p><strong>能力判定</strong>：能读懂法律文书、找出漏洞、按当事人立场重写；不做诉讼代理。</p>
+<hr />
+<h2 id="8-v1">领域 8｜财务与审计 ⭐（v1 漏掉）</h2>
+<p><strong>做过</strong>：</p>
+<ul>
+<li><strong>盛安财务审计</strong>：工资资金流向审计、四表核对</li>
+<li><strong>工资发放台账</strong>：恒正 2,547 万 / 源润 2,546 万双线核对，SUMIF 月度汇总</li>
+<li><strong>班组产值工资分配表</strong> 与台账对账</li>
+<li><strong>财务台账</strong>：流水录入、账单按交易对方拆分、发票台账</li>
+<li><strong>手写工资表识别</strong>：照片 → 视觉识别 → 结构化 → 验算 → PDF</li>
+<li><strong>投资项目估算/概算/预算审查</strong>：算术核验、口径比对、数量单价复核</li>
+</ul>
+<p><strong>能力判定</strong>：能做对账、能发现算术和口径错误、能把散乱凭证整理成可交付报表。不做审计签字。</p>
+<hr />
+<h2 id="9-v1">领域 9｜招标监控与投标信息 ⭐（v1 漏掉）</h2>
+<p><strong>做过</strong>：</p>
+<ul>
+<li><strong>东莞招标监控</strong>：定时抓取交易平台公告，关键词过滤，增量去重</li>
+<li><strong>东江环保</strong>等项目的投标资料整理</li>
+<li><strong>企业信息爬取</strong>：工商登记、资质、股东高管、中标记录、诉讼、行政处罚（政府公开数据）</li>
+<li><strong>开标/中标结果查询</strong>：从交易平台抓公告、图纸、清单、限价</li>
+</ul>
+<p><strong>能力判定</strong>：能搭「监控 → 筛选 → 通知」的自动流水线，比人工盯网站快。</p>
+<hr />
+<h2 id="10">领域 10｜建筑与工程数字化（差异化最强）</h2>
+<p><strong>做过（有实际产品，不只是文档）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>具体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>小程序产品</strong></td>
+<td>炜达云（45 页面，14 个建筑管理模块）← 这是真产品</td>
+</tr>
+<tr>
+<td><strong>图纸</strong></td>
+<td>DWG/DXF 读取、天正图纸理解、施工图转 3D 效果图、图纸信息提取成通俗报告</td>
+</tr>
+<tr>
+<td><strong>造价</strong></td>
+<td>工程量清单单价对比、13% 调价改写、投资估算审查、单方造价对标、盘扣支模架用量</td>
+</tr>
+<tr>
+<td><strong>合同</strong></td>
+<td>施工分包、商铺租赁、装修、企业借款全套文书</td>
+</tr>
+<tr>
+<td><strong>工资</strong></td>
+<td>班组台账对账、欠薪受理档案、手写工资表转 PDF</td>
+</tr>
+<tr>
+<td><strong>BIM</strong></td>
+<td>广联达 GBQ6/GTJ/GQI 处理、IFC 土建+安装合成网页 3D</td>
+</tr>
+<tr>
+<td><strong>工程文书</strong></td>
+<td>联系函、催款函、索赔函、安全措施费论证</td>
+</tr>
+<tr>
+<td><strong>企业简报</strong></td>
+<td>贝特瑞简报、PPT 演示文稿、汇报提纲</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这是最强差异牌</strong>：AI 圈懂建筑的人几乎没有，建筑行业懂 AI 的极少。<strong>客户是工程公司时，我是少数既听得懂他们说话、又能真做出东西的人</strong> —— 而且已经交付过小程序这种真产品。</p>
+<hr />
+<h2 id="11">领域 11｜服务器运维与部署</h2>
+<ul>
+<li><strong>Linux</strong>：无图形界面服务器全套配置</li>
+<li><strong>服务托管</strong>：systemd（自动重启/日志/依赖顺序）</li>
+<li><strong>反代</strong>：nginx/Caddy、子路径挂载、SSL、X-Accel-Redirect</li>
+<li><strong>穿透</strong>：Cloudflare Tunnel、SSH 反向隧道、Tailscale 组网</li>
+<li><strong>容器</strong>：Docker Compose 多服务（Chatwoot 五容器）</li>
+<li><strong>六层排查法</strong>：进程 → 端口 → 反代 → 日志 → 数据库 → 外部 API</li>
+</ul>
+<p><strong>案例</strong>：家宽无公网 IP 打通外网访问并配 HTTPS；云服务器 443 被封改 SSH 反向隧道；无显示器服务器装 Windows VM。</p>
+<hr />
+<h2 id="12-bot">领域 12｜消息机器人与多 Bot 运维</h2>
+<ul>
+<li><strong>8 个飞书 Bot 实例</strong>（feishu_1/2/3/4/17/18/21 + wb_1）独立 profile、systemd 托管、Docker 沙箱、掉线自恢复</li>
+<li><strong>企业微信接入</strong>：AI Bot 长连接模式，扫码登录、凭据加密</li>
+<li><strong>邮箱自动化</strong>：IMAP 读取、规则过滤、4 小时定时巡检</li>
+<li><strong>定时任务体系</strong>：cron 管理、失败告警、避免重复执行</li>
+</ul>
+<p><strong>踩过的坑</strong>：gateway 进程内重启自己会自杀 → 用一次性 cron 脱离进程树；多实例必须 <code>gateway.standalone: true</code>；沙箱的技能目录是软链，<code>rm -rf</code> 删到真身（踩过 3 次）。</p>
+<hr />
+<h2 id="13">领域 13｜支付与商业化闭环</h2>
+<ul>
+<li><strong>微信支付 v3</strong>：Native 扫码、签名验证、回调验签、AES-GCM 解密</li>
+<li><strong>积分计费</strong>：扣费规则单一真相源（DB 驱动）、步骤单价可配</li>
+<li><strong>订单退款</strong>：实付/赠送分离追踪、退款上限校验</li>
+<li><strong>充值流程</strong>：下单→支付→回调→到账→赠送，全链路幂等</li>
+</ul>
+<p><strong>三个坑</strong>：NOTIFY_URL 多前缀→302；公钥不匹配→401；APIv3 密钥不匹配→AES 解密失败。</p>
+<hr />
+<h2 id="14">领域 14｜浏览器自动化与逆向</h2>
+<ul>
+<li><strong>Playwright 全自动发布</strong>：掘金 + CSDN 全流程（今天跑通）</li>
+<li><strong>CDP 接管模式</strong>：用户扫码，程序控制同一窗口，不碰密码验证码</li>
+<li><strong>绕 WAF</strong>：识别无头指纹 → 改有头（Xvfb）</li>
+<li><strong>逆向工具链</strong>：jadx / apktool / Ghidra 12.2 / radare2 / frida / mitmproxy</li>
+<li><strong>爬虫</strong>：招标公告、企业信息、视频数据</li>
+</ul>
+<p><strong>关键经验</strong>：curl 通但浏览器 403 = 指纹问题不是 IP；JS <code>.click()</code> 不触发框架事件委托，必须真鼠标；点不动的按钮先抓服务端错误，别瞎试 UI。</p>
+<hr />
+<h2 id="15">领域 15｜文档与数据自动化</h2>
+<ul>
+<li><strong>合同</strong>：批量生成、审查、修订（中文，含押金/违约/付款条款分析）</li>
+<li><strong>PDF</strong>：中文排版规范、扫描件 OCR 重建、方向校正、合并拆分</li>
+<li><strong>Excel/台账</strong>：SUMIF 汇总、按列拆分、活公式统计表</li>
+<li><strong>报表</strong>：手写表照片 → 结构化 → 验算 → PDF</li>
+<li><strong>CAD</strong>：DWG/DXF 读取、信息提取、转 SVG/PDF、批量出图</li>
+<li><strong>思维导图</strong>：代码生成圆形辐射式 PDF</li>
+</ul>
+<hr />
+<h2 id="16">领域 16｜内容创作与运营</h2>
+<ul>
+<li><strong>AI 短剧</strong>：从故事到成片，多集系列（已做：都市隐龙、余烬重燃）</li>
+<li><strong>多个短剧/内容系列</strong>：牛顿、水浒梁山厂牌、AI 人士 KTV、王老登讲 AI</li>
+<li><strong>MV 制作</strong>：歌词定轴、卡点、片头片尾设计</li>
+<li><strong>数字人</strong>：照片 + 录音 → 口播</li>
+<li><strong>播客 / 有声小说</strong>：单人、双人、多角色</li>
+<li><strong>海报设计</strong>：AI 出图 + 中文标题排版</li>
+<li><strong>账号运营</strong>：定位、选题、发布流程、数据复盘、自动化运营</li>
+</ul>
+<hr />
+<h1 id="_4" id="2">二、按「客户问题」重新排列</h1>
+<table>
+<thead>
+<tr>
+<th>你遇到的情况</th>
+<th>我能做什么</th>
+<th>大概多久</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 功能做出来不敢上线</td>
+<td>补计费/权限/并发/重试/部署</td>
+<td>1–3 周</td>
+</tr>
+<tr>
+<td>上线总出故障、日志看不出原因</td>
+<td>六层排查定位根因</td>
+<td>1–3 天</td>
+</tr>
+<tr>
+<td>模型调用太贵</td>
+<td>拆成本结构找省钱点</td>
+<td>3–5 天</td>
+</tr>
+<tr>
+<td>想本地跑 AI 不知买什么卡</td>
+<td>按任务倒推显存</td>
+<td>半天</td>
+</tr>
+<tr>
+<td>要一个建筑行业小程序</td>
+<td>45 页面的产品我做过（含迁移/审计/发版）</td>
+<td>3–6 周</td>
+</tr>
+<tr>
+<td>每天手工填表/对账/发文章</td>
+<td>自动化脚本</td>
+<td>2–5 天</td>
+</tr>
+<tr>
+<td>想收钱不会接支付</td>
+<td>微信支付全流程</td>
+<td>3–7 天</td>
+</tr>
+<tr>
+<td>客服问题重复太多</td>
+<td>AI 自动回复 + 人工接管</td>
+<td>3–5 天</td>
+</tr>
+<tr>
+<td>图纸/清单要数字化</td>
+<td>图纸解析 + 数据提取</td>
+<td>3–10 天</td>
+</tr>
+<tr>
+<td>工程台账对不上账</td>
+<td>对账 + 差异定位 + 报表</td>
+<td>2–5 天</td>
+</tr>
+<tr>
+<td>要盯招标网站</td>
+<td>监控流水线 + 关键词通知</td>
+<td>2–4 天</td>
+</tr>
+<tr>
+<td>想做 AI 短视频/MV 不会</td>
+<td>全流程代做</td>
+<td>按条计</td>
+</tr>
+<tr>
+<td>合同/文书要改</td>
+<td>审查 + 漏洞识别 + 重写</td>
+<td>1–3 天</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_5" id="3">三、诚实边界（不做的）</h1>
+<table>
+<thead>
+<tr>
+<th>不做</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纯视觉设计、品牌包装</td>
+<td>能写可用界面，做不出设计感的视觉</td>
+</tr>
+<tr>
+<td>算法研究、模型训练</td>
+<td>应用层，不做论文复现</td>
+</tr>
+<tr>
+<td>带团队、大型协作</td>
+<td>独立开发者，习惯一个人闭环</td>
+</tr>
+<tr>
+<td>驻场/坐班</td>
+<td>只做远程</td>
+</tr>
+<tr>
+<td>三天交付复杂系统</td>
+<td>单人产能，急单必砸</td>
+</tr>
+<tr>
+<td>只写提示词不落系统</td>
+<td>那不是我的价值</td>
+</tr>
+<tr>
+<td>说不清怎么验证的项目</td>
+<td>最后一定扯皮</td>
+</tr>
+<tr>
+<td>K8s / 微服务架构设计</td>
+<td>知道概念，没有真实项目经验</td>
+</tr>
+<tr>
+<td>面试手撕算法</td>
+<td>工程够用，刷题不行</td>
+</tr>
+<tr>
+<td>诉讼代理</td>
+<td>能整理材料、能读懂，不当代理人</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_6" id="4">四、三个版本的自我介绍</h1>
+<h2 id="30">30 秒</h2>
+<blockquote>
+<p>我做 AI 应用落地和工程数字化的。一个人写过六万多行的 AI 内容生产平台，也做过建筑行业的微信小程序（45 个页面）。强项是让 AI 功能真正上线跑稳，还能把成本压下来。</p>
+</blockquote>
+<h2 id="2_1">2 分钟</h2>
+<blockquote>
+<p>我建筑工程出身，转行做开发，现在是独立开发者。</p>
+<p>两块最主要的作品：一是 AI 内容生产平台，输入故事自动出成片，64,752 行 Python、2,484 个接口、32 张表，从第一行代码到线上运维都是我；二是建筑行业的微信小程序，45 个页面、14 个业务模块，做过飞书到微信的全量迁移，写了完整的代码审计报告。</p>
+<p>最难的不是调 AI 接口，是工程问题：多进程状态、支付幂等、任务队列、成本控制。我把 21 个真实故障都写成了复盘，公开在 GitHub。</p>
+<p>我的定位是：<strong>能把 AI 从 demo 做到上线的工程人</strong>，而且懂工程行业。</p>
+</blockquote>
+<h2 id="10_1">10 分钟（按顺序讲）</h2>
+<ol>
+<li>我是谁：建筑转开发，独立开发者</li>
+<li>代表作一：AI 短剧平台（挑 2–3 个环节细讲）</li>
+<li>代表作二：建筑小程序（迁移 + 审计 + 发版）</li>
+<li>深讲一个故障：gunicorn 多进程进度 0%</li>
+<li>成本观：AI 视频 85% 的钱花在生成，降废片率比换供应商有效</li>
+<li>边界：不做算法、不做设计，专注把应用做稳</li>
+<li>反问：你们现在最卡的技术问题是什么？</li>
+</ol>
+<hr />
+<h1 id="_7" id="5">五、我还在学的（诚实标注）</h1>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app1~app8 全部工作区</td>
+<td>✅ 已扫（v2 补充）</td>
+</tr>
+<tr>
+<td>hermes-feishu_17/18</td>
+<td>✅ 已扫</td>
+</tr>
+<tr>
+<td>210 个技能库</td>
+<td>✅ 已扫</td>
+</tr>
+<tr>
+<td><strong>WorkBuddy（910MB 工作区）</strong></td>
+<td>❌ 未扫</td>
+</tr>
+<tr>
+<td><strong>Grok bot 相关产出</strong></td>
+<td>❌ 未扫</td>
+</tr>
+<tr>
+<td>feishu_1/2/3/21 的独立产出</td>
+<td>⚠️ 只扫了目录，未细看</td>
+</tr>
+</tbody>
+</table>
+<p><strong>下一步</strong>：把 WorkBuddy 和 Grok 的产出也扫一遍，能力清单还能再扩。</p>
+<hr />
+<h1 id="_8" id="6">六、最后</h1>
+<p>不是「我会用很多工具」——工具每年都在换。</p>
+<p>真正稀缺的是这三样：</p>
+<ol>
+<li><strong>端到端能力</strong> — 从想法到上线到运维，一个人走完</li>
+<li><strong>真实故障经验</strong> — 21 个坑，每个都能讲出根因和解法</li>
+<li><strong>懂两个世界</strong> — AI 圈里懂建筑，建筑圈里懂 AI</li>
+</ol>
+<p><strong>技术会过期，这三样不会。</strong></p>
+</div>
+
+<a class="top-btn" href="#" title="回到顶部">↑</a>
+
+<footer>
+  王丁炜 · 能力全景<br>
+  <span style="opacity:.7">全部内容来自真实项目，不是简历包装</span>
+</footer>
+
+</body>
+</html>
