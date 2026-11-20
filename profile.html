@@ -3,619 +3,339 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>王丁炜 · 能力全景</title>
+<title>王丁炜 · AI 应用开发</title>
 <style>
 :root{
-  --bg:#070809; --bg2:#0b0f14; --card:#0f1622; --line:#1e2a3d;
-  --text:#e9eff8; --text2:#a7b6ca; --text3:#6b7a90;
-  --accent:#3b82f6; --accent2:#5ec8f5; --good:#34d399; --warn:#fbbf24;
+  --bg:#05070c; --line:#1a2740;
+  --ink:#eef4fc; --ink2:#a9bcd4; --ink3:#77899f;
+  --blue:#4b8cff; --cyan:#5fd0f5; --amber:#f5b942; --green:#35d39a;
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);line-height:1.8;
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  font-size:15px}
-
-/* Hero */
-.hero{padding:64px 24px 48px;text-align:center;position:relative;overflow:hidden;
-  background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.16),transparent 62%)}
-.hero h1{font-size:31px;font-weight:800;margin:0 0 12px;letter-spacing:-.5px;
-  background:linear-gradient(135deg,#fff,#8fb8e8);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent}
-.hero .sub{color:var(--text2);font-size:14.5px;margin-bottom:6px}
-.hero .meta{color:var(--text3);font-size:12.5px;margin-top:16px;letter-spacing:.05em}
-
-.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
-
-/* 导航 */
-.nav{display:flex;flex-wrap:wrap;gap:8px;padding:20px 0 32px;border-bottom:1px solid var(--line);
-  margin-bottom:36px}
-.nav a{font-size:12.5px;color:var(--text2);text-decoration:none;padding:5px 12px;
-  border:1px solid var(--line);border-radius:18px;transition:.15s;background:var(--card)}
-.nav a:hover{border-color:var(--accent);color:#cfe4ff;background:rgba(59,130,246,.12)}
-
-/* 正文 */
-h1{font-size:23px;font-weight:800;margin:44px 0 18px;padding-top:18px;
-  border-top:1px solid var(--line);letter-spacing:-.3px}
-h1:first-of-type{border:0;padding-top:0;margin-top:0}
-h2{font-size:17px;font-weight:700;margin:30px 0 11px;color:#fff;
-  padding-left:13px;border-left:3px solid var(--accent);line-height:1.4}
-h3{font-size:15.5px;font-weight:600;margin:22px 0 8px;color:var(--accent2)}
-p{margin:10px 0;color:var(--text2);font-size:15px}
-strong{color:#fff;font-weight:700}
-em{color:var(--warn);font-style:normal}
-a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(94,200,245,.3)}
-a:hover{border-color:var(--accent2)}
-hr{border:0;border-top:1px solid var(--line);margin:40px 0}
-
-ul,ol{margin:10px 0;padding-left:22px;color:var(--text2);font-size:15px}
-li{margin:6px 0}
-li strong{color:#fff}
-
-blockquote{margin:18px 0;padding:12px 18px;background:rgba(59,130,246,.08);
-  border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:var(--text2);font-size:14.5px}
-blockquote p{margin:0;color:var(--text2)}
-
-/* 表格 */
-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13.5px;
-  background:var(--card);border-radius:10px;overflow:hidden;
-  box-shadow:0 0 0 1px var(--line)}
-th{background:#121b28;color:var(--accent2);font-weight:600;text-align:left;
-  padding:9px 12px;font-size:12.8px;letter-spacing:.02em}
-td{padding:8px 12px;border-top:1px solid var(--line);color:var(--text2);vertical-align:top;font-size:13.2px}
-td strong{color:#fff}
-tr:hover td{background:rgba(59,130,246,.04)}
-
-/* 代码 */
-code{background:#141d2b;color:var(--accent2);padding:2px 7px;border-radius:5px;
-  font-size:.9em;font-family:"SF Mono",Consolas,monospace}
-pre{background:#0c121b;border:1px solid var(--line);border-radius:10px;padding:16px;
-  overflow-x:auto;margin:18px 0}
-pre code{background:none;padding:0;color:var(--text2);font-size:12.5px;line-height:1.65}
-
-/* 回到顶部 */
-.top-btn{position:fixed;right:20px;bottom:24px;width:44px;height:44px;border-radius:50%;
-  background:rgba(59,130,246,.9);color:#fff;display:flex;align-items:center;justify-content:center;
-  font-size:19px;text-decoration:none;box-shadow:0 6px 20px rgba(59,130,246,.35);
-  border:0;transition:.18s;z-index:20}
-.top-btn:hover{background:#2f6fd8;transform:translateY(-2px)}
-
-footer{border-top:1px solid var(--line);padding:30px 22px 44px;text-align:center;
-  color:var(--text3);font-size:13px;line-height:2}
-footer a{color:var(--accent2)}
-
-@media(max-width:600px){
-  .hero{padding:44px 18px 34px}
-  .hero h1{font-size:25px}
-  body{font-size:14.3px}
-  h1{font-size:20px}
-  h2{font-size:16px}
-  p,ul,ol{font-size:14.3px}
-  .wrap{padding:0 16px 96px}
-  table{font-size:12.5px}
-  th,td{padding:7px 8px;font-size:12.2px}
-  .nav a{font-size:12px;padding:5px 11px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);line-height:1.75;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  font-size:15px;-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(1000px 500px at 50% -10%, rgba(75,140,255,.14), transparent 65%),
+    radial-gradient(800px 400px at 90% 105%, rgba(95,208,245,.06), transparent 70%);
+  background-attachment:fixed;
 }
-@media print{
-  body{background:#fff;color:#111}
-  .nav,.top-btn{display:none}
-  h2{border-color:#333}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px}
+
+.hero{padding:64px 0 44px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--green);
+  background:rgba(53,211,154,.09);border:1px solid rgba(53,211,154,.25);
+  padding:4px 13px;border-radius:20px;margin-bottom:22px;letter-spacing:.02em}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green)}
+h1{font-size:clamp(30px,5vw,40px);font-weight:800;letter-spacing:-.8px;line-height:1.15;
+  background:linear-gradient(135deg,#fff 30%,#93b8e8);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .role{margin-top:14px;font-size:clamp(15px,2.2vw,18px);color:#c2d3e8;font-weight:600}
+.hero .sub{margin-top:9px;font-size:13.5px;color:var(--ink3);letter-spacing:.03em}
+
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:36px 0 0;
+  background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.num{background:#080d16;padding:16px 8px;text-align:center}
+.num b{display:block;font-size:clamp(18px,2.8vw,23px);font-weight:800;color:var(--cyan);
+  line-height:1.2;letter-spacing:-.5px}
+.num span{display:block;margin-top:4px;font-size:11.5px;color:var(--ink3)}
+
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:11px;
+  font-size:14px;font-weight:600;text-decoration:none;transition:.16s;border:1px solid var(--line)}
+.btn.main{background:linear-gradient(180deg,#4b8cff,#3568d4);border-color:#5a96ff;color:#fff;
+  box-shadow:0 8px 22px -10px rgba(75,140,255,.9)}
+.btn.main:hover{background:linear-gradient(180deg,#5a96ff,#3f74e0)}
+.btn.ghost{color:var(--ink2)}
+.btn.ghost:hover{border-color:#2e4a70;color:#fff}
+
+section{padding:48px 0 56px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--blue);
+  text-transform:uppercase;margin-bottom:9px}
+h2{font-size:clamp(20px,3vw,25px);font-weight:800;letter-spacing:-.3px;line-height:1.3;
+  margin-bottom:8px}
+.lead{color:var(--ink2);font-size:14.5px;margin-bottom:26px;line-height:1.8}
+
+.probs{display:flex;flex-direction:column;gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.prob{display:grid;grid-template-columns:1.1fr 1.4fr auto;gap:14px;align-items:baseline;
+  background:#080d16;padding:13px 16px;transition:.15s}
+.prob:hover{background:#0c1320}
+.prob .q{color:#fff;font-weight:600;font-size:13.8px}
+.prob.head{background:#0b1220;padding:10px 16px}
+.prob.head .q,.prob.head .a,.prob.head .t{font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#7d92ad;text-transform:none}
+.prob.head:hover{background:#0b1220}
+.prob .a{color:var(--ink2);font-size:13.2px;line-height:1.6}
+.prob .t{color:var(--cyan);font-size:12px;font-weight:600;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+
+.cases{display:flex;flex-direction:column;gap:16px}
+.case{position:relative;padding:22px 24px;border-radius:16px;
+  background:linear-gradient(158deg,#0c1524,#0a1120);border:1px solid transparent}
+.case::before{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;
+  background:linear-gradient(150deg,rgba(95,208,245,.42),rgba(26,39,64,.7) 55%,rgba(245,185,66,.22));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.case h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:3px;display:flex;
+  align-items:center;gap:9px;flex-wrap:wrap}
+.tag{font-size:10.5px;font-weight:600;color:var(--green);background:rgba(53,211,154,.11);
+  border:1px solid rgba(53,211,154,.28);padding:2px 8px;border-radius:12px}
+.case .desc{color:var(--ink2);font-size:13.5px;margin:9px 0 14px;line-height:1.72}
+.mini{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:12px}
+.mini div{font-size:12.5px;color:var(--ink3)}
+.mini b{color:var(--cyan);font-size:15px;font-weight:700;margin-right:2px}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font-size:11.5px;color:#8fa6c2;background:#070c14;border:1px solid var(--line);
+  padding:3px 9px;border-radius:7px;font-family:"SF Mono",Menlo,Consolas,monospace}
+.case a{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:13px;
+  color:var(--cyan);text-decoration:none;font-weight:600}
+.case a:hover{text-decoration:underline}
+
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.group{background:#080d16;border:1px solid var(--line);border-radius:13px;padding:17px 18px}
+.group h4{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:9px;
+  display:flex;align-items:center;gap:7px}
+.group h4::before{content:'';width:3px;height:13px;border-radius:2px;
+  background:linear-gradient(180deg,var(--blue),var(--cyan))}
+.group ul{list-style:none;font-size:13px;color:var(--ink2);line-height:1.9}
+.group li::before{content:'·';color:var(--ink3);margin-right:7px;font-weight:700}
+
+.bounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:9px}
+.bound{font-size:13px;color:var(--ink2);background:rgba(255,107,107,.045);
+  border:1px solid rgba(255,107,107,.14);border-radius:9px;padding:9px 13px}
+.bound::before{content:'✕ ';color:#c96a6a;font-weight:700}
+
+.contact{text-align:center;padding:50px 0 60px}
+.contact .mail{display:inline-block;margin-top:8px;font-size:clamp(16px,2.6vw,20px);
+  font-weight:700;color:var(--cyan);text-decoration:none}
+.contact .mail:hover{text-decoration:underline}
+.contact p{color:var(--ink3);font-size:13px;margin-top:14px}
+
+footer{border-top:1px solid var(--line);padding:24px 0 40px;text-align:center;
+  font-size:12px;color:var(--ink3);line-height:2}
+footer a{color:var(--ink2);text-decoration:none}
+footer a:hover{color:var(--cyan)}
+
+.top{position:fixed;right:18px;bottom:22px;width:40px;height:40px;border-radius:50%;
+  background:rgba(75,140,255,.85);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:17px;text-decoration:none;box-shadow:0 6px 18px rgba(75,140,255,.35);z-index:20;
+  opacity:0;pointer-events:none;transition:.22s}
+.top.show{opacity:1;pointer-events:auto}
+.top:hover{background:#4b8cff;transform:translateY(-2px)}
+
+@media(max-width:620px){
+  body{font-size:14.5px}
+  .wrap{padding:0 16px}
+  .hero{padding:44px 0 34px}
+  .nums{grid-template-columns:repeat(2,1fr)}
+  .num{padding:13px 6px}
+  .prob{grid-template-columns:1fr;gap:4px;padding:12px 14px}
+  section{padding:34px 0}
+  .case{padding:19px 17px}
+  .mini{gap:12px}
 }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <h1>王丁炜</h1>
-  <div class="sub">一个人把产品从零做到上线：需求 → 设计 → 编码 → 部署 → 运维</div>
-  <div class="sub" style="font-size:14px;color:var(--text3)">建筑工程出身 · 非科班 · 端到端交付</div>
-  <div class="meta">16 个能力领域 · 469 个可复用技能 · 21 个生产故障复盘</div>
-</div>
-
 <div class="wrap">
-  <div class="nav"><a href="#0">零、先说我是什么样的人</a><a href="#1">一、能力领域</a><a href="#2">二、按「客户问题」重新排列</a><a href="#3">三、诚实边界（不做的）</a><a href="#4">四、三个版本的自我介绍</a><a href="#5">五、最后</a></div>
-  <h1 id="_1">能力全景</h1>
-<h1 id="_2" id="0">零、先说我是什么样的人</h1>
-<p>建筑工程出身，不是科班。所以我的路子和科班不同：</p>
-<ul>
-<li><strong>带着问题去学技术</strong>，不是先学理论再找用途</li>
-<li><strong>每个东西都是为了解决一个真实麻烦</strong>，不是练手</li>
-<li><strong>习惯一个人把整条链走完</strong>：需求 → 设计 → 编码 → 部署 → 运维 → 出问题自己修</li>
-</ul>
-<p>结果是：单点深度不如专职的人（不如专职前端做设计，不如算法工程师写算法），但<strong>端到端的完整能力极稀缺</strong>。一个产品从零到上线，绝大多数人只负责其中一段。</p>
-<p><strong>规模证据</strong>：</p>
-<ul>
-<li>AI 内容生产平台：<strong>64,752 行 Python、2,484 路由、626 模板、32 表、11 生产步骤</strong></li>
-<li>建筑工程管理小程序：<strong>45 个页面、14 个业务模块</strong>，含跨平台全量迁移与自动发版</li>
-<li><strong>469 个可复用技能</strong>（每个对应一个真实项目或踩过的坑）</li>
-<li><strong>21 个生产故障完整复盘</strong>（公开在 GitHub）</li>
-</ul>
-<hr />
-<h1 id="_3" id="1">一、能力领域</h1>
-<h2 id="1ai">领域 1｜AI 应用开发（最强）</h2>
-<p><strong>做过</strong>：一条从「一段故事」到「一集成片」的全自动生产线。</p>
-<table>
-<thead>
-<tr>
-<th>环节</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>剧本</td>
-<td>分集大纲 → 台词 → 分镜表</td>
-</tr>
-<tr>
-<td>角色</td>
-<td>角色注册表、六视图标准照、跨镜头一致性</td>
-</tr>
-<tr>
-<td>出图/出视频</td>
-<td>可灵 / 千问 / ComfyUI 多引擎，运镜与时长控制</td>
-</tr>
-<tr>
-<td>配音</td>
-<td>多角色音色、逐句时间轴、语速校准</td>
-</tr>
-<tr>
-<td>字幕/装配</td>
-<td>逐句对齐、双行合并、多路混流、响度标准化</td>
-</tr>
-<tr>
-<td>计费</td>
-<td>积分扣费、订单、退款（含赠送额度追踪）</td>
-</tr>
-<tr>
-<td>用户/客服</td>
-<td>注册登录、权限、作品库、AI 客服接管</td>
-</tr>
-</tbody>
-</table>
-<p><strong>规模</strong>：64,752 行 Python / 14,574 行 JS / 2,484 路由 / 32 表 / 11 步骤</p>
-<p><strong>边界</strong>：不做模型训练、不做纯视觉设计</p>
-<hr />
-<h2 id="2">领域 2｜后端工程</h2>
-<p><strong>做过</strong>：2,484 个路由的 API 体系、32 张表设计、SQLite→PostgreSQL 迁移、多 worker 任务队列（<code>SELECT FOR UPDATE SKIP LOCKED</code>）、双登录认证（密码 + 短信）、CSRF 防护、按用户权限分流的文件服务。</p>
-<p><strong>四个能脱稿讲的真实故障</strong>：</p>
-<ol>
-<li><strong>进度永远 0%</strong> — 四进程各自内存字典，任务建在 #2，轮询进 #3 查不到。改落数据库，顺带解决重启丢状态。</li>
-<li><strong>限流失效</strong> — 内存计数器四进程各算各的，配 100 次/分实际放行 400 次。</li>
-<li><strong>支付回调 302</strong> — 回调地址多写了路径前缀，跳转丢 POST body。</li>
-<li><strong>时区错乱</strong> — 两种时间基准混在一张表，同一天记录差一天。</li>
-</ol>
-<hr />
-<h2 id="3ai">领域 3｜AI 模型部署与显存调优</h2>
-<p><strong>单卡 24G 跑通的</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>模型</th>
-<th>实测</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>画图</td>
-<td>FLUX.1 dev fp8 + IP-Adapter + ControlNet</td>
-<td>20–40 秒/张</td>
-</tr>
-<tr>
-<td>图生视频</td>
-<td>Wan 2.1 / SVD</td>
-<td>512p 短片段，第 2 秒易崩脸</td>
-</tr>
-<tr>
-<td>口型</td>
-<td>Sonic / LatentSync / Wav2Lip</td>
-<td>4.8 秒音频跑 205 秒</td>
-</tr>
-<tr>
-<td>语音合成</td>
-<td>IndexTTS（154 音色 + 克隆）/ CosyVoice</td>
-<td>常驻 6.7G</td>
-</tr>
-<tr>
-<td>语音识别</td>
-<td>whisper.cpp（CUDA 自编译）</td>
-<td>中文优先，常驻 2.3G</td>
-</tr>
-<tr>
-<td>文本</td>
-<td>llama.cpp / vLLM，27B / 32B</td>
-<td>量化下沉</td>
-</tr>
-</tbody>
-</table>
-<p><strong>核心经验</strong>：</p>
-<ul>
-<li>显存不够<strong>不报 OOM</strong>，而是慢十倍然后给废图（在搬权重不是算）</li>
-<li>可用显存 = 单卡 − 常驻（我机器常驻 15G，24G 卡实际只有 9G）</li>
-<li>权重 ≤ 可用显存 × 0.8 才安全</li>
-<li><strong>双卡 ≠ 双倍显存</strong>（除非做 tensor parallel）</li>
-<li>新架构显卡需要新 CUDA，老框架直接编译失败</li>
-</ul>
-<hr />
-<h2 id="4ffmpeg">领域 4｜音视频处理（ffmpeg 全链路）</h2>
-<ul>
-<li><strong>60 路音频混流</strong>：<code>adelay + amix</code> 逐句锚定时间轴</li>
-<li><strong>字幕</strong>：SRT 生成、语音识别 + 文字校正、双行合并、烧字幕</li>
-<li><strong>响度</strong>：LUFS 标准化、分段压缩解决「片头小声片尾大声」</li>
-<li><strong>视频</strong>：按镜头时长智能裁剪、黑帧/废帧检测、拼接</li>
-<li><strong>MV 全流程</strong>：歌 → 分镜 → 出图 → 运镜 → 卡点字幕 → 成品（已交付多支）</li>
-</ul>
-<p><strong>能力</strong>：音画同步可做到 <strong>±1 帧</strong></p>
-<hr />
-<h2 id="5-ai">领域 5｜音乐与 AI 音频</h2>
-<ul>
-<li><strong>歌曲生成</strong>：ACE-Step、DiffRhythm、MiniMax Music、HeartMuLa（本地部署）</li>
-<li><strong>云端出歌全流程</strong>：出歌、歌词时间轴、WAV、人声分离</li>
-<li><strong>双轨制作法</strong>：人声与伴奏分两条腿生成再适配</li>
-<li><strong>音频质量测量</strong>：频谱、音量曲线、动态范围客观评估</li>
-<li><strong>多角色广播剧 / 有声小说</strong>：多音色 + 逐句时间轴</li>
-<li><strong>已交付</strong>：多首原创歌曲与 MV</li>
-</ul>
-<hr />
-<h2 id="6">领域 6｜微信小程序开发</h2>
-<p><strong>做过</strong>：一套建筑工程管理小程序 —— 现场人员在手机上填报、审批、查数据。</p>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>页面数</td>
-<td><strong>45 个</strong></td>
-</tr>
-<tr>
-<td>业务模块</td>
-<td><strong>14 个</strong>：项目 / 采购 / 进度 / 施工日志 / 合同 / 质量 / 安全 / 成本 / 风险 / 任务 / 供应商 / 工人 / 设备 / 材料</td>
-</tr>
-<tr>
-<td>技术栈</td>
-<td>小程序原生 + 组件库 + 自建 Node 后端</td>
-</tr>
-<tr>
-<td>版本迭代</td>
-<td>每版带变更记录与产物校验</td>
-</tr>
-<tr>
-<td>部署</td>
-<td>命令行自动上传 + 云服务器</td>
-</tr>
-</tbody>
-</table>
-<p><strong>做的两件难事</strong>：</p>
-<ol>
-<li><strong>跨平台全量迁移</strong></li>
-<li>整套 API 前缀全量替换</li>
-<li>发现并修复 9 个页面的返回栈崩溃（P0）</li>
-<li>
-<p>输出一份<strong>按 P0/P1/P2 分级的代码质量审计报告</strong></p>
-</li>
-<li>
-<p><strong>登录态与页面栈修复</strong></p>
-</li>
-<li>根因：登录检查用了普通跳转，返回时重复触发</li>
-<li>方案：改成彻底重置页面栈</li>
-<li>端到端测试 5 种场景（已登录 / 未登录 / 新登录 / 凭证过期 / 重置失效）全通过</li>
-</ol>
-<p><strong>能力判定</strong>：能独立完成小程序从迁移、改造、审计到上传发版的完整闭环。</p>
-<hr />
-<h2 id="7">领域 7｜法律文书与材料整理</h2>
-<p><strong>做过</strong>：</p>
-<ul>
-<li><strong>完整案卷整理</strong>与参考材料汇编（含归档与外存档结构）</li>
-<li><strong>调解材料</strong>编写，按可核查结构组织事实与证据</li>
-<li><strong>商铺租赁合同</strong>审查：漏洞识别、条款修订、出具修订版与 PDF</li>
-<li><strong>劳务纠纷和解协议</strong>审查：民事与刑事路径判断</li>
-<li><strong>企业间借款 / 代收代付</strong>全套文书起草</li>
-<li><strong>举报 / 检举控告材料</strong>：按可核查结构成稿</li>
-<li><strong>民事纠纷调解与执行</strong>：给当事人出能看懂的文件</li>
-<li><strong>已签署合同复核</strong>：金额、签章、空白项、与起草稿逐项比对</li>
-</ul>
-<p><strong>能力判定</strong>：能读懂法律文书、找出漏洞、按当事人立场重写；不做诉讼代理。</p>
-<hr />
-<h2 id="8">领域 8｜财务与审计</h2>
-<p><strong>做过</strong>：</p>
-<ul>
-<li><strong>工程资金流向审计</strong>：工资资金四表核对</li>
-<li><strong>双线工资台账对账</strong>：两套台账交叉核对，SUMIF 月度汇总</li>
-<li><strong>班组产值分配表</strong>与总台账对账</li>
-<li><strong>财务台账</strong>：流水录入、账单按交易对方拆分、发票台账</li>
-<li><strong>手写工资表识别</strong>：照片 → 视觉识别 → 结构化 → 验算 → PDF 报表</li>
-<li><strong>投资估算 / 概算 / 预算审查</strong>：算术核验、口径比对、数量单价复核</li>
-</ul>
-<p><strong>能力判定</strong>：能做对账、能发现算术和口径错误、能把散乱凭证整理成可交付报表。不做审计签字。</p>
-<hr />
-<h2 id="9">领域 9｜招标监控与商务信息</h2>
-<p><strong>做过</strong>：</p>
-<ul>
-<li><strong>招标公告监控</strong>：定时抓取交易平台，关键词过滤，增量去重</li>
-<li><strong>投标资料整理</strong>：资质、业绩、人员、报价</li>
-<li><strong>企业信息采集</strong>：工商登记、资质、股东高管、中标记录、涉诉、行政处罚（政府公开数据）</li>
-<li><strong>开标 / 中标结果查询</strong>：从交易平台抓公告、图纸、清单、限价</li>
-</ul>
-<p><strong>能力判定</strong>：能搭「监控 → 筛选 → 通知」的自动流水线，比人工盯网站快。</p>
-<hr />
-<h2 id="10">领域 10｜建筑与工程数字化（差异化最强）</h2>
-<p><strong>做过（有实际产品，不只是文档）</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>类别</th>
-<th>具体</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>小程序产品</strong></td>
-<td>45 页面、14 个建筑管理模块，已上线运营</td>
-</tr>
-<tr>
-<td><strong>图纸</strong></td>
-<td>DWG/DXF 读取、天正图纸理解、施工图转 3D 效果图、图纸信息提取成通俗报告</td>
-</tr>
-<tr>
-<td><strong>造价</strong></td>
-<td>工程量清单单价对比、批量调价改写、投资估算审查、单方造价对标、模板架用量计算</td>
-</tr>
-<tr>
-<td><strong>合同</strong></td>
-<td>施工分包、商铺租赁、装修、企业借款全套文书</td>
-</tr>
-<tr>
-<td><strong>工资</strong></td>
-<td>班组台账对账、欠薪受理档案、手写工资表转 PDF</td>
-</tr>
-<tr>
-<td><strong>BIM</strong></td>
-<td>广联达 GBQ6/GTJ/GQI 处理、土建 + 安装 IFC 合成网页 3D</td>
-</tr>
-<tr>
-<td><strong>工程文书</strong></td>
-<td>联系函、催款函、索赔函、安全措施费论证</td>
-</tr>
-<tr>
-<td><strong>企业简报</strong></td>
-<td>公司简介重排、PPT 演示文稿、汇报提纲</td>
-</tr>
-</tbody>
-</table>
-<p><strong>为什么这是最强差异牌</strong>：AI 圈懂建筑的人几乎没有，建筑行业懂 AI 的极少。<strong>客户是工程公司时，我是少数既听得懂他们说话、又能真做出东西的人</strong> —— 而且已经交付过小程序这种真产品。</p>
-<hr />
-<h2 id="11">领域 11｜服务器运维与部署</h2>
-<ul>
-<li><strong>Linux</strong>：无图形界面服务器全套配置</li>
-<li><strong>服务托管</strong>：systemd（自动重启 / 日志 / 依赖顺序）</li>
-<li><strong>反代</strong>：nginx / Caddy、子路径挂载、SSL、文件内部重定向</li>
-<li><strong>穿透</strong>：Cloudflare Tunnel、SSH 反向隧道、Tailscale 组网</li>
-<li><strong>容器</strong>：Docker Compose 多服务编排</li>
-<li><strong>六层排查法</strong>：进程 → 端口 → 反代 → 日志 → 数据库 → 外部 API</li>
-</ul>
-<p><strong>案例</strong>：家宽无公网 IP 打通外网访问并配 HTTPS；云服务器 443 被封改 SSH 反向隧道；无显示器服务器装 Windows 虚拟机。</p>
-<hr />
-<h2 id="12-bot">领域 12｜消息机器人与多 Bot 运维</h2>
-<ul>
-<li><strong>多个 Bot 实例</strong>独立 profile、systemd 托管、Docker 沙箱、掉线自恢复</li>
-<li><strong>企业微信接入</strong>：AI Bot 长连接模式，扫码登录、凭据管理</li>
-<li><strong>邮箱自动化</strong>：IMAP 读取、规则过滤、定时巡检</li>
-<li><strong>定时任务体系</strong>：cron 管理、失败告警、避免重复执行</li>
-</ul>
-<p><strong>踩过的坑</strong>：进程内重启自己会自杀 → 用一次性任务脱离进程树；多实例必须开独立模式；沙箱里的技能目录是软链，删除会伤到源目录。</p>
-<hr />
-<h2 id="13">领域 13｜支付与商业化闭环</h2>
-<ul>
-<li><strong>微信支付 v3</strong>：Native 扫码、签名验证、回调验签、AES-GCM 解密</li>
-<li><strong>积分计费</strong>：扣费规则单一真相源（数据库驱动）、步骤单价可配</li>
-<li><strong>订单退款</strong>：实付 / 赠送分离追踪、退款上限校验</li>
-<li><strong>充值流程</strong>：下单 → 支付 → 回调 → 到账 → 赠送，全链路幂等</li>
-</ul>
-<p><strong>三个坑</strong>：回调地址多前缀 → 302；公钥不匹配 → 401；APIv3 密钥不匹配 → AES 解密失败。</p>
-<hr />
-<h2 id="14">领域 14｜浏览器自动化与逆向</h2>
-<ul>
-<li><strong>全自动发布</strong>：技术社区平台完整发布流程（含标签注入、签名绕过）</li>
-<li><strong>CDP 接管模式</strong>：用户扫码，程序控制同一窗口，不碰密码验证码</li>
-<li><strong>绕 WAF</strong>：识别无头指纹 → 改有头模式</li>
-<li><strong>逆向工具链</strong>：jadx / apktool / Ghidra / radare2 / frida / mitmproxy</li>
-<li><strong>爬虫</strong>：招标公告、企业信息、视频数据</li>
-</ul>
-<p><strong>关键经验</strong>：命令行通但浏览器 403 = 指纹问题不是 IP；JS 的 <code>.click()</code> 不触发框架事件委托，必须真鼠标；点不动的按钮先抓服务端错误，别瞎试界面。</p>
-<hr />
-<h2 id="15">领域 15｜文档与数据自动化</h2>
-<ul>
-<li><strong>合同</strong>：批量生成、审查、修订（中文，含押金 / 违约 / 付款条款分析）</li>
-<li><strong>PDF</strong>：中文排版规范、扫描件 OCR 重建、方向校正、合并拆分</li>
-<li><strong>Excel / 台账</strong>：SUMIF 汇总、按列拆分、活公式统计表</li>
-<li><strong>报表</strong>：手写表照片 → 结构化 → 验算 → PDF</li>
-<li><strong>CAD</strong>：DWG/DXF 读取、信息提取、转 SVG/PDF、批量出图</li>
-<li><strong>思维导图</strong>：代码生成圆形辐射式 PDF</li>
-</ul>
-<hr />
-<h2 id="16">领域 16｜内容创作与运营</h2>
-<ul>
-<li><strong>AI 短剧</strong>：从故事到成片，多集系列</li>
-<li><strong>MV 制作</strong>：歌词定轴、卡点、片头片尾设计</li>
-<li><strong>数字人</strong>：照片 + 录音 → 口播</li>
-<li><strong>播客 / 有声小说</strong>：单人、双人、多角色</li>
-<li><strong>海报设计</strong>：AI 出图 + 中文标题排版</li>
-<li><strong>账号运营</strong>：定位、选题、发布流程、数据复盘、自动化运营</li>
-</ul>
-<hr />
-<h1 id="_4" id="2">二、按「客户问题」重新排列</h1>
-<table>
-<thead>
-<tr>
-<th>你遇到的情况</th>
-<th>我能做什么</th>
-<th>大概多久</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AI 功能做出来不敢上线</td>
-<td>补计费 / 权限 / 并发 / 重试 / 部署</td>
-<td>1–3 周</td>
-</tr>
-<tr>
-<td>上线总出故障、日志看不出原因</td>
-<td>六层排查定位根因</td>
-<td>1–3 天</td>
-</tr>
-<tr>
-<td>模型调用太贵</td>
-<td>拆成本结构找省钱点</td>
-<td>3–5 天</td>
-</tr>
-<tr>
-<td>想本地跑 AI 不知买什么卡</td>
-<td>按任务倒推显存</td>
-<td>半天</td>
-</tr>
-<tr>
-<td>要一个建筑行业小程序</td>
-<td>45 页面的产品做过（含迁移 / 审计 / 发版）</td>
-<td>3–6 周</td>
-</tr>
-<tr>
-<td>每天手工填表 / 对账 / 发文章</td>
-<td>自动化脚本</td>
-<td>2–5 天</td>
-</tr>
-<tr>
-<td>想收钱不会接支付</td>
-<td>微信支付全流程</td>
-<td>3–7 天</td>
-</tr>
-<tr>
-<td>客服问题重复太多</td>
-<td>AI 自动回复 + 人工接管</td>
-<td>3–5 天</td>
-</tr>
-<tr>
-<td>图纸 / 清单要数字化</td>
-<td>图纸解析 + 数据提取</td>
-<td>3–10 天</td>
-</tr>
-<tr>
-<td>工程台账对不上账</td>
-<td>对账 + 差异定位 + 报表</td>
-<td>2–5 天</td>
-</tr>
-<tr>
-<td>要盯招标网站</td>
-<td>监控流水线 + 关键词通知</td>
-<td>2–4 天</td>
-</tr>
-<tr>
-<td>想做 AI 短视频 / MV 不会</td>
-<td>全流程代做</td>
-<td>按条计</td>
-</tr>
-<tr>
-<td>合同 / 文书要改</td>
-<td>审查 + 漏洞识别 + 重写</td>
-<td>1–3 天</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h1 id="_5" id="3">三、诚实边界（不做的）</h1>
-<table>
-<thead>
-<tr>
-<th>不做</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>纯视觉设计、品牌包装</td>
-<td>能写可用界面，做不出设计感的视觉</td>
-</tr>
-<tr>
-<td>算法研究、模型训练</td>
-<td>应用层，不做论文复现</td>
-</tr>
-<tr>
-<td>带团队、大型协作</td>
-<td>独立开发者，习惯一个人闭环</td>
-</tr>
-<tr>
-<td>驻场 / 坐班</td>
-<td>只做远程</td>
-</tr>
-<tr>
-<td>三天交付复杂系统</td>
-<td>单人产能，急单必砸</td>
-</tr>
-<tr>
-<td>只写提示词不落系统</td>
-<td>那不是我的价值</td>
-</tr>
-<tr>
-<td>说不清怎么验证的项目</td>
-<td>最后一定扯皮</td>
-</tr>
-<tr>
-<td>K8s / 微服务架构设计</td>
-<td>知道概念，没有真实项目经验</td>
-</tr>
-<tr>
-<td>面试手撕算法</td>
-<td>工程够用，刷题不行</td>
-</tr>
-<tr>
-<td>诉讼代理</td>
-<td>能整理材料、能读懂，不当代理人</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h1 id="_6" id="4">四、三个版本的自我介绍</h1>
-<h2 id="30">30 秒</h2>
-<blockquote>
-<p>我做 AI 应用落地和工程数字化的。一个人写过六万多行的 AI 内容生产平台，也做过建筑行业的微信小程序（45 个页面）。强项是让 AI 功能真正上线跑稳，还能把成本压下来。</p>
-</blockquote>
-<h2 id="2_1">2 分钟</h2>
-<blockquote>
-<p>我建筑工程出身，转行做开发，现在是独立开发者。</p>
-<p>两块最主要的作品：一是 AI 内容生产平台，输入故事自动出成片，六万多行代码、两千多个接口、三十二张表，从第一行代码到线上运维都是我；二是建筑行业的微信小程序，45 个页面、14 个业务模块，做过跨平台全量迁移，写了完整的代码审计报告。</p>
-<p>最难的不是调 AI 接口，是工程问题：多进程状态、支付幂等、任务队列、成本控制。我把 21 个真实故障都写成了复盘，公开在 GitHub。</p>
-<p>我的定位是：<strong>能把 AI 从 demo 做到上线的工程人</strong>，而且懂工程行业。</p>
-</blockquote>
-<h2 id="10_1">10 分钟（按顺序讲）</h2>
-<ol>
-<li>我是谁：建筑转开发，独立开发者</li>
-<li>代表作一：AI 内容生产平台（挑 2–3 个环节细讲）</li>
-<li>代表作二：建筑小程序（迁移 + 审计 + 发版）</li>
-<li>深讲一个故障：多进程下进度永远 0%</li>
-<li>成本观：AI 视频 85% 的钱花在生成，降废片率比换供应商有效</li>
-<li>边界：不做算法、不做设计，专注把应用做稳</li>
-<li>反问：你们现在最卡的技术问题是什么？</li>
-</ol>
-<hr />
-<h1 id="_7" id="5">五、最后</h1>
-<p>不是「我会用很多工具」——工具每年都在换。</p>
-<p>真正稀缺的是这三样：</p>
-<ol>
-<li><strong>端到端能力</strong> — 从想法到上线到运维，一个人走完</li>
-<li><strong>真实故障经验</strong> — 21 个坑，每个都能讲出根因和解法</li>
-<li><strong>懂两个世界</strong> — AI 圈里懂建筑，建筑圈里懂 AI</li>
-</ol>
-<p><strong>技术会过期，这三样不会。</strong></p>
-</div>
 
-<a class="top-btn" href="#" title="回到顶部">↑</a>
+<header class="hero">
+  <div class="badge">现在可以接新项目</div>
+  <h1>王丁炜</h1>
+  <div class="role">把 AI 从「demo 跑通了」做到「能上线收钱」</div>
+  <div class="sub" style="font-size:14px;color:#93a8c4;margin-top:7px">AI 应用落地 · 独立全栈开发 · 上线排障与成本优化</div>
+  <div class="sub" style="margin-top:5px">建筑工程出身 · 非科班 · 一个人走完需求到运维</div>
+
+  <div class="nums">
+    <div class="num"><b>64,752</b><span>行 Python</span></div>
+    <div class="num"><b>2,484</b><span>个接口</span></div>
+    <div class="num"><b>32</b><span>张数据表</span></div>
+    <div class="num"><b>21</b><span>个故障复盘</span></div>
+  </div>
+
+  <div class="cta">
+    <a class="btn main" href="mailto:476743538@qq.com">发邮件谈谈</a>
+    <a class="btn ghost" href="https://github.com/wangdinwei/ai-drama-pipeline">看架构复盘 →</a>
+    <a class="btn ghost" href="https://github.com/wangdinwei">GitHub →</a>
+  </div>
+</header>
+
+<section>
+  <div class="eyebrow">What I solve</div>
+  <h2>你卡在哪一步，我大概就接哪一步</h2>
+  <p class="lead">下面这些都不是设想，是做过、踩过、修好的。时间是我一个人干的实际工期。</p>
+
+  <div class="probs">
+    <div class="prob head"><span class="q">你遇到的</span><span class="a">我怎么处理</span><span class="t">周期</span></div>
+    <div class="prob"><span class="q">AI 功能做出来了，不敢上线</span><span class="a">补计费、权限、并发、失败重试、部署，让它扛得住真实用户</span><span class="t">1–3 周</span></div>
+    <div class="prob"><span class="q">上线总出故障，日志看不出原因</span><span class="a">按「进程 → 端口 → 反代 → 日志 → 数据库 → 外部 API」六层定位</span><span class="t">1–3 天</span></div>
+    <div class="prob"><span class="q">模型调用太贵，账单看不懂</span><span class="a">先拆成本结构，多数项目 85% 花在视频生成，降废片率比换供应商有效</span><span class="t">3–5 天</span></div>
+    <div class="prob"><span class="q">想本地跑 AI，不知道买什么卡</span><span class="a">按实际任务倒推显存需求，别为跑分买单</span><span class="t">半天</span></div>
+    <div class="prob"><span class="q">要做个带业务逻辑的小程序</span><span class="a">45 页面的行业小程序做过，含跨平台迁移、代码审计、自动发版</span><span class="t">3–6 周</span></div>
+    <div class="prob"><span class="q">每天手工填表、对账、发文章</span><span class="a">写自动化脚本，把重复动作变成一条命令</span><span class="t">2–5 天</span></div>
+    <div class="prob"><span class="q">想收钱，不会接支付</span><span class="a">微信支付 v3 全流程：下单、回调验签、退款、幂等防重复扣</span><span class="t">3–7 天</span></div>
+    <div class="prob"><span class="q">客服问题重复太多，人扛不住</span><span class="a">AI 自动回复 + 人工接管，非工作时间也能答</span><span class="t">3–5 天</span></div>
+    <div class="prob"><span class="q">图纸、清单要数字化</span><span class="a">CAD 图纸解析、信息提取、转成能看的报告</span><span class="t">3–10 天</span></div>
+    <div class="prob"><span class="q">工程台账对不上账</span><span class="a">双线对账 + 差异定位 + 出可交付报表</span><span class="t">2–5 天</span></div>
+    <div class="prob"><span class="q">要天天盯招标网站</span><span class="a">监控流水线：定时抓、关键词过滤、增量通知</span><span class="t">2–4 天</span></div>
+    <div class="prob"><span class="q">合同、文书要改</span><span class="a">审查漏洞、按你的立场重写、出修订版和 PDF</span><span class="t">1–3 天</span></div>
+    <div class="prob"><span class="q">想做 AI 短视频 / MV 不会</span><span class="a">从剧本到成片全流程代做，含配音、字幕、卡点</span><span class="t">按条计</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Shipped</div>
+  <h2>两个从零做到上线的系统</h2>
+  <p class="lead">不是课程作业，不是 demo，都是真实用户在用的东西。</p>
+
+  <div class="cases">
+    <div class="case">
+      <h3>① AI 内容生产平台 <span class="tag">已上线运营</span></h3>
+      <p class="desc">输入一段故事，自动走完剧本、分镜、出图、出视频、配音、字幕、混流，输出一集能直接发的成片。11 个步骤可以单独重跑，多用户、积分计费、退款全通。</p>
+      <div class="mini">
+        <div><b>64,752</b>行 Python</div>
+        <div><b>14,574</b>行 JS</div>
+        <div><b>626</b>个模板</div>
+        <div><b>32</b>张表</div>
+      </div>
+      <div class="stack">
+        <span class="chip">Flask</span><span class="chip">PostgreSQL</span><span class="chip">Alembic</span>
+        <span class="chip">esbuild</span><span class="chip">nginx</span><span class="chip">systemd</span>
+        <span class="chip">Kling</span><span class="chip">DashScope</span><span class="chip">微信支付 v3</span>
+        <span class="chip">ffmpeg</span><span class="chip">Chatwoot</span>
+      </div>
+      <a href="https://github.com/wangdinwei/ai-drama-pipeline">看架构取舍、成本模型、21 个真实故障 →</a>
+    </div>
+
+    <div class="case">
+      <h3>② 建筑工程管理小程序 <span class="tag">已上线运营</span></h3>
+      <p class="desc">工地现场用的移动工具，14 个业务模块覆盖项目、采购、进度、施工日志、合同、质量、安全、成本、风险。做过从一个平台到另一个平台的全量迁移，写了按 P0/P1/P2 分级的代码审计报告。</p>
+      <div class="mini">
+        <div><b>45</b>个页面</div>
+        <div><b>14</b>个业务模块</div>
+        <div><b>9</b>类字典接口</div>
+        <div><b>4</b>个版本迭代</div>
+      </div>
+      <div class="stack">
+        <span class="chip">小程序原生</span><span class="chip">Vant</span><span class="chip">Node.js</span>
+        <span class="chip">miniprogram-ci</span><span class="chip">腾讯云</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Stack</div>
+  <h2>能用得上的东西</h2>
+  <p class="lead">按能不能直接上手分组，不按学没学过。</p>
+
+  <div class="groups">
+    <div class="group">
+      <h4>后端与数据</h4>
+      <ul>
+        <li>Flask / FastAPI，2,484 个接口的体系</li>
+        <li>PostgreSQL、SQLite→PG 迁移、Alembic</li>
+        <li>多 worker 任务队列（SKIP LOCKED）</li>
+        <li>双登录认证、CSRF、权限分流</li>
+      </ul>
+    </div>
+    <div class="group">
+      <h4>AI 与模型</h4>
+      <ul>
+        <li>可灵 / 千问 / ComfyUI 多引擎编排</li>
+        <li>FLUX + IP-Adapter 角色一致性</li>
+        <li>单卡 24G 显存调优（量化、卸载）</li>
+        <li>TTS 多音色、Whisper 转写、口型同步</li>
+      </ul>
+    </div>
+    <div class="group">
+      <h4>音视频全链路</h4>
+      <ul>
+        <li>ffmpeg 多路混流、逐句锚定时间轴</li>
+        <li>字幕生成与烧制、响度标准化</li>
+        <li>按镜头时长智能裁剪、黑帧检测</li>
+        <li>音画同步做到 ±1 帧</li>
+      </ul>
+    </div>
+    <div class="group">
+      <h4>部署与运维</h4>
+      <ul>
+        <li>Linux、systemd、Docker Compose</li>
+        <li>nginx / Caddy 反代、SSL、子路径</li>
+        <li>Cloudflare Tunnel、Tailscale、SSH 隧道</li>
+        <li>六层排查法定位线上故障</li>
+      </ul>
+    </div>
+    <div class="group">
+      <h4>文档与自动化</h4>
+      <ul>
+        <li>中文合同批量生成、审查、修订</li>
+        <li>PDF 排版、扫描件 OCR 重建</li>
+        <li>台账对账、活公式报表</li>
+        <li>CAD 图纸解析、信息提取</li>
+      </ul>
+    </div>
+    <div class="group">
+      <h4>前端与集成</h4>
+      <ul>
+        <li>Jinja2 + 原生 JS，626 个模板</li>
+        <li>微信小程序、支付 v3、退款闭环</li>
+        <li>飞书 / 企微 Bot、定时任务体系</li>
+        <li>Playwright 自动化、逆向工具链</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Not for me</div>
+  <h2>这些我不接，先说清楚</h2>
+  <p class="lead">省得互相耽误时间。</p>
+
+  <div class="bounds">
+    <div class="bound">纯视觉设计、品牌包装</div>
+    <div class="bound">算法研究、模型训练</div>
+    <div class="bound">带团队、大型协作</div>
+    <div class="bound">驻场、坐班</div>
+    <div class="bound">三天交付复杂系统</div>
+    <div class="bound">只写提示词、不落系统</div>
+    <div class="bound">说不清怎么验证的项目</div>
+    <div class="bound">K8s 微服务架构设计</div>
+    <div class="bound">面试手撕算法</div>
+    <div class="bound">诉讼代理</div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="eyebrow">Contact</div>
+  <h2>有活要谈，直接发邮件</h2>
+  <a class="mail" href="mailto:476743538@qq.com">476743538@qq.com</a>
+  <p>工作时间 4 小时内回，其余时间次日回<br>需要电话或微信的，邮件里说一声</p>
+  <p style="margin-top:22px;color:#48586e">发邮件写清四件事：想做什么 · 现在到哪一步 · 什么时候要 · 预算大概多少</p>
+</section>
+
+</div>
 
 <footer>
-  王丁炜 · 能力全景<br>
-  <span style="opacity:.7">全部内容来自真实项目，不是简历包装</span>
+  <div class="wrap">
+    王丁炜 · <a href="https://github.com/wangdinwei">GitHub</a> ·
+    <a href="https://lenghu.tech/work/">项目展示</a> ·
+    <a href="mailto:476743538@qq.com">邮箱</a><br>
+    <span style="opacity:.6">所有数字来自真实项目，可核对</span>
+  </div>
 </footer>
+
+<a class="top" id="toTop" href="#">↑</a>
+
+<script>
+const t = document.getElementById("toTop");
+addEventListener("scroll", () => {
+  t.classList.toggle("show", window.scrollY > 420);
+}, {passive:true});
+</script>
 
 </body>
 </html>
