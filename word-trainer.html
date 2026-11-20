@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#05070c">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="单词训练">
 <title>技术单词训练器</title>
 <style>
 :root{
@@ -100,6 +105,9 @@ body{
 .zh.abbr{font-family:"SF Mono",Menlo,Consolas,monospace;letter-spacing:.1em;font-size:clamp(12px,1.65vh,14px)}
 
 /* 发音：圆形按钮 */
+/* 单词区（桌面：竖排居中；手机：单词左、喇叭右） */
+.head-row{display:block}
+.head-main{display:block}
 .say{margin:11px auto 0;width:44px;height:44px;border-radius:50%;cursor:pointer;
   display:flex;align-items:center;justify-content:center;position:relative;
   background:radial-gradient(circle at 35% 30%,rgba(95,208,245,.28),rgba(75,140,255,.1));
@@ -185,17 +193,20 @@ body{
 
 /* ───────── 手机 ───────── */
 @media (max-width:600px){
-  body{overflow:auto;min-height:100dvh}
+  body{overflow:hidden;height:var(--app-h,100dvh);min-height:0}
   .hdr{padding:12px 16px 0}
-  .stage{min-height:calc(100dvh - 132px);padding:12px 14px 6px;
+  .stage{flex:1;min-height:0;padding:12px 14px 6px;
     align-items:center;justify-content:center}
   .foot .tip-kb{display:none}
   .foot .tip-m{display:inline}
   .card-inner{padding:22px 18px 20px;border-radius:17px}
-  .word{font-size:clamp(32px,8.6vw,42px)}
-  .ipa{font-size:14px;margin-top:8px}
-  .zh{font-size:16px;margin-top:7px}
-  .say{width:54px;height:54px;margin-top:18px}
+  /* 单词在左、播放键在右（喇叭与单词首行对齐） */
+  .head-row{display:flex;align-items:flex-start;gap:14px}
+  .head-main{flex:1;min-width:0;text-align:left}
+  .word{font-size:clamp(32px,8.6vw,42px);text-align:left}
+  .ipa{font-size:14px;margin-top:8px;text-align:left}
+  .zh{font-size:16px;margin-top:7px;text-align:left}
+  .head-row .say{margin:0;margin-top:-4px;flex-shrink:0;width:44px;height:44px}
   .say svg{width:22px;height:22px}
   .meaning{margin-top:17px;padding:11px 18px 11px 15px;text-align:left}
   .meaning .term{font-size:16.5px}
@@ -206,6 +217,31 @@ body{
   .nav{margin-top:15px;gap:11px}
   .btn{padding:13px;font-size:15.5px;border-radius:12px;border-color:#28405f;color:#a8bcd6}
   .foot{padding:10px 16px 14px;font-size:10.5px}
+}
+
+/* 手机键盘弹起：整体上压，保证单词/喇叭/意思/输入框全在视口内 */
+@media (max-width:600px){
+  body.kb .jump,
+  body.kb .foot,
+  body.kb .batch,
+  body.kb .ipa{display:none}
+  body.kb .hdr{padding:7px 14px 0}
+  body.kb .stage{padding:6px 10px}
+  body.kb .card-inner{padding:11px 14px 10px;border-radius:14px}
+  body.kb .head-row{gap:10px}
+  body.kb .word{font-size:clamp(24px,7vw,30px)}
+  body.kb .zh{font-size:13px;margin-top:3px}
+  body.kb .head-row .say{width:36px;height:36px;margin-top:-2px}
+  body.kb .say svg{width:16px;height:16px}
+  body.kb .meaning{margin-top:8px;padding:7px 12px 7px 10px}
+  body.kb .meaning .lbl{font-size:8.5px;margin-bottom:0;display:inline;margin-right:4px}
+  body.kb .meaning .term{font-size:14px;display:inline}
+  body.kb .meaning .txt{font-size:11.5px;margin-top:2px;line-height:1.4}
+  body.kb .field{margin-top:8px}
+  body.kb .field input{padding:9px 12px;font-size:17px}
+  body.kb .fb{height:15px;line-height:15px;margin-top:4px;font-size:11px}
+  body.kb .nav{margin-top:7px;gap:8px}
+  body.kb .btn{padding:8px;font-size:13.5px}
 }
 
 /* 极矮屏（笔记本 768 高） */
@@ -2011,11 +2047,15 @@ function render(){
     <div class="card" id="card">
       <div class="card-inner">
         <span class="batch">${w.batch}</span>
-        <div class="word">${w.en}</div>
-        <div class="ipa">${w.ipa}</div>
-        <div class="zh${w.spell || w.mixed ? " abbr" : ""}"><span>读作</span>${w.zh}</div>
-        <div class="say" id="say" title="听发音">
-          <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+        <div class="head-row">
+          <div class="head-main">
+            <div class="word">${w.en}</div>
+            <div class="ipa">${w.ipa}</div>
+            <div class="zh${w.spell || w.mixed ? " abbr" : ""}"><span>读作</span>${w.zh}</div>
+          </div>
+          <div class="say" id="say" title="听发音">
+            <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+          </div>
         </div>
         <div class="meaning">
           <span class="lbl">意思</span>
@@ -2115,6 +2155,38 @@ document.addEventListener("keydown", e => {
   if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return;
   if (e.key === "s" || e.key === "S"){ if (idx < WORDS.length) say(ttsText(WORDS[idx])); }
 });
+
+/* ── 手机键盘弹起：用 visualViewport 实时压高度，把卡片整体上压 ── */
+(function fitViewport(){
+  const root = document.documentElement;
+  const vv = window.visualViewport;
+  let raf = 0;
+  function apply(){
+    const h = vv ? vv.height : window.innerHeight;
+    root.style.setProperty("--app-h", Math.round(h) + "px");
+    /* 键盘弹起判定：可视高度比窗口高度少了 120px 以上 */
+    const kb = !!vv && (window.innerHeight - vv.height > 120);
+    document.body.classList.toggle("kb", kb);
+  }
+  function schedule(){
+    if (raf) return;
+    raf = requestAnimationFrame(() => { raf = 0; apply(); });
+  }
+  if (vv){
+    vv.addEventListener("resize", schedule);
+    vv.addEventListener("scroll", schedule);
+  }
+  window.addEventListener("resize", schedule);
+  window.addEventListener("orientationchange", () => setTimeout(apply, 280));
+  apply();
+})();
+
+/* ── Service Worker：首次打开后整页缓存到手机，之后秒开、断网也能用 ── */
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {});
+  });
+}
 
 render();
 </script>
