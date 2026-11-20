@@ -234,13 +234,13 @@ body{
 
 <header class="hdr">
   <div class="hdr-row">
-    <span class="counter">第 <b id="cur">1</b><span class="sep">/</span>177</span>
+    <span class="counter">第 <b id="cur">1</b><span class="sep">/</span>205</span>
     <span class="right-meta"><span class="dot"></span><span id="mastered">已掌握 0</span></span>
   </div>
   <div class="track"><div class="track-fill" id="fill"></div></div>
   <div class="jump">
     <span>跳到</span>
-    <input id="jumpTo" type="number" min="1" max="177" inputmode="numeric" placeholder="序号">
+    <input id="jumpTo" type="number" min="1" max="205" inputmode="numeric" placeholder="序号">
     <span>个</span>
     <button id="jumpBtn">跳转</button>
   </div>
@@ -1714,7 +1714,7 @@ const WORDS = [
   "zh": "瑞弗斯-普拉克西",
   "term": "反向代理",
   "mean": "门口的统一接待。用户只找一个入口，里面几台服务由它来分派。nginx 就是干这个的。",
-  "batch": "第 8 批：其他"
+  "batch": "第 3 批：服务器与运维"
  },
  {
   "en": "load balancer",
@@ -1722,7 +1722,235 @@ const WORDS = [
   "zh": "罗德-巴伦瑟",
   "term": "负载均衡",
   "mean": "把活平均分给几台机器。一台倒了自动跳过，这是扛住大流量的基本操作。",
-  "batch": "第 8 批：其他"
+  "batch": "第 3 批：服务器与运维"
+ },
+ {
+  "en": "MoE",
+  "ipa": "/ˌem oʊ ˈiː/",
+  "zh": "M-O-E",
+  "term": "混合专家模型",
+  "mean": "一种让大模型省钱跑法：内部拆成好几个专家，每个问题只叫醒其中两三个。DeepSeek 用的就是这招。",
+  "batch": "第 15 批：模型与评测",
+  "spell": true
+ },
+ {
+  "en": "RLHF",
+  "ipa": "/ˌɑːr el eɪtʃ ˈef/",
+  "zh": "R-L-H-F",
+  "term": "人类反馈强化学习",
+  "mean": "教模型懂人话的办法：先让它答，人给答案打分，再照分数调。ChatGPT 变听话主要靠它。",
+  "batch": "第 15 批：模型与评测",
+  "spell": true
+ },
+ {
+  "en": "tokenizer",
+  "ipa": "/ˈtoʊkənaɪzər/",
+  "zh": "托肯奈泽",
+  "term": "分词器",
+  "mean": "把一句话切成小块的那个东西。AI 眼里的单位不是字也不是词，是这些小块。",
+  "batch": "第 15 批：模型与评测"
+ },
+ {
+  "en": "context window",
+  "ipa": "/ˈkɑːntekst ˈwɪndoʊ/",
+  "zh": "康泰克斯特-温豆",
+  "term": "上下文窗口",
+  "mean": "模型一次能记住多少内容。窗口不够，聊到后面它就忘了前面说过啥。",
+  "batch": "第 15 批：模型与评测"
+ },
+ {
+  "en": "hallucination",
+  "ipa": "/həˌluːsɪˈneɪʃn/",
+  "zh": "哈鲁西内申",
+  "term": "幻觉",
+  "mean": "AI 一本正经地编瞎话。它不是骗你，是它真觉得自己说得对。治它主要靠 RAG。",
+  "batch": "第 15 批：模型与评测"
+ },
+ {
+  "en": "benchmark",
+  "ipa": "/ˈbentʃmɑːrk/",
+  "zh": "本奇马克",
+  "term": "基准测试",
+  "mean": "给模型出的一套标准考题，跑分看谁强。注意跑分高不等于好用。",
+  "batch": "第 15 批：模型与评测"
+ },
+ {
+  "en": "SOTA",
+  "ipa": "/ˈsoʊtə/",
+  "zh": "索塔",
+  "term": "当前最好水平",
+  "mean": "英文「state of the art」的缩写，意思是这项任务目前全世界做得最好。厂商发新模型都说自己 SOTA。",
+  "batch": "第 15 批：模型与评测"
+ },
+ {
+  "en": "alignment",
+  "ipa": "/əˈlaɪnmənt/",
+  "zh": "呃-莱恩门特",
+  "term": "对齐",
+  "mean": "让 AI 的想法和行为符合人的意图和价值观。说白了就是别让它乱来。",
+  "batch": "第 15 批：模型与评测"
+ },
+ {
+  "en": "few-shot",
+  "ipa": "/ˌfjuː ˈʃɑːt/",
+  "zh": "弗尤-肖特",
+  "term": "少样本提示",
+  "mean": "问 AI 之前先给它两三个例子，它照着学格式。比空口描述效果好很多。",
+  "batch": "第 16 批：提示与调用"
+ },
+ {
+  "en": "zero-shot",
+  "ipa": "/ˌzɪroʊ ˈʃɑːt/",
+  "zh": "齐罗-肖特",
+  "term": "零样本提示",
+  "mean": "一个例子都不给，直接问。模型行不行，这时候最见真章。",
+  "batch": "第 16 批：提示与调用"
+ },
+ {
+  "en": "chain-of-thought",
+  "ipa": "/ˌtʃeɪn əv ˈθɔːt/",
+  "zh": "陈-奥夫-索特",
+  "term": "思维链",
+  "mean": "让 AI 把想的过程一步步写出来再给答案。比直接要答案准，尤其是算数和推理。",
+  "batch": "第 16 批：提示与调用"
+ },
+ {
+  "en": "function calling",
+  "ipa": "/ˈfʌŋkʃn ˈkɔːlɪŋ/",
+  "zh": "方克申-考灵",
+  "term": "函数调用",
+  "mean": "让模型自己决定去调哪个工具。比如你问天气，它知道该去调天气接口。",
+  "batch": "第 16 批：提示与调用"
+ },
+ {
+  "en": "streaming",
+  "ipa": "/ˈstriːmɪŋ/",
+  "zh": "斯特里明",
+  "term": "流式输出",
+  "mean": "AI 边想边往外吐字，就是那种打字机效果。用户不用干等一整段。",
+  "batch": "第 16 批：提示与调用"
+ },
+ {
+  "en": "SSE",
+  "ipa": "/ˌes es ˈiː/",
+  "zh": "S-S-E",
+  "term": "服务器推送事件",
+  "mean": "做流式输出最常用的技术。浏览器开一条长连接，服务器有新字就推过来。",
+  "batch": "第 16 批：提示与调用",
+  "spell": true
+ },
+ {
+  "en": "rerank",
+  "ipa": "/ˌriːˈræŋk/",
+  "zh": "瑞-然克",
+  "term": "重排序",
+  "mean": "先粗粗找出一百条，再让模型重新排个名，把最相关的挑出来。检索准不准主要看这一步。",
+  "batch": "第 17 批：RAG 与检索"
+ },
+ {
+  "en": "chunking",
+  "ipa": "/ˈtʃʌŋkɪŋ/",
+  "zh": "昌京",
+  "term": "分块",
+  "mean": "把长文档切成一段一段再存起来。切得太大检索不准，切得太碎意思会断。",
+  "batch": "第 17 批：RAG 与检索"
+ },
+ {
+  "en": "vector database",
+  "ipa": "/ˈvektər ˈdeɪtəbeɪs/",
+  "zh": "维克特-数据库",
+  "term": "向量数据库",
+  "mean": "专门存「意思」的库。你搜一句话，它按意思相近找，不是按字面匹配。",
+  "batch": "第 17 批：RAG 与检索"
+ },
+ {
+  "en": "CFG",
+  "ipa": "/ˌsiː ef ˈdʒiː/",
+  "zh": "C-F-G",
+  "term": "提示词引导强度",
+  "mean": "出图时「多听提示词的话」这个旋钮。调太低乱画，调太高画面发死，一般 6-8 之间。",
+  "batch": "第 18 批：出图参数",
+  "spell": true
+ },
+ {
+  "en": "steps",
+  "ipa": "/steps/",
+  "zh": "斯特普斯",
+  "term": "采样步数",
+  "mean": "出图擦几遍噪点。太少糙，太多收益递减还费时间，一般 20-30 步够。",
+  "batch": "第 18 批：出图参数"
+ },
+ {
+  "en": "scheduler",
+  "ipa": "/ˈskedʒuːlər/",
+  "zh": "斯凯朱勒",
+  "term": "调度算法",
+  "mean": "决定每一遍怎么擦的算法。不同算法出来的风格不一样，换一个就换一种味道。",
+  "batch": "第 18 批：出图参数"
+ },
+ {
+  "en": "inpaint",
+  "ipa": "/ˈɪnpeɪnt/",
+  "zh": "因-佩恩特",
+  "term": "局部重绘",
+  "mean": "框住画面一块，只重画那一块，别的地方不动。改手、改脸、去杂物全靠它。",
+  "batch": "第 18 批：出图参数"
+ },
+ {
+  "en": "upscale",
+  "ipa": "/ˈʌpskeɪl/",
+  "zh": "阿普-斯凯尔",
+  "term": "放大",
+  "mean": "把小图变高清，不是简单拉伸，是补出细节来。",
+  "batch": "第 18 批：出图参数"
+ },
+ {
+  "en": "deploy",
+  "ipa": "/dɪˈplɔɪ/",
+  "zh": "迪普洛伊",
+  "term": "部署（动词）",
+  "mean": "把做好的东西放到服务器上跑起来。名词是 deployment，动词就是它。",
+  "batch": "第 19 批：动词"
+ },
+ {
+  "en": "roll back",
+  "ipa": "/ˌroʊl ˈbæk/",
+  "zh": "罗尔-拜克",
+  "term": "回滚（动词）",
+  "mean": "新版本搞坏了就退回去。名词是 rollback，动词就这么说：roll it back。",
+  "batch": "第 19 批：动词"
+ },
+ {
+  "en": "align",
+  "ipa": "/əˈlaɪn/",
+  "zh": "呃-莱恩",
+  "term": "对齐（动词）",
+  "mean": "把两边弄成一致。跟客户对齐需求，跟团队对齐方案，都是用这个词。",
+  "batch": "第 19 批：动词"
+ },
+ {
+  "en": "chunk",
+  "ipa": "/tʃʌŋk/",
+  "zh": "昌克",
+  "term": "切块（动词）",
+  "mean": "把大东西切成小块。把文档 chunk 一下再喂给模型。",
+  "batch": "第 19 批：动词"
+ },
+ {
+  "en": "handle",
+  "ipa": "/ˈhændl/",
+  "zh": "汉德尔",
+  "term": "处理 / 扛住",
+  "mean": "最常用的万能动词。扛得住多少并发就说 handle 多少 QPS，处理某件事也是它。",
+  "batch": "第 19 批：动词"
+ },
+ {
+  "en": "load test",
+  "ipa": "/ˈloʊd test/",
+  "zh": "罗德-泰斯特",
+  "term": "压力测试",
+  "mean": "模拟一堆人同时用，看系统扛不扛得住。上线前必做。",
+  "batch": "第 19 批：动词"
  }
 ];
 let idx = 0;
