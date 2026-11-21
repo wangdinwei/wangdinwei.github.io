@@ -6,7 +6,7 @@
  *   - 离线且没缓存：回退到缓存的首页
  * 版本号：改动页面内容后把 CACHE 版本 +1，用户下次打开自动换新
  */
-const CACHE = 'wordtrainer-v4';
+const CACHE = 'wordtrainer-v6';
 const PAGE = './index.html';
 
 self.addEventListener('install', (e) => {
